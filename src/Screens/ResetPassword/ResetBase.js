@@ -36,6 +36,7 @@ export default class LoginBase extends Component {
   onSubmit = () => {
     // const { navigate } = this.props.navigation;
     if (this.checkAllField()) {
+      this.setState({loading:true})
       let data = {
         email: this.state.email,
         resetPasswordToken: this.state.token,
@@ -43,10 +44,18 @@ export default class LoginBase extends Component {
       };
       callApi('post', 'v1/auth/resetPassword', data)
         .then(response => {
-          if (response.status === 200) Alert({ message: 'Password Reset successfully' });
+          if (response.status === 200) Alert({ message: 'Password Reset successfully' ,	buttons: [
+            {
+              title: 'Ok',
+              icon: false,
+              backgroundColor: 'blue'
+            }
+          ]});
+          this.setState({loading:false})
           this.props.navigation.navigate('Login');
         })
         .catch(error => {
+          this.setState({loading:false})
           console.log(error.response);
         });
     } else {

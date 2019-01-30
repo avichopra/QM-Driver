@@ -8,6 +8,7 @@ import {
   isValidPassword,
   isValidConfirmPassword
 } from '../../utilities/validation';
+import {Keyboard} from "react-native"
 import { callApi } from '../../utilities/serverApi';
 import { Alert } from '../../ReusableComponents/modal';
 export default class signupBase extends Component {
@@ -26,7 +27,8 @@ export default class signupBase extends Component {
       emergencycontacterror: '',
       passworderror: '',
       confirmpassworderror: '',
-      modalVisible: false
+      modalVisible: false,
+      loading:false
     };
   }
   checkAllMandatoryField = () => {
@@ -83,28 +85,40 @@ export default class signupBase extends Component {
   };
   onSubmit = () => {
     if (this.checkAllMandatoryField()) {
+      this.setState({loading:true})
       let data = {
-        fullname: this.state.FullName,
-        email: this.state.Email,
-        contactNo: this.state.contactnumber,
-        emergencycontactnumber: this.state.emergencycontactnumber,
-        password: this.state.password,
+        fullname: this.state.FullName.trim(),
+        email: this.state.Email.trim(),
+        contactNo: this.state.contactnumber.trim(),
+        emergencycontactnumber: this.state.emergencycontactnumber.trim(),
+        password: this.state.password.trim(),
         role: 'Patient'
       };
       callApi('post', 'v1/auth/register', data)
         .then(response => {
           if (response.status === 201) {
-            Alert({ message: 'Verification link has been send to your email' });
+            this.setState({FullName:"",Email:"",contactnumber:"",emergencycontactnumber:"",password:"",confirmpassword:"",loading:false})
+            Alert({ message: 'Verification link has been sent to your email' ,	buttons: [
+              {
+                title: 'Ok',
+                icon: false,
+                backgroundColor: 'blue'
+              }
+            ]});
+
             // alert('Verification link has been sent to your email');
           }
           // console.log(response);
         })
         .catch(error => {
-          console.log(error);
+          this.setState({loading:false,FullName:"",Email:"",contactnumber:"",emergencycontactnumber:"",password:"",confirmpassword:"",emailerror:"Email already exist"})
+          console.log(error.response);
         });
     } else {
       console.log('error');
     }
   };
-  componentDidMount() {}
+  componentDidMount() {
+    Keyboard.dismiss();
+  }
 }

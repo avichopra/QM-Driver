@@ -11,9 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // import TempStorage from '../utilities/tempStorage';
 
 export function Alert(data = {}) {
-
 	let {
-
 		emotion = 'normal',
 
 		title = 'Alert',
@@ -21,9 +19,7 @@ export function Alert(data = {}) {
 		message = 'Your custom message',
 
 		buttons = [
-
 			{
-
 				title: 'CANCEL',
 
 				onPress: () => {},
@@ -31,11 +27,9 @@ export function Alert(data = {}) {
 				icon: false,
 
 				backgroundColor: 'blue'
-
 			},
 
 			{
-
 				title: 'OK',
 
 				onPress: () => {},
@@ -43,19 +37,13 @@ export function Alert(data = {}) {
 				icon: false,
 
 				backgroundColor: 'blue'
-
 			}
-
 		],
 
 		...otherProps
-
 	} = data;
 
-
-
 	Events.trigger('showAlert', {
-
 		message,
 
 		title,
@@ -65,31 +53,22 @@ export function Alert(data = {}) {
 		emotion,
 
 		...otherProps
-
 	});
-
 }
 
-
-
 export default class ModalView extends Component {
-
 	constructor(props) {
-
 		super(props);
 
 		let { title = false, message = false, buttons = false, show = false, emotion = false } = props || {};
 
 		this.state = {
-
 			title: title || 'Alert',
 
 			message: message || 'Your custom message',
 
 			buttons: buttons || [
-
 				{
-
 					title: 'CANCEL',
 
 					onPress: () => {},
@@ -97,11 +76,9 @@ export default class ModalView extends Component {
 					icon: false,
 
 					backgroundColor: '#1A5276'
-
 				},
 
 				{
-
 					title: 'OK',
 
 					onPress: () => {},
@@ -109,79 +86,48 @@ export default class ModalView extends Component {
 					icon: false,
 
 					backgroundColor: '#1A5276'
-
 				}
-
 			],
 
 			show: show,
 
 			emotion: emotion || 'normal'
-
 		};
-
 	}
 
-
-
 	componentWillMount() {
-
 		let { id = null } = this.props;
 
 		Events.on('showAlert', id ? id : '123456789', this.onRequest);
 
 		Events.on('upDateAlert', id ? id : '123456789', this.upDateAlert);
-
 	}
 
-
-
 	componentWillUnmount() {
-
 		let { id = null } = this.props;
 
 		Events.remove('showAlert', id ? id : '123456789');
 
 		Events.remove('upDateAlert', id ? id : '123456789');
-
 	}
 
-
-
 	onRequest = (options) => {
-
 		let { message, title, show = true, buttons = [], emotion = 'normal' } = options;
 
-
-
 		if (message) {
-
 			this.setState({ title, message, buttons, show, emotion });
-
 		}
-
 	};
-
-
 
 	upDateAlert = (options) => {
-
 		this.setState({ ...options });
-
 	};
-
-
 
 	closeModal = () => {
-
 		this.setState({ show: false });
-
 	};
 
-
-
 	render() {
-
 		let { backgroundColor, animationType } = this.props;
 
 		let { title, message, buttons, show, emotion = 'normal' } = this.state;
@@ -189,39 +135,25 @@ export default class ModalView extends Component {
 		const height = Dimensions.get('window').height;
 
 		let alertGuy = [ 'angry', 'confused', 'happy', 'normal', 'sad', 'surprized' ].includes(emotion)
-
 			? `icon_guy_${emotion}`
-
 			: 'icon_guy_normal';
 
 		return (
-
 			<Modal transparent visible={show} animationType={animationType || 'fade'} onRequestClose={this.closeModal}>
-
 				<TouchableWithoutFeedback>
-
 					<View
-
 						style={[
-
 							{
-
 								width: '100%',
 
 								height: height,
 
 								backgroundColor: '#FFFFFF'
-
 							}
-
 						]}
-
 					>
-
 						<View
-
 							style={{
-
 								// elevation: 24,
 
 								// shadowColor: "#000",
@@ -255,16 +187,17 @@ export default class ModalView extends Component {
 										}}
 									/> */}
 								</View>
+
 								{/* -------------------------- Title --------------------------------- */}
 								<View
 									style={{
 										justifyContent: 'center',
 										alignItems: 'center',
 										flex: 1,
-										marginBottom: 16
+										marginBottom: 40
 									}}
 								>
-									<Text style={[ { textAlign: 'center', color: 'grey', fontSize: 20 } ]}>
+									<Text style={[ { textAlign: 'center', color: 'grey', fontSize: 25 } ]}>
 										{title}
 									</Text>
 								</View>
@@ -273,7 +206,7 @@ export default class ModalView extends Component {
 									<Text
 										style={{
 											color: '#616161',
-											fontSize: 16,
+											fontSize: 20,
 											fontFamily: 'Roboto-Regular',
 											lineHeight: 24,
 											paddingHorizontal: 24,
@@ -285,6 +218,7 @@ export default class ModalView extends Component {
 								</View>
 							</View>
 						</View>
+
 						{/* -------------------------- Actions --------------------------------- */}
 						<View
 							style={{
@@ -303,14 +237,14 @@ export default class ModalView extends Component {
 											key={index}
 											activeOpacity={0.7}
 											style={{
-												width: 40,
-												height: 40,
+												width: 60,
+												height: 60,
 												borderRadius: 20,
 												marginHorizontal: 8,
 												marginBottom: 8,
 												justifyContent: 'center',
 												alignItems: 'center',
-												backgroundColor: button.backgroundColor
+												backgroundColor: '#21618C'
 											}}
 											onPress={() => {
 												this.closeModal();
@@ -321,27 +255,26 @@ export default class ModalView extends Component {
 									) : (
 										<TouchableHighlight
 											key={index}
-											underlayColor={'#e6e6e6'}
+											// underlayColor={'#e6e6e6'}
 											onPress={() => {
-                        // this.closeModal();
-                      button.onPress?  button.onPress():{}
-                        this.closeModal();
+												button.onPress ? button.onPress() : {};
+												this.closeModal();
 											}}
 											style={{
-												height: 36,
-												minWidth: 64,
+												height: 40,
+												minWidth: 70,
 												paddingHorizontal: 10,
 												justifyContent: 'center',
 												marginRight: 8,
 												alignItems: 'center',
-												backgroundColor: button.backgroundColor
+												backgroundColor: '#21618C'
 											}}
 										>
 											<View>
 												<Text
 													style={{
-														color: '#03a9f4',
-														fontSize: 14
+														color: 'white',
+														fontSize: 18
 													}}
 												>
 													{button.title}
