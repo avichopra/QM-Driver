@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Dimensions, StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 import config from '../config/index';
-=======
-import config from "../config/index"
->>>>>>>  changes app icon login rest
 export default class Header extends Component {
 	constructor(props) {
 		super(props);
@@ -44,11 +40,7 @@ export default class Header extends Component {
 								source={{
 									uri:
 										avatarSource === ''
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 											? 'asset:/icon/def.png'
-=======
-											? 'asset:/images/def.png'
->>>>>>>  changes app icon login rest
 											: `${config.SERVER_URL}/v1/daffo/file/${avatarSource}`
 								}}
 								style={[ styles.circle, styles.circleBorder ]}

@@ -9,10 +9,6 @@
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-
-=======
->>>>>>>  changes app icon login rest
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -37,11 +33,7 @@
 </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
         <meta-data
-=======
-         <meta-data
->>>>>>>  changes app icon login rest
     android:name="com.google.android.geo.API_KEY"
     android:value="AIzaSyASICVTRwAiAnnT_AzZFCqitJ56C8koh3s"/>
     </application>

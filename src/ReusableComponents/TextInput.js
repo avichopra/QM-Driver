@@ -10,12 +10,8 @@ export default (TextField = (props) => {
 		error = '',
 		onHandleChange = () => {},
 		keyboardType = 'default',
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 		secureTextEntry = false,
 		editable = true
-=======
-		secureTextEntry = false
->>>>>>>  changes app icon login rest
 	} = props;
 	return (
 		<View>
@@ -45,11 +41,7 @@ export default (TextField = (props) => {
 						onHandleChange(props.value, text, props.field);
 					}}
 					value={fieldValue ? fieldValue : null}
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					editable={editable}
-=======
-					editable={true}
->>>>>>>  changes app icon login rest
 					keyboardType={keyboardType}
 					secureTextEntry={secureTextEntry}
 				/>

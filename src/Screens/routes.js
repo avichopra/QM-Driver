@@ -4,10 +4,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Drawer from './DrawerNavigator';
 import Login from './Login/login';
 import Oauth from './oAuthComponent/oauth';
-
+import OTP from "./OTP/otp"
 import Reset from './reset/reset';
 import ResetPassword from './ResetPassword/Reset';
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 // import SignUp from './Signup/signup';
 const SwitchRouteConfig = {
 	Login: Login,
@@ -16,16 +15,6 @@ const SwitchRouteConfig = {
 	Oauth: Oauth,
 	Drawer: Drawer,
 	OTP: OTP,
-=======
-
-const SwitchRouteConfig = {
-	Login: Login,
-	
-	Reset: Reset,
-	Oauth: Oauth,
-	Drawer: Drawer,
-
->>>>>>>  changes app icon login rest
 	ResetPassword: ResetPassword
 };
 
@@ -47,11 +36,7 @@ class SwitchNavigatorWrapper extends React.Component {
 	};
 
 	componentWillUnmount() {
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 		Linking.removeAllListeners('url'); //'url', this.handleOpenURL);
-=======
-		Linking.removeAllListeners("url"); //'url', this.handleOpenURL);
->>>>>>>  changes app icon login rest
 	}
 
 	navigateTo = (url) => {

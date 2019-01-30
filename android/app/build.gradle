@@ -138,21 +138,13 @@ android {
 
 dependencies {
     compile project(':react-native-image-resizer')
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-    compile project(':react-native-google-places')
-=======
       compile project(':react-native-google-places')
->>>>>>>  changes app icon login rest
     implementation(project(':react-native-maps')){
       exclude group: 'com.google.android.gms', module: 'play-services-base'
       exclude group: 'com.google.android.gms', module: 'play-services-maps'
   }
   implementation 'com.google.android.gms:play-services-base:10.0.1'
   implementation 'com.google.android.gms:play-services-maps:10.0.1'
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-    compile project(':react-native-google-places')
-=======
->>>>>>>  changes app icon login rest
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
     compile project(':react-native-splash-screen')

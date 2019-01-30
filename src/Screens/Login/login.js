@@ -27,11 +27,7 @@ export default class Login extends Base {
 			password: '',
 			emailerror: '',
 			passworderror: '',
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-			loading: false
-=======
 			loading:false
->>>>>>>  changes app icon login rest
 		};
 	}
 	// componentDidMount() {
@@ -78,42 +74,19 @@ export default class Login extends Base {
 	render() {
 		// console.warn("hiiiiiiiiiiiiiiiiii")
 		return (
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-			<KeyboardAvoidingView style={{ flex: 1 }}>
-				<ScrollView contentContainerStyle={style.f1} keyboardShouldPersistTaps="always">
-=======
 			<KeyboardAvoidingView style={{ flex: 1 }} >
 			
 				<ScrollView contentContainerStyle={style.f1} keyboardShouldPersistTaps='always'>
->>>>>>>  changes app icon login rest
 					<ImageBackground
 						source={{ uri: 'asset:/icon/group_2.png' }}
 						style={style.d1}
 						resizeMode={'stretch'}
 					>
 						<View style={style.f1}>
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-							<Image
-								source={{ uri: 'asset:/icon/group.png' }}
-								style={[ { marginTop: 30 }, style.d2, style.a1 ]}
-							/>
-							<Text
-								style={{
-									alignSelf: 'center',
-									color: '#ffffff',
-									fontSize: 11,
-									fontFamily: 'NunitoSans-Regular'
-								}}
-							>
-								Driver App
-							</Text>
-						</View>
-=======
 							<Image source={{ uri: 'asset:/icon/group.png' }} style={[ style.d2, style.a1 ,{marginTop:30}]} />
 							<Text style={{alignSelf:"center",color:"#ffffff",fontSize:11,fontFamily:"NunitoSans-Regular"}}>Driver App</Text>
 						</View>
 						
->>>>>>>  changes app icon login rest
 						<View style={style.f1}>
 							<View style={style.d4}>
 								<Image
@@ -165,27 +138,6 @@ export default class Login extends Base {
 							<Text style={style.c1}>{this.state.passworderror}</Text>
 						</View>
 						<View style={[ style.j1, style.f1 ]}>
-<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
-							{this.state.loading === false ? (
-								<TouchableOpacity style={style.c2} onPress={this.onSubmit} accessible={false}>
-									<Text
-										style={{
-											textAlign: 'center',
-											marginTop: 13,
-											fontSize: 14,
-											color: '#2948ff',
-											fontFamily: 'Nunito Bold'
-										}}
-									>
-										SIGN IN
-									</Text>
-								</TouchableOpacity>
-							) : (
-								<View style={style.c2}>
-									<ActivityIndicator size="large" color="#000" />
-								</View>
-							)}
-=======
 							{this.state.loading===false?<TouchableOpacity style={style.c2} onPress={this.onSubmit} accessible={false}>
 								<Text
 									style={{
@@ -199,7 +151,6 @@ export default class Login extends Base {
 									SIGN IN
 								</Text>
 							</TouchableOpacity>:<View style={style.c2}><ActivityIndicator size="large" color="#000" /></View>}
->>>>>>>  changes app icon login rest
 						</View>
 					</ImageBackground>
 				</ScrollView>
