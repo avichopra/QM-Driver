@@ -50,12 +50,24 @@ import {
 	TouchableOpacity,
 	ScrollView
 } from 'react-native';
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 import RNGooglePlaces from 'react-native-google-places';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { callApi } from '../utilities/serverApi';
 import { setDriver } from '../redux';
 
+=======
+import { callApi } from '../utilities/serverApi';
+import {connect} from "react-redux"
+import {setPatient} from "../redux/index"
+import RNGooglePlaces from 'react-native-google-places';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+const instructions = Platform.select({
+	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+	android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu'
+});
+>>>>>>>  changes app icon login rest
 const { width, height } = Dimensions.get('window');
 class Home extends Component {
 	constructor() {
@@ -68,6 +80,27 @@ class Home extends Component {
 			currentPlace: ''
 		};
 	}
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
+=======
+	componentWillMount()
+	{
+		let headers = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			authorization: `Bearer ${this.props.token}`
+		};
+		console.warn("token",this.props.token)
+		callApi(
+			'post',
+			'v1/daffo/Patient/getOwn',
+			{ perPage: 1, filter: { userId: this.props.user.id} },
+			headers
+		).then((result) => {
+			console.warn('resultttttttttttttttttttttttttttttt getOwn', result.data[0]);
+			result.data[0] ?  setPatient(result.data[0]) : '';
+		});
+	}
+>>>>>>>  changes app icon login rest
 	componentWillUnmount() {
 		navigator.geolocation.clearWatch();
 	}
@@ -166,6 +199,11 @@ class Home extends Component {
 					longitude: place.longitude
 				});
 				console.log(place.latitude);
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
+=======
+				// place represents user's selection from the
+				// suggestions and it is a simplified Google Place object.
+>>>>>>>  changes app icon login rest
 			})
 			.catch((error) => console.log(error.message));
 	};
@@ -178,6 +216,10 @@ class Home extends Component {
 				<MapView
 					provider={PROVIDER_GOOGLE}
 					style={[ styles.map ]}
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
+=======
+					// camera={{ zoom: 50 }}
+>>>>>>>  changes app icon login rest
 					showsUserLocation={true}
 					mapType="standard"
 					followsUserLocation={true}
@@ -202,6 +244,49 @@ class Home extends Component {
 						title={'Your Location'}
 					/>
 				</MapView>
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
+=======
+				<View
+					style={{
+						flexDirection: 'row',
+						width: window.width,
+						// margin: 30,
+						height: 50,
+						padding: 5,
+						alignItems: 'center',
+						justifyContent: 'center',
+						borderRadius: 5,
+						backgroundColor: '#fff',
+						elevation: 20,
+						position: 'absolute',
+						marginTop: 60,
+						// marginLeft: 20,
+						// marginRight: 20,
+						alignSelf: 'center'
+					}}
+				>
+					<ScrollView
+						contentContainerStyle={{ alignItems: 'center' }}
+						style={{ width: '90%' }}
+						horizontal={true}
+						showsHorizontalScrollIndicator={false}
+					>
+						<Text
+							style={{
+								borderBottomWidth: 2,
+								borderBottomColor: '#507CFC',
+								fontSize: 18
+							}}
+							onLongPress={this.AutoCom}
+						>
+							{this.state.currentPlace}
+						</Text>
+					</ScrollView>
+					<View style={{ whidth: '10%' }}>
+						<Image source={{ uri: 'mipmap/map' }} style={{ height: 19, width: 19 }} resizeMode="contain" />
+					</View>
+				</View>
+>>>>>>>  changes app icon login rest
 			</View>
 		);
 	}

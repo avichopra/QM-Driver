@@ -34,6 +34,10 @@ export default class resetBase extends Component {
           if (response.status === 200) {
             this.setState({email:"",loading:false})
             Alert({
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
+=======
+              title: 'Reset Password',
+>>>>>>>  changes app icon login rest
               message: 'Password reset link has been sent to your email',	buttons: [
 								{
 									title: 'Ok',

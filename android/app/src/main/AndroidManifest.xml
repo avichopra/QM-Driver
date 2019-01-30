@@ -9,15 +9,19 @@
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 
+=======
+>>>>>>>  changes app icon login rest
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
+      android:icon="@mipmap/app_icon"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
+        android:launchMode="singleTask"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
@@ -25,9 +29,19 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+          <intent-filter android:label="Quick_Medic_Driver">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="quickmedicdriver"/>
+</intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
         <meta-data
+=======
+         <meta-data
+>>>>>>>  changes app icon login rest
     android:name="com.google.android.geo.API_KEY"
     android:value="AIzaSyASICVTRwAiAnnT_AzZFCqitJ56C8koh3s"/>
     </application>

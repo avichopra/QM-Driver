@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 import * as Storage from '../utilities/asyncStorage';
 
 import Svg, { Path, Ellipse } from 'react-native-svg';
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 import config from '../config/index';
+=======
+const width = Dimensions.get('window').width;
+import config from "../config/index"
+>>>>>>>  changes app icon login rest
 class DrawerContent extends Component {
 	navigateToScreen = (route) => {
 		const navigateAction = StackActions.reset({
@@ -90,7 +95,11 @@ class DrawerContent extends Component {
 							source={{
 								uri:
 									picture === ''
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 										? 'asset:/icon/def.png'
+=======
+										? 'asset:/images/def.png'
+>>>>>>>  changes app icon login rest
 										: `${config.SERVER_URL}/v1/daffo/file/${picture}`
 							}}
 							style={{
