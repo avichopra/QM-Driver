@@ -25,14 +25,22 @@ export default class resetBase extends Component {
   };
   onSubmit = () => {
     if (this.checkAllMandatoryField()) {
+      this.setState({loading:true})
       let data = {
         email: this.state.email
       };
       callApi('post', 'v1/auth/forget', data)
         .then(response => {
           if (response.status === 200) {
+            this.setState({email:"",loading:false})
             Alert({
-              message: 'Password reset link has been sent to your email'
+              message: 'Password reset link has been sent to your email',	buttons: [
+								{
+									title: 'Ok',
+									icon: false,
+									backgroundColor: 'blue'
+								}
+							]
             });
             console.log('response', response);
             // alert('Password Reset Link has been sent to your email');
@@ -41,7 +49,7 @@ export default class resetBase extends Component {
         })
         .catch(error => {
           if (error.response.data.code === 400) {
-            this.setState({ emailerror: 'user not found' });
+            this.setState({ emailerror: 'user not found',loading:false });
           }
           console.log('Error', error.response.data);
         });

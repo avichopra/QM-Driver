@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Dimensions, StyleSheet } from 'react-native';
 import Header from './Header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TextField from '../ReusableComponents/TextInput';
 import Button from '../ReusableComponents/Button';
 import MyProfileBase from './MyProfileBase';
+import { connect } from 'react-redux';
 class MyProfile extends MyProfileBase {
 	static navigationOptions = {
 		drawerLabel: 'My Profile',
@@ -12,163 +13,80 @@ class MyProfile extends MyProfileBase {
 	};
 
 	render() {
-		console.log('avatarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr', this.state.avatarSource);
-
 		const height = Dimensions.get('window').height;
 		const { GeneralInfoPressed, AdditionalInfoPressed } = this.state;
+		let { username = '', email = '', contactNo, picture = '' } = this.props.user;
+		let { vehicleNo, driverUniqueNo } = this.props.driver;
 		return (
-			<KeyboardAvoidingView style={{ flex: 1 }}>
-				<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-					<View style={{ flexGrow: 1 }}>
-						<View style={{ height: 200 }}>
+			<KeyboardAvoidingView style={styles.fg}>
+				<ScrollView contentContainerStyle={styles.fg}>
+					<View style={styles.fg}>
+						<View style={styles.ProfileHeaderHeight}>
 							<Header
 								title={'My Profile'}
 								openDrawer={this.openDrawer}
 								height={200}
 								cameraClicked={this.cameraClicked}
-								avatarSource={this.state.avatarSource}
+								avatarSource={this.state.picture}
+								onHandleChange={this.onHandleChange}
+								name="userName"
+								fieldValue={this.state.userName}
 							/>
 						</View>
+
 						<View
 							style={{
-								height: 60,
-								width: '100%',
-								flexDirection: 'row',
+								height: 320,
+								width: '80%',
+								borderWidth: 3,
+								borderRadius: 2,
+								borderColor: 'rgba(178,186,187 	,0.1)',
+								borderBottomWidth: 0,
+								elevation: 5,
+								marginVertical: 30,
+								alignSelf: 'center',
+
 								alignItems: 'center'
-								// flexGrow: 1,
 							}}
 						>
-							<TouchableOpacity
-								style={{
-									width: '48%',
-									borderRightWidth: 1,
-									borderRightColor: '#B1B1B1',
-									alignItems: 'center',
-									justifyContent: 'center'
-								}}
-								onPress={this.GeneralInfoPressed}
-							>
-								<Text
-									style={[
-										GeneralInfoPressed && true ? { color: 'black' } : { color: '#B1B1B1' },
-										{ fontSize: 18 }
-									]}
-								>
-									General Info
-								</Text>
-								{GeneralInfoPressed && true ? (
-									<View
-										style={{ height: 1.5, backgroundColor: 'blue', width: '60%', marginTop: 5 }}
-									/>
-								) : (
-									<View style={{ height: 1.5, width: '60%', marginTop: 5 }} />
-								)}
-							</TouchableOpacity>
-							<TouchableOpacity
-								style={{ width: '48%', alignItems: 'center', justifyContent: 'center' }}
-								onPress={this.AdditionalInfoPressed}
-							>
-								<Text
-									style={[
-										AdditionalInfoPressed && true ? { color: 'black' } : { color: '#B1B1B1' },
-										{ fontSize: 18 }
-									]}
-								>
-									Additional Info
-								</Text>
-								{AdditionalInfoPressed && true ? (
-									<View
-										style={{ height: 1.5, backgroundColor: 'blue', width: '60%', marginTop: 5 }}
-									/>
-								) : (
-									<View style={{ height: 1.5, width: '60%', marginTop: 5 }} />
-								)}
-							</TouchableOpacity>
+							<TextField
+								placeholder={'Email'}
+								icon={'envelope'}
+								onHandleChange={this.onHandleChange}
+								field={'email'}
+								fieldValue={email}
+							/>
+							<TextField
+								placeholder={'Contact No.'}
+								icon={'call_answer_grey'}
+								onHandleChange={this.onHandleChange}
+								field={'contactNo'}
+								fieldValue={this.state.contactNo}
+								// error={this.state.GeneralInfo.contactNoError}
+								keyboardType={'numeric'}
+							/>
+							<TextField
+								placeholder={'Vehicle Number'}
+								icon={'ambulance'}
+								// onHandleChange={this.onHandleChange}
+								// field={'vehicleNo'}
+								editable={false}
+								fieldValue={vehicleNo}
+								// error={this.state.GeneralInfo.emergencyContactNoError}
+								keyboardType={'numeric'}
+							/>
+							<TextField
+								placeholder={'Driver Unique Number'}
+								icon={'driver'}
+								// onHandleChange={this.onHandleChange}
+								// field={'DUN'}
+								fieldValue={driverUniqueNo}
+								editable={false}
+								// error={this.state.GeneralInfo.emergencyContactNoError}
+								keyboardType={'numeric'}
+							/>
 						</View>
-						{!(AdditionalInfoPressed && true) ? (
-							<View
-								style={{
-									height: 230,
-									width: '80%',
-									borderWidth: 3,
-									borderRadius: 2,
-									borderColor: 'rgba(178,186,187 	,0.1)',
-									borderBottomWidth: 0,
-									elevation: 5,
-									marginVertical: 10,
-									alignSelf: 'center',
 
-									alignItems: 'center'
-								}}
-							>
-								<TextField
-									placeholder={'Email'}
-									icon={'envelope'}
-									onHandleChange={this.onHandleChange}
-									field={'GeneralInfo'}
-									value={'email'}
-								/>
-								<TextField
-									placeholder={'Contact No.'}
-									icon={'call_answer_grey'}
-									onHandleChange={this.onHandleChange}
-									field={'GeneralInfo'}
-									value={'contactNo'}
-								/>
-								<TextField
-									placeholder={'Emergency Contact No.'}
-									icon={'call_answer_grey'}
-									onHandleChange={this.onHandleChange}
-									field={'GeneralInfo'}
-									value={'emergencyContactNo'}
-								/>
-							</View>
-						) : (
-							<View
-								style={{
-									height: 300,
-									width: '80%',
-									borderWidth: 3,
-									borderRadius: 2,
-									borderColor: 'rgba(178,186,187 	,0.1)',
-									borderBottomWidth: 0,
-									elevation: 5,
-									marginVertical: 10,
-									alignSelf: 'center',
-
-									alignItems: 'center'
-								}}
-							>
-								<TextField
-									placeholder={'Address'}
-									icon={'pin'}
-									onHandleChange={this.onHandleChange}
-									field={'AdditionalInfo'}
-									value={'address'}
-								/>
-								<TextField
-									placeholder={'Blood Group'}
-									icon={'blood'}
-									onHandleChange={this.onHandleChange}
-									field={'AdditionalInfo'}
-									value={'bloodGroup'}
-								/>
-								<TextField
-									placeholder={'Emergency Contact No.'}
-									icon={'call_answer_grey'}
-									onHandleChange={this.onHandleChange}
-									field={'GeneralInfo'}
-									value={'emergencyContactNo'}
-								/>
-								<TextField
-									placeholder={'Relation with Patient'}
-									icon={'relation'}
-									onHandleChange={this.onHandleChange}
-									field={'AdditionalInfo'}
-									value={'relationWithPatient'}
-								/>
-							</View>
-						)}
 						<View
 							style={{
 								flexGrow: 1,
@@ -178,7 +96,12 @@ class MyProfile extends MyProfileBase {
 								marginVertical: 30
 							}}
 						>
-							<Button title={'Save'} backgroundColor={'#443BFF'} onSave={this.onSave} />
+							<Button
+								title={'Save'}
+								backgroundColor={'#443BFF'}
+								onSave={this.onSave}
+								loading={this.state.loading}
+							/>
 						</View>
 					</View>
 				</ScrollView>
@@ -186,4 +109,28 @@ class MyProfile extends MyProfileBase {
 		);
 	}
 }
-export default MyProfile;
+function mapStateToProps(state) {
+	console.log('I am the stateeeeeeeeeeeeeeeeeeeeeeeeeeee', state);
+	return {
+		user: state.user,
+		token: state.token,
+		driver: state.driver
+	};
+}
+const styles = StyleSheet.create({
+	fg: { flexGrow: 1 },
+	ProfileHeaderHeight: { height: 200 },
+	InfoView: {
+		height: 60,
+		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	center: { alignItems: 'center', justifyContent: 'center' },
+	GInfo: {
+		width: '48%',
+		borderRightWidth: 1,
+		borderRightColor: '#B1B1B1'
+	}
+});
+export default connect(mapStateToProps)(MyProfile);

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import {
-  createDrawerNavigator,
-  createAppContainer,
-  createStackNavigator,
-  createSwitchNavigator
+	createDrawerNavigator,
+	createAppContainer,
+	createStackNavigator,
+	createSwitchNavigator
 } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Foundation';
 
@@ -15,30 +15,43 @@ import ChangePassword from '../DrawerComponents/ChangePassword';
 import Header from '../DrawerComponents/Header';
 import Logout from '../DrawerComponents/Logout';
 import DrawerContent from '../DrawerComponents/DrawerContent';
-
+const Stack = createStackNavigator(
+	{
+		Home: {
+			screen: Home
+		},
+		MyProfile: {
+			screen: MyProfile
+		},
+		ChangePassword: {
+			screen: ChangePassword
+		},
+		History: {
+			screen: History
+		},
+		Logout: {
+			screen: Logout
+		}
+	},
+	{
+		headerMode: 'none',
+		initialRouteName: 'Home',
+		navigationOptions: {
+			headerVisible: false
+		}
+	}
+);
 const MyDrawerNavigator = createDrawerNavigator(
-  {
-    Home: {
-      screen: Home
-    },
-    MyProfile: {
-      screen: MyProfile
-    },
-    ChangePassword: {
-      screen: ChangePassword
-    },
-    History: {
-      screen: History
-    },
-    Logout: {
-      screen: Logout
-    }
-  },
-  {
-    initialRouteName: 'Home',
-    drawerWidth: 300,
-    contentComponent: DrawerContent
-  }
+	{
+		Stack: {
+			screen: Stack
+		}
+	},
+	{
+		initialRouteName: 'Stack',
+		drawerWidth: 300,
+		contentComponent: DrawerContent
+	}
 );
 
 export default createAppContainer(MyDrawerNavigator);

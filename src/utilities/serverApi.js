@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../config/index';
 import * as Storage from '../utilities/asyncStorage';
+import store from "../utilities/store"
 const callApi = (
   method,
   reqUrl,
@@ -34,6 +35,14 @@ const callApi = (
     axios({ ...options })
       .then(response => resolve(response))
       .catch(error => {
+         console.log("error inside callApi",error.response)
+         if(error.response.status===401)
+         {
+           console.log("status 401")
+           Storage.remove('token');
+          Storage.remove('user');
+          store.getInstance().getKey("Login").navigate("Login")
+         }
         reject(error);
       });
   });
