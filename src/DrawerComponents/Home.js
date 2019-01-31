@@ -56,6 +56,7 @@ import {
 	ScrollView,
 	ActivityIndicator
 } from 'react-native';
+import getDirections from 'react-native-google-maps-directions'
 import RNGooglePlaces from 'react-native-google-places';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
@@ -64,6 +65,7 @@ import { setDriver } from '../redux';
 import Store from "../redux/store/index"
 import {addLocation} from "../redux/actions/index"
 const { width, height } = Dimensions.get('window');
+
 class Home extends Component {
 	constructor() {
 		super();
@@ -245,7 +247,9 @@ class Home extends Component {
 							longitudeDelta: longitude_Delta
 						}}
 						title={'Your Location'}
+						
 					/>
+					
 				</MapView>}
 			</View>
 		);
