@@ -32,11 +32,12 @@ export default class resetBase extends Component {
 	onSubmit = () => {
 		if (this.checkAllMandatoryField()) {
 			this.setState({ loading: true });
-			// console.log('OTP Verified', this.state.otp, this.state.id);
 			let data = {
-				email: this.state.email,
-				otp: this.state.otp
+				email: this.props.user.email,
+				otp: this.state.otp,
+				contactNo: this.props.navigation.state.params.contactNo
 			};
+
 			callApi('post', 'v1/daffo/dispatch/otpVerification', data)
 				.then((response) => {
 					this.setState({ loading: false });

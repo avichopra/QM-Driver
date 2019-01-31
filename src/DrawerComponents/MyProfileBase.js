@@ -6,7 +6,7 @@ import ImageResizer from 'react-native-image-resizer';
 import SplashScreen from 'react-native-splash-screen';
 import ImagePicker from 'react-native-image-picker';
 import { setUser, setDriver } from '../redux/index';
-
+import { Alert } from '../ReusableComponents/modal';
 import Axios from 'axios';
 export default class MyProfile extends Component {
 	constructor(props) {
@@ -14,8 +14,7 @@ export default class MyProfile extends Component {
 		this.state = {
 			email: '',
 			contactNo: '',
-			// vehicleNo: '',
-			// DUN: '',
+
 			imageSelected: false,
 			profileImage: '',
 			userName: '',
@@ -39,8 +38,25 @@ export default class MyProfile extends Component {
 	openDrawer = () => {
 		this.props.navigation.openDrawer();
 	};
-
-	
+	goToOtp = () => {
+		this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo });
+	};
+	checkPhoneVerified = () => {
+		console.warn('phn vrr', this.props.user.phoneVerified);
+		if (this.props.user.phoneVerified === false) {
+			Alert({
+				message: 'Your new contact number is not verified',
+				buttons: [
+					{
+						title: 'Verify',
+						icon: false,
+						backgroundColor: 'blue',
+						onPress: this.goToOtp
+					}
+				]
+			});
+		}
+	};
 	componentDidMount() {
 		this.state.userName = this.props.user.fullname;
 		this.state.email = this.props.user.email;
@@ -50,57 +66,67 @@ export default class MyProfile extends Component {
 		// this.state.DUN = this.props.driver.driverUniqueNo;
 		// this.state.vehicleNo = this.props.driver.vehicleNo;
 		this.setState({});
+		this.checkPhoneVerified();
 		setTimeout(() => {
 			SplashScreen.hide();
 		}, 2000);
 	}
 
 	onSave = () => {
-		let data = {
-			// contactNo: this.state.contactNo,
-			picture: this.state.picture,
-			fullname: this.state.userName
-			// vehicleNo: this.state.vehicleNo,
-			// driverUniqueNo: this.state.DUN
-		};
 		let headers = {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 			authorization: `Bearer ${this.props.token}`
 		};
-		this.setState({ loading: true });
-		// callApi('patch', 'v1/daffo/User/updateOwn', data, headers)
-		// 	// Axios.patch('http://192.168.100.141:3000/v1/daffo/User/updateOwn', data, { headers })
-		// 	.then((result) => {
-		// 		console.log('result>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result);
-		// 		setUser(result.data[0]);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log('error from myProfile Base update', err.response, err.status, err);
-		// 	});
-		// let data1 = {
-		// 	vehicleNo: this.state.vehicleNo,
-		// 	driverUniqueNo: this.state.driverUniqueNo
-		// };
-
-		callApi('post', 'v1/daffo/dispatch/updateDriver', data, headers)
-			// Axios.patch('http://192.168.100.141:3000/v1/daffo/User/updateOwn', data, { headers })
-			.then((result) => {
-				this.setState({ loading: false });
-				console.log(
-					'result>>>>>>>>>>>>>>>>>>>>>>:::::::::::::::::::::>>>>>>>>>>>>>>>>>>>>>>',
-					result.data.updatedUser
-				);
-				setUser(result.data.updatedUser);
-				// setDriver(result.data.updatedDriver);
-				// this.setState({ loading: false });
-				this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo });
-			})
-			.catch((err) => {
-				console.log('error from myProfile Base ', err.response, err.status, err);
-				// this.setState({ loading: false });
-			});
-		// }
+		if (this.state.contactNo !== this.props.user.contactNo) {
+			let data = {
+				phoneVerified: false,
+				picture: this.state.picture,
+				fullname: this.state.userName,
+				newContactNo: this.state.contactNo
+			};
+			this.setState({ loading: true });
+			callApi('post', 'v1/daffo/dispatch/updateDriver', data, headers)
+				// Axios.patch('http://192.168.100.141:3000/v1/daffo/User/updateOwn', data, { headers })
+				.then((result) => {
+					this.setState({ loading: false });
+					console.log(
+						'result>>>>>>>>>>>>>>>>>>>>>>:::::::::::::::::::::>>>>>>>>>>>>>>>>>>>>>>',
+						result.data.updatedUser
+					);
+					setUser(result.data.updatedUser);
+					// setDriver(result.data.updatedDriver);
+					// this.setState({ loading: false });
+					this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo });
+				})
+				.catch((err) => {
+					console.log('error from myProfile Base ', err.response, err.status, err);
+					// this.setState({ loading: false });
+				});
+		} else {
+			console.warn('My profile being called');
+			this.setState({ loading: true });
+			let data = {
+				// contactNo: this.state.contactNo,
+				picture: this.state.picture,
+				fullname: this.state.userName
+			};
+			callApi('post', 'v1/daffo/dispatch/updateDriver', data, headers)
+				.then((result) => {
+					this.setState({ loading: false });
+					console.log(
+						'result>>>>>>>>>>>>>>>>>>>>>>:::::::::::::::::::::>>>>>>>>>>>>>>>>>>>>>>',
+						result.data.updatedUser
+					);
+					setUser(result.data.updatedUser);
+					// setDriver(result.data.updatedDriver);
+					// this.setState({ loading: false });
+				})
+				.catch((err) => {
+					console.log('error from myProfile Base ', err.response, err.status, err);
+					// this.setState({ loading: false });
+				});
+		}
 	};
 	cameraClicked = () => {
 		console.log('avatarrrrrrrrrrrrrrr clicked called>>>>>>>>>>>>>>>>>>>>>>>>>>>');
