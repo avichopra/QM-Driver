@@ -30,11 +30,12 @@ export default class resetBase extends Component {
 	onSubmit = () => {
 		if (this.checkAllMandatoryField()) {
 			this.setState({ loading: true });
-			// console.log('OTP Verified', this.state.otp, this.state.id);
 			let data = {
 				email: this.props.user.email,
-				otp: this.state.otp
+				otp: this.state.otp,
+				contactNo: this.props.navigation.state.params.contactNo
 			};
+
 			callApi('post', 'v1/daffo/dispatch/otpVerification', data)
 				.then((response) => {
 					this.setState({ loading: false });
@@ -43,8 +44,8 @@ export default class resetBase extends Component {
 						message: 'Your number has been verified',
 						buttons: [ { title: 'OK', backgroundColor: '#1A5276' } ]
 					});
+					setUser(response.data.user);
 					this.props.navigation.navigate('MyProfile');
-					console.log('response', response);
 				})
 				.catch((error) => {
 					this.setState({ otperror: error.response.data.message, loading: false });
