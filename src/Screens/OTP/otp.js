@@ -23,15 +23,17 @@ class OTP extends Base {
 			loading: false
 		};
 	}
-
-	componentDidMount() {
-		this.resendOTP();
-
-		const { navigation } = this.props;
+componentWillMount(){
+	const { navigation } = this.props;
 		const email = navigation.getParam('email');
+		this.setState({ email:email });
+}
+	componentDidMount() {
+	
 		// const user = navigation.getParam('user');
-		this.setState({ email });
-		console.log('Parameter', email);
+		console.warn("email",this.state.email)
+		this.resendOTP();
+		// console.log('Parameter',email);
 	}
 
 	render() {

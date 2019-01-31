@@ -79,27 +79,11 @@ export default class LoginBase extends Component {
 						
 					else if (error.response.data.message === 'Incorrect password')
 						this.setState({ passworderror: 'Incorrect password'});
-					else if (!error.response.data.message.emailVerified) {
-						console.log('inside verify modal');
-						this.setState({email:"",password:""})
-						Alert({
-              title: 'Verify Email',
-							message: 'Verify your email',
-							buttons: [
-								{
-									title: 'Cancel',
-									icon: false,
-									backgroundColor: 'blue'
-								},
-								{
-									title: 'Send Verification Email',
-									onPress: this.sendVerifationEmail,
-									icon: false,
-									backgroundColor: 'blue'
-								}
-							]
-						});
-					}
+						else if (!error.response.data.message.phoneVerified)
+						{
+							navigate('OTP', { email: error.response.data.message.email });
+						}
+						
 				});
 		} else {
 			console.log('error in validation');

@@ -34,7 +34,8 @@ export default class Reset extends Base {
         <ScrollView contentContainerStyle={style.f1} keyboardShouldPersistTaps='always'>
           <ImageBackground source={{ uri: 'asset:/icon/group_2.png' }} style={style.d1} resizeMode={'stretch'}>
             <View style={style.f1}>
-              <Image source={{ uri: 'asset:/icon/group.png' }} style={[style.d2, style.d3, style.a1]} />
+              <Image source={{ uri: 'asset:/icon/group.png' }} style={[style.d2, style.a1,{marginTop:30}]} />
+              <Text style={{alignSelf:"center",color:"#ffffff",fontSize:11,fontFamily:"NunitoSans-Regular"}}>Driver App</Text>
             </View>
             <View style={style.f1}>
               <View style={style.d4}>

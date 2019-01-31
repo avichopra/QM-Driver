@@ -31,7 +31,7 @@ class SwitchNavigatorWrapper extends React.Component {
 		Linking.addEventListener('url', this.handleOpenURL);
 	}
 	handleOpenURL = (event) => {
-		console.warn('inside handle', event);
+		// console.warn('inside handle', event);
 		this.navigateTo(event.url);
 	};
 

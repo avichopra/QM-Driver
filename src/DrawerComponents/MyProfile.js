@@ -11,7 +11,6 @@ class MyProfile extends MyProfileBase {
 		drawerLabel: 'My Profile',
 		drawerIcon: ({ tintColor }) => <Icon name={'user'} size={25} color={'black'} />
 	};
-
 	render() {
 		const height = Dimensions.get('window').height;
 		const { GeneralInfoPressed, AdditionalInfoPressed } = this.state;

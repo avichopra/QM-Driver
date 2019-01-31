@@ -1,9 +1,8 @@
 package com.quick_medic_driver;
-
-
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 
 
@@ -33,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LocationServicesDialogBoxPackage(),
             new ImageResizerPackage(),
             new MapsPackage(),
             new RNGooglePlacesPackage(),
@@ -41,7 +41,6 @@ public class MainApplication extends Application implements ReactApplication {
             new SplashScreenReactPackage(),
             new ImagePickerPackage(),
             new RNGestureHandlerPackage()
-             
                         
       );
     }

@@ -20,7 +20,7 @@ class oauth extends Component {
 			if (url === null){
 				this.tryLogin();
 			}
-			console.warn(url);
+			// console.warn(url);
 			this.navigateTo(url);
 		});
 
