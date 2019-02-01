@@ -108,7 +108,7 @@ class DrawerContent extends Component {
 					</TouchableOpacity>
 					<View style={{ width: '50%', alignItems: 'center' }}>
 						<Text style={{ color: 'black' }} numberOfLines={1}>
-							{this.props.user.fullname ? this.props.user.fullname : 'Name'}
+							{this.props.user.fullname ? this.props.user.fullname.split(" ")[0] : ""}
 						</Text>
 					</View>
 				</View>

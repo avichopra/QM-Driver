@@ -71,7 +71,7 @@ export default class MyProfile extends Component {
 				if (result.data.done) {
 					Alert({
 						title: 'Change Password',
-						message: 'Your password has been changed',
+						message: 'Your password has been changed successfully',
 						buttons: [ { title: 'OK', backgroundColor: '#1A5276' } ]
 					});
 this.setEmpty()

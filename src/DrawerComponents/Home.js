@@ -104,7 +104,8 @@ class Home extends Component {
 		}
 	  }
 	componentWillMount() {
-	     console.warn("Location in redux",this.props.location)
+		 console.warn("Location in redux",this.props.location)
+		 this.requestLocationPermission()
 		if(this.props.location!=null)
 		{
 			this.setState({loading:false,latitude:this.props.location.latitude,longitude:this.props.location.longitude})
@@ -169,7 +170,7 @@ class Home extends Component {
 		);
 		// this.getDirection('29.132963299999993,75.7534505', '29.1328949,75.753995');
 		// this._askForLocationServices();
-		// this.requestLocationPermission()
+		this.requestLocationPermission()
 	}
 	getDirection = async (startLoc, destinationLoc) => {
 		let resp = await fetch(
@@ -186,15 +187,15 @@ class Home extends Component {
 		// });
 		console.log(respJson);
 	};
-	// _askForLocationServices() {
-	// 	PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-	// 		title: 'question',
-	// 		message: 'gimme that location'
-	// 	}).then((granted) => {
-	// 		console.log('granted', granted);
-	// 		// always returns never_ask_again
-	// 	});
-	// }
+	_askForLocationServices() {
+		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
+			title: 'question',
+			message: 'gimme that location'
+		}).then((granted) => {
+			console.log('granted', granted);
+			// always returns never_ask_again
+		});
+	}
 	// onRegionChange(region) {
 	// 	this.setState({
 	// 	  latitude: region.latitude,

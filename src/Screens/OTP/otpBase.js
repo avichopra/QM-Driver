@@ -71,7 +71,7 @@ export default class resetBase extends Component {
 		callApi('post', 'v1/daffo/dispatch/reSendOtp', data)
 			.then((response) => {
 				if (response.status === 200) {
-					this.setState({ otperror: 'OTP sent successfully', loading: false });
+					this.setState({ otperror: 'OTP has been sent, Please verify your number', loading: false });
 				}
 				console.log('Response in resend otp', response);
 			})
