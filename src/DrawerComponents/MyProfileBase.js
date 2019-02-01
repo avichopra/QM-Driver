@@ -46,11 +46,15 @@ export default class MyProfile extends Component {
 	goToOtp = () => {
 		this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo ,email:this.props.user.email,routeName:"MyProfile"});
 	};
+	clearName=()=>
+	{
+		this.setState({userName:""})
+	}
 	checkPhoneVerified = () => {
 		console.warn('phn vrr', this.props.user.phoneVerified);
 		if (this.props.user.phoneVerified === false) {
 			Alert({
-				message: 'Your new contact number is not verified',
+				message: 'Your new contact number is not verified please verify it',
 				buttons: [
 					{
 						title: 'Verify',

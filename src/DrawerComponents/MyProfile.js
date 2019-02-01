@@ -30,6 +30,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								name="userName"
 								fieldValue={this.state.userName}
+							    clearName={this.clearName}
 							/>
 						</View>
 
