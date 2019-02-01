@@ -4,7 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Drawer from './DrawerNavigator';
 import Login from './Login/login';
 import Oauth from './oAuthComponent/oauth';
-import OTP from './OTP/otp';
+import OTP from "./OTP/otp"
 import Reset from './reset/reset';
 import ResetPassword from './ResetPassword/Reset';
 // import SignUp from './Signup/signup';
@@ -21,7 +21,6 @@ const SwitchRouteConfig = {
 const SwitchConfig = {
 	initialRouteName: 'Oauth'
 };
-
 const SwitchNavigator = createSwitchNavigator(SwitchRouteConfig, SwitchConfig);
 
 class SwitchNavigatorWrapper extends React.Component {
@@ -31,7 +30,7 @@ class SwitchNavigatorWrapper extends React.Component {
 		Linking.addEventListener('url', this.handleOpenURL);
 	}
 	handleOpenURL = (event) => {
-		console.warn('inside handle', event);
+		// console.warn('inside handle', event);
 		this.navigateTo(event.url);
 	};
 
@@ -52,10 +51,10 @@ class SwitchNavigatorWrapper extends React.Component {
 		const routeParams = route.split('/');
 		let routeName = routeParams[0];
 		let email = routeParams[1];
-		if (routeName === 'otp') {
-			console.log('User in auth', email);
-			this.props.navigation.navigate('OTP', { email: email });
-		}
+		// if (routeName === 'otp') {
+		// 	console.log('User in auth', email);
+		// 	this.props.navigation.navigate('OTP', { email: email });
+		// }
 		if (routeName === 'reset') {
 			let resetPasswordToken = routeParams[2];
 			console.log(' reset');

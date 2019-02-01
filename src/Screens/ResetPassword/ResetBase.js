@@ -44,7 +44,7 @@ export default class LoginBase extends Component {
       };
       callApi('post', 'v1/auth/resetPassword', data)
         .then(response => {
-          if (response.status === 200) Alert({ message: 'Password Reset successfully' ,	buttons: [
+          if (response.status === 200) Alert({ title: 'Change Password',message: 'Password Reset successfully' ,	buttons: [
             {
               title: 'Ok',
               icon: false,

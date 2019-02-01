@@ -59,9 +59,31 @@
 		767105D82C8C48ED95FDAE47 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A77CFB24D01435B99C64276 /* Octicons.ttf */; };
 		3BF62429DE6045279DE3ABED /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6324E8709A64FD7A93964C6 /* SimpleLineIcons.ttf */; };
 		9FCECCB3CEF24F46B38B68D0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49778C0F01024FF48AB99C65 /* Zocial.ttf */; };
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 		78958B4529A54BFE92D07297 /* libRNGooglePlaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41994A7B0F8454F8A94EDF4 /* libRNGooglePlaces.a */; };
 		DF99160C745A41A29C841F64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5089B0DA3C24A5DABA6C03F /* libAirMaps.a */; };
 		39B4DA4B048B436F9D41750F /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB93FCDC44D4535A1041215 /* libRCTImageResizer.a */; };
+=======
+		15E1DA9AB5F94624A40AA351 /* Nunito Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8E23C3B93254244AF5178BD /* Nunito Bold.ttf */; };
+		F1F94ADB6E94423FAEFF9BC3 /* Nunito Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28CE877B20304A42B9F65E4C /* Nunito Light.ttf */; };
+		C331C2F959994CFF87017291 /* Nunito Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F999A6E65C3469A8FEF291F /* Nunito Regular.ttf */; };
+		3783B5DF9C4541C4B26A9443 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A43DDC97C34B5C9F6C831C /* Nunito-SemiBold.ttf */; };
+		701071E39B0D479881369ADE /* NunitoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA8D00DD8CD94E4FB0C6B922 /* NunitoSans-Black.ttf */; };
+		DE9AB21CCB8247D8A25EDCF2 /* NunitoSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79441E2B2E5749F8ADBB9354 /* NunitoSans-BlackItalic.ttf */; };
+		2E8E41D8748848379CF8BBB3 /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 670B2AF06D5D47A88F1EDB08 /* NunitoSans-Bold.ttf */; };
+		AEF350745128419186C366FE /* NunitoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9B625B3D5174D99B0B271DA /* NunitoSans-BoldItalic.ttf */; };
+		7B60BE475C944BE2BE6C26EF /* NunitoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD763B2184B4878BC82C78A /* NunitoSans-ExtraBold.ttf */; };
+		079F0DA41E78475EAA3582D3 /* NunitoSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AF83D648DF741D2BA48896C /* NunitoSans-ExtraBoldItalic.ttf */; };
+		6347417E22294095B88EB64A /* NunitoSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E8DAF68174D598C849B33 /* NunitoSans-ExtraLight.ttf */; };
+		15E3E2C8B9034F5CA018F9AE /* NunitoSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 359FF557716E4CCA8F6A5069 /* NunitoSans-ExtraLightItalic.ttf */; };
+		DBBBAF2C01344DC6976A278F /* NunitoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F2B5E33BDC5425398E4B804 /* NunitoSans-Italic.ttf */; };
+		6E981E7102F742ACB4D6242B /* NunitoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46952548D21B4C9C9D023132 /* NunitoSans-Light.ttf */; };
+		863481A764804227916CB38A /* NunitoSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF44B7B1BD5D4505A1198B6A /* NunitoSans-LightItalic.ttf */; };
+		E6B817F1305E4088AD4C6F25 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1802892D8B684EE0A61AF6A1 /* NunitoSans-Regular.ttf */; };
+		07DC7F998AEF4C079B496B54 /* NunitoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3181D764FF4FFC8919E482 /* NunitoSans-SemiBold.ttf */; };
+		BE70FAEEA21F49038B0BC41C /* NunitoSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54178909760E4007949BFBAB /* NunitoSans-SemiBoldItalic.ttf */; };
+		255064865A7842BDA109AB17 /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB1138E6BA24D41BD306B96 /* libRCTImageResizer.a */; };
+>>>>>>>  changes app icon login rest
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,12 +416,35 @@
 		1A77CFB24D01435B99C64276 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C6324E8709A64FD7A93964C6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		49778C0F01024FF48AB99C65 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 		EEB7151A37D4446C91DD90AF /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; name = "RNGooglePlaces.xcodeproj"; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		B41994A7B0F8454F8A94EDF4 /* libRNGooglePlaces.a */ = {isa = PBXFileReference; name = "libRNGooglePlaces.a"; path = "libRNGooglePlaces.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		F283472F363A4ECBA24305E6 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E5089B0DA3C24A5DABA6C03F /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		7F287B629BA646E28F0EEE50 /* RCTImageResizer.xcodeproj */ = {isa = PBXFileReference; name = "RCTImageResizer.xcodeproj"; path = "../node_modules/react-native-image-resizer/ios/RCTImageResizer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		3EB93FCDC44D4535A1041215 /* libRCTImageResizer.a */ = {isa = PBXFileReference; name = "libRCTImageResizer.a"; path = "libRCTImageResizer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+=======
+		E8E23C3B93254244AF5178BD /* Nunito Bold.ttf */ = {isa = PBXFileReference; name = "Nunito Bold.ttf"; path = "../assets/fonts/Nunito Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		28CE877B20304A42B9F65E4C /* Nunito Light.ttf */ = {isa = PBXFileReference; name = "Nunito Light.ttf"; path = "../assets/fonts/Nunito Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5F999A6E65C3469A8FEF291F /* Nunito Regular.ttf */ = {isa = PBXFileReference; name = "Nunito Regular.ttf"; path = "../assets/fonts/Nunito Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		36A43DDC97C34B5C9F6C831C /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; name = "Nunito-SemiBold.ttf"; path = "../assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AA8D00DD8CD94E4FB0C6B922 /* NunitoSans-Black.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Black.ttf"; path = "../assets/fonts/NunitoSans-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		79441E2B2E5749F8ADBB9354 /* NunitoSans-BlackItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BlackItalic.ttf"; path = "../assets/fonts/NunitoSans-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		670B2AF06D5D47A88F1EDB08 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Bold.ttf"; path = "../assets/fonts/NunitoSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B9B625B3D5174D99B0B271DA /* NunitoSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BoldItalic.ttf"; path = "../assets/fonts/NunitoSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4DD763B2184B4878BC82C78A /* NunitoSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBold.ttf"; path = "../assets/fonts/NunitoSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8AF83D648DF741D2BA48896C /* NunitoSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/NunitoSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C9E8DAF68174D598C849B33 /* NunitoSans-ExtraLight.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLight.ttf"; path = "../assets/fonts/NunitoSans-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		359FF557716E4CCA8F6A5069 /* NunitoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLightItalic.ttf"; path = "../assets/fonts/NunitoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8F2B5E33BDC5425398E4B804 /* NunitoSans-Italic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Italic.ttf"; path = "../assets/fonts/NunitoSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		46952548D21B4C9C9D023132 /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Light.ttf"; path = "../assets/fonts/NunitoSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CF44B7B1BD5D4505A1198B6A /* NunitoSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-LightItalic.ttf"; path = "../assets/fonts/NunitoSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1802892D8B684EE0A61AF6A1 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Regular.ttf"; path = "../assets/fonts/NunitoSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D3181D764FF4FFC8919E482 /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBold.ttf"; path = "../assets/fonts/NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54178909760E4007949BFBAB /* NunitoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBoldItalic.ttf"; path = "../assets/fonts/NunitoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		27EE50777D664323AEC904B3 /* RCTImageResizer.xcodeproj */ = {isa = PBXFileReference; name = "RCTImageResizer.xcodeproj"; path = "../node_modules/react-native-image-resizer/ios/RCTImageResizer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1BB1138E6BA24D41BD306B96 /* libRCTImageResizer.a */ = {isa = PBXFileReference; name = "libRCTImageResizer.a"; path = "libRCTImageResizer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+>>>>>>>  changes app icon login rest
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,9 +477,13 @@
 				5D73D21BDD30414A9E3DE2D4 /* libSplashScreen.a in Frameworks */,
 				3A0F5B78431049B084E8A9D3 /* libRNSVG.a in Frameworks */,
 				E7AF6BCB79AB4BFEAF15ED42 /* libRNVectorIcons.a in Frameworks */,
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 				78958B4529A54BFE92D07297 /* libRNGooglePlaces.a in Frameworks */,
 				DF99160C745A41A29C841F64 /* libAirMaps.a in Frameworks */,
 				39B4DA4B048B436F9D41750F /* libRCTImageResizer.a in Frameworks */,
+=======
+				255064865A7842BDA109AB17 /* libRCTImageResizer.a in Frameworks */,
+>>>>>>>  changes app icon login rest
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,9 +677,13 @@
 				4E8AEA9FAD5244008D298732 /* SplashScreen.xcodeproj */,
 				2FBD831D54974D2583C2CD9C /* RNSVG.xcodeproj */,
 				216246BF66BD415AA82453B1 /* RNVectorIcons.xcodeproj */,
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 				EEB7151A37D4446C91DD90AF /* RNGooglePlaces.xcodeproj */,
 				F283472F363A4ECBA24305E6 /* AirMaps.xcodeproj */,
 				7F287B629BA646E28F0EEE50 /* RCTImageResizer.xcodeproj */,
+=======
+				27EE50777D664323AEC904B3 /* RCTImageResizer.xcodeproj */,
+>>>>>>>  changes app icon login rest
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -697,6 +750,24 @@
 				1A77CFB24D01435B99C64276 /* Octicons.ttf */,
 				C6324E8709A64FD7A93964C6 /* SimpleLineIcons.ttf */,
 				49778C0F01024FF48AB99C65 /* Zocial.ttf */,
+				E8E23C3B93254244AF5178BD /* Nunito Bold.ttf */,
+				28CE877B20304A42B9F65E4C /* Nunito Light.ttf */,
+				5F999A6E65C3469A8FEF291F /* Nunito Regular.ttf */,
+				36A43DDC97C34B5C9F6C831C /* Nunito-SemiBold.ttf */,
+				AA8D00DD8CD94E4FB0C6B922 /* NunitoSans-Black.ttf */,
+				79441E2B2E5749F8ADBB9354 /* NunitoSans-BlackItalic.ttf */,
+				670B2AF06D5D47A88F1EDB08 /* NunitoSans-Bold.ttf */,
+				B9B625B3D5174D99B0B271DA /* NunitoSans-BoldItalic.ttf */,
+				4DD763B2184B4878BC82C78A /* NunitoSans-ExtraBold.ttf */,
+				8AF83D648DF741D2BA48896C /* NunitoSans-ExtraBoldItalic.ttf */,
+				9C9E8DAF68174D598C849B33 /* NunitoSans-ExtraLight.ttf */,
+				359FF557716E4CCA8F6A5069 /* NunitoSans-ExtraLightItalic.ttf */,
+				8F2B5E33BDC5425398E4B804 /* NunitoSans-Italic.ttf */,
+				46952548D21B4C9C9D023132 /* NunitoSans-Light.ttf */,
+				CF44B7B1BD5D4505A1198B6A /* NunitoSans-LightItalic.ttf */,
+				1802892D8B684EE0A61AF6A1 /* NunitoSans-Regular.ttf */,
+				2D3181D764FF4FFC8919E482 /* NunitoSans-SemiBold.ttf */,
+				54178909760E4007949BFBAB /* NunitoSans-SemiBoldItalic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1163,6 +1234,24 @@
 				767105D82C8C48ED95FDAE47 /* Octicons.ttf in Resources */,
 				3BF62429DE6045279DE3ABED /* SimpleLineIcons.ttf in Resources */,
 				9FCECCB3CEF24F46B38B68D0 /* Zocial.ttf in Resources */,
+				15E1DA9AB5F94624A40AA351 /* Nunito Bold.ttf in Resources */,
+				F1F94ADB6E94423FAEFF9BC3 /* Nunito Light.ttf in Resources */,
+				C331C2F959994CFF87017291 /* Nunito Regular.ttf in Resources */,
+				3783B5DF9C4541C4B26A9443 /* Nunito-SemiBold.ttf in Resources */,
+				701071E39B0D479881369ADE /* NunitoSans-Black.ttf in Resources */,
+				DE9AB21CCB8247D8A25EDCF2 /* NunitoSans-BlackItalic.ttf in Resources */,
+				2E8E41D8748848379CF8BBB3 /* NunitoSans-Bold.ttf in Resources */,
+				AEF350745128419186C366FE /* NunitoSans-BoldItalic.ttf in Resources */,
+				7B60BE475C944BE2BE6C26EF /* NunitoSans-ExtraBold.ttf in Resources */,
+				079F0DA41E78475EAA3582D3 /* NunitoSans-ExtraBoldItalic.ttf in Resources */,
+				6347417E22294095B88EB64A /* NunitoSans-ExtraLight.ttf in Resources */,
+				15E3E2C8B9034F5CA018F9AE /* NunitoSans-ExtraLightItalic.ttf in Resources */,
+				DBBBAF2C01344DC6976A278F /* NunitoSans-Italic.ttf in Resources */,
+				6E981E7102F742ACB4D6242B /* NunitoSans-Light.ttf in Resources */,
+				863481A764804227916CB38A /* NunitoSans-LightItalic.ttf in Resources */,
+				E6B817F1305E4088AD4C6F25 /* NunitoSans-Regular.ttf in Resources */,
+				07DC7F998AEF4C079B496B54 /* NunitoSans-SemiBold.ttf in Resources */,
+				BE70FAEEA21F49038B0BC41C /* NunitoSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,8 +1394,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1315,8 +1407,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1347,8 +1442,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1357,8 +1455,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1387,8 +1488,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1416,8 +1520,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1456,8 +1563,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1466,8 +1576,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1506,8 +1619,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1516,8 +1632,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1555,8 +1674,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1565,8 +1687,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};
@@ -1604,8 +1729,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>>  changes app icon login rest
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1614,8 +1742,11 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+<<<<<<< 6b9aafd563a4114f3fcb2f117aa6c0e7001b3908
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+=======
+>>>>>>>  changes app icon login rest
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 				);
 			};

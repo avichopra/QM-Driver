@@ -6,11 +6,13 @@ import { setUserToken, setUser, setUserRefreshToken } from '../../redux/index';
 import { Alert } from '../../ReusableComponents/modal';
 export default class resetBase extends Component {
 	componentDidMount() {
-		console.warn('did mount being called');
+		// console.warn('did mount being called');
+
 		const { navigation } = this.props;
 		const otp = navigation.getParam('otp');
 		const user = navigation.getParam('user');
 		console.log('Parameter', otp, user);
+		// this.resendOTP()
 	}
 	checkAllMandatoryField = () => {
 		var otp = isValidOTP(this.state.otp);
@@ -28,10 +30,11 @@ export default class resetBase extends Component {
 		}
 	};
 	onSubmit = () => {
+		const {navigation}=this.props
 		if (this.checkAllMandatoryField()) {
 			this.setState({ loading: true });
 			let data = {
-				email: this.props.user.email,
+				email: navigation.state.params.email,
 				otp: this.state.otp,
 				contactNo: this.props.navigation.state.params.contactNo
 			};
@@ -45,7 +48,11 @@ export default class resetBase extends Component {
 						buttons: [ { title: 'OK', backgroundColor: '#1A5276' } ]
 					});
 					setUser(response.data.user);
-					this.props.navigation.navigate('MyProfile');
+					setUserToken(response.data.token.accessToken);
+					setUserRefreshToken(response.data.token)
+					this.setState({loading:false})
+					console.warn('response',this.props.navigation.state.params.routeName);
+					this.props.navigation.navigate(this.props.navigation.state.params.routeName);
 				})
 				.catch((error) => {
 					this.setState({ otperror: error.response.data.message, loading: false });
@@ -56,9 +63,11 @@ export default class resetBase extends Component {
 		}
 	};
 	resendOTP = () => {
-		console.warn('resend otp being called');
-		this.setState({ loading: true });
-		let data = { email: this.props.user.email };
+		// alert("otp sent")
+		// console.warn('resend otp being called');
+		// this.setState({ loading: true });
+		let data = { email: this.state.email };
+		console.warn("email in resend",data)
 		callApi('post', 'v1/daffo/dispatch/reSendOtp', data)
 			.then((response) => {
 				if (response.status === 200) {
@@ -67,7 +76,7 @@ export default class resetBase extends Component {
 				console.log('Response in resend otp', response);
 			})
 			.catch((error) => {
-				console.log('inside error', error.response.data);
+				console.warn('inside error', error.response.data);
 			});
 	};
 }

@@ -11,7 +11,6 @@ class MyProfile extends MyProfileBase {
 		drawerLabel: 'My Profile',
 		drawerIcon: ({ tintColor }) => <Icon name={'user'} size={25} color={'black'} />
 	};
-
 	render() {
 		const height = Dimensions.get('window').height;
 		const { GeneralInfoPressed, AdditionalInfoPressed } = this.state;
@@ -19,7 +18,7 @@ class MyProfile extends MyProfileBase {
 		let { vehicleNo, driverUniqueNo } = this.props.driver;
 		return (
 			<KeyboardAvoidingView style={styles.fg}>
-				<ScrollView contentContainerStyle={styles.fg}>
+				<ScrollView contentContainerStyle={styles.fg} keyboardShouldPersistTaps="always">
 					<View style={styles.fg}>
 						<View style={styles.ProfileHeaderHeight}>
 							<Header
@@ -55,6 +54,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								field={'email'}
 								fieldValue={email}
+								editable={false}
 							/>
 							<TextField
 								placeholder={'Contact No.'}
@@ -62,6 +62,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								field={'contactNo'}
 								fieldValue={this.state.contactNo}
+								error={this.state.contactNoError}
 								// error={this.state.GeneralInfo.contactNoError}
 								keyboardType={'numeric'}
 							/>
@@ -98,7 +99,7 @@ class MyProfile extends MyProfileBase {
 						>
 							<Button
 								title={'Save'}
-								backgroundColor={'#443BFF'}
+								backgroundColor={'#2d76d4'}
 								onSave={this.onSave}
 								loading={this.state.loading}
 							/>

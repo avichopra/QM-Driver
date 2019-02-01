@@ -34,6 +34,7 @@ export default class resetBase extends Component {
           if (response.status === 200) {
             this.setState({email:"",loading:false})
             Alert({
+              title: 'Reset Password',
               message: 'Password reset link has been sent to your email',	buttons: [
 								{
 									title: 'Ok',

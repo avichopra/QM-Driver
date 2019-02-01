@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Store from '../../redux/store/index';
-import store from '../../utilities/store';
-import { setUserToken, setUser, setPatient, setUserRefreshToken } from '../../redux/index';
+import store from "../../utilities/store"
+import { setUserToken, setUser, setPatient,setUserRefreshToken } from '../../redux/index';
 import { Platform, Linking, View, Text, AppState } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import * as Storage from '../../utilities/asyncStorage';
 import { callApi } from '../../utilities/serverApi';
-import { timeCalculate } from '../../utilities/timeCalculate';
+import {timeCalculate} from "../../utilities/timeCalculate"
 import axios from 'axios';
 import { addUser, addUserToken } from '../../redux/actions/index';
 class oauth extends Component {
@@ -15,12 +15,12 @@ class oauth extends Component {
 		super(props);
 	}
 	componentDidMount() {
-		store.getInstance().setKeyWithRef('Login', this.props.navigation);
+		store.getInstance().setKeyWithRef('Login', this.props.navigation)
 		Linking.getInitialURL().then((url) => {
-			if (url === null) {
+			if (url === null){
 				this.tryLogin();
 			}
-			console.warn(url);
+			// console.warn(url);
 			this.navigateTo(url);
 		});
 
@@ -43,7 +43,6 @@ class oauth extends Component {
 		const routeParams = route.split('/');
 		let routeName = routeParams[0];
 		let email = routeParams[1];
-
 		if (routeName === 'reset') {
 			let resetPasswordToken = routeParams[2];
 			console.log(' reset');
@@ -63,15 +62,15 @@ class oauth extends Component {
 			await Storage.get('token').then((data) => {
 				token = data;
 			});
-			await Storage.get('refreshToken').then((data) => {
-				console.log('data in asynstorage', data);
-				expireTime = data.expiresIn;
-				refreshToken = data.refreshToken;
-			});
-			await Storage.get('user').then((data) => {
-				console.log('user data', data);
-				email = data.email;
-			});
+			await Storage.get('refreshToken').then((data)=>{
+				console.log("data in asynstorage",data)
+				expireTime=data.expiresIn;
+				refreshToken=data.refreshToken;
+			})
+		    await Storage.get("user").then((data)=>{
+				console.log("user data",data);
+               email=data.email;
+			})
 			console.log('after function', token);
 			if (token === null) {
 				throw Error('Token not found. Log-in again to proceed.');
@@ -83,53 +82,56 @@ class oauth extends Component {
 					Accept: 'application/json',
 					authorization: `Bearer ${token}`
 				};
-				if (timeCalculate(expireTime)) {
-					let data = { email: email, refreshToken: refreshToken };
-					callApi('post', 'v1/auth/refresh-token', data)
-						.then((response) => {
+					 if(timeCalculate(expireTime))
+					 {
+						 let data={"email":email,"refreshToken":refreshToken}
+						callApi("post","v1/auth/refresh-token",data).then((response)=>{
 							let headers = {
 								'content-type': 'application/json',
 								Accept: 'application/json',
 								authorization: `Bearer ${response.data.accessToken}`
 							};
-							console.log('refresh token', response);
-							setUserToken(response.data.accessToken);
-							setUserRefreshToken(response.data);
-							callApi('get', 'v1/auth/isLogin', {}, headers)
-								.then((response) => {
-									setUser(response.data.userTransformed);
-									// Store.dispatch(addUser(response.data.userTransformed));
-									console.log('response in auth', response);
-									navigate('Drawer');
-								})
-								.catch((error) => {
-									console.log('error token expired', error);
-									if (error.response.status === 401) navigate('Login');
-									console.log('Error', error);
-								});
-						})
-						.catch((error) => {
-							console.log('error in refresh token', error);
-						});
-				} else {
+							   console.log("refresh token",response)
+							 setUserToken(response.data.accessToken);
+					 setUserRefreshToken(response.data)
 					callApi('get', 'v1/auth/isLogin', {}, headers)
+					.then((response) => {
+						setUser(response.data.userTransformed);
+						// Store.dispatch(addUser(response.data.userTransformed));
+						console.log('response in auth', response);
+						navigate('Drawer');
+					})
+					.catch((error) => {
+						console.log("error token expired",error)
+						if (error.response.status === 401) navigate('Login');
+						console.log('Error', error);
+					});
+						}).catch((error)=>{
+							console.log("error in refresh token",error)
+						})
+					
+					 }
+					else
+					{
+						callApi('get', 'v1/auth/isLogin', {}, headers)
 						.then((response) => {
 							Store.dispatch(addUser(response.data.userTransformed));
-							Store.dispatch(addUserToken(token));
-							// Storage.get("token").then(async (token)=>
-							// {
-
-							// 	await Store.dispatch(addUserToken(token));
-							// })
+							Store.dispatch(addUserToken(token))
+						// Storage.get("token").then(async (token)=>
+						// {
+						
+						// 	await Store.dispatch(addUserToken(token));
+						// })
 							console.log('response in auth', response);
 							navigate('Drawer');
 						})
 						.catch((error) => {
-							console.log('error token expired', error);
+							console.log("error token expired",error)
 							if (error.response.status === 401) navigate('Login');
 							console.log('Error', error);
 						});
-				}
+					} 
+			
 			}
 		} catch (err) {
 			console.log('inside err', err);
@@ -138,7 +140,7 @@ class oauth extends Component {
 	};
 
 	render() {
-		return <View />;
+		return <View/>;
 	}
 }
 function mapStateToProps(state) {
