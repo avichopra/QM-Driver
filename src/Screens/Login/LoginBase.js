@@ -13,10 +13,10 @@ export default class LoginBase extends Component {
 	ChangeText = async (text, name) => {
 		await this.setState({ [name]: text });
 		if (name === 'email') {
-			let email = checkField(name, this.state.email.trim());
+			let email = checkField("Email", this.state.email.trim());
 			this.setState({ emailerror: email });
 		} else if (name === 'password') {
-			let password = checkField(name, this.state.password.trim());
+			let password = checkField("Password", this.state.password.trim());
 			this.setState({ passworderror: password });
 		}
 	};
@@ -81,7 +81,7 @@ export default class LoginBase extends Component {
 						this.setState({ passworderror: 'Incorrect password'});
 						else if (!error.response.data.message.phoneVerified)
 						{
-							navigate('OTP', { email: error.response.data.message.email });
+							navigate('OTP', { email: error.response.data.message.email,routeName:"Drawer" });
 						}
 						
 				});

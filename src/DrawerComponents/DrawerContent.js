@@ -90,7 +90,7 @@ class DrawerContent extends Component {
 							source={{
 								uri:
 									picture === ''
-										? 'asset:/images/def.png'
+										? 'asset:/icon/def.png'
 										: `${config.SERVER_URL}/v1/daffo/file/${picture}`
 							}}
 							style={{

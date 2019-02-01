@@ -30,10 +30,11 @@ export default class resetBase extends Component {
 		}
 	};
 	onSubmit = () => {
+		const {navigation}=this.props
 		if (this.checkAllMandatoryField()) {
 			this.setState({ loading: true });
 			let data = {
-				email: this.props.user.email,
+				email: navigation.state.params.email,
 				otp: this.state.otp,
 				contactNo: this.props.navigation.state.params.contactNo
 			};
@@ -50,8 +51,8 @@ export default class resetBase extends Component {
 					setUserToken(response.data.token.accessToken);
 					setUserRefreshToken(response.data.token)
 					this.setState({loading:false})
-					console.log('response', response);
-					this.props.navigation.navigate('Drawer');
+					console.warn('response',this.props.navigation.state.params.routeName);
+					this.props.navigation.navigate(this.props.navigation.state.params.routeName);
 				})
 				.catch((error) => {
 					this.setState({ otperror: error.response.data.message, loading: false });

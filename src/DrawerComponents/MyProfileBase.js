@@ -7,6 +7,7 @@ import SplashScreen from 'react-native-splash-screen';
 import ImagePicker from 'react-native-image-picker';
 import { setUser, setDriver } from '../redux/index';
 import { Alert } from '../ReusableComponents/modal';
+import {checkEmpty} from "../utilities/validation"
 import Axios from 'axios';
 export default class MyProfile extends Component {
 	constructor(props) {
@@ -14,18 +15,22 @@ export default class MyProfile extends Component {
 		this.state = {
 			email: '',
 			contactNo: '',
-
 			imageSelected: false,
 			profileImage: '',
 			userName: '',
 			avatarSource: null,
 			picture: '',
 			userName: '',
-			loading: false
+			loading: false,
+			contactNoError:""
 		};
 	}
 
 	onHandleChange = (name, value, field) => {
+		if(this.state.contactNoError!=="")
+	{
+		this.setState({contactNoError:""})
+	}
 		if (field) {
 			this.state[field] = value;
 			this.setState({});
@@ -39,7 +44,7 @@ export default class MyProfile extends Component {
 		this.props.navigation.openDrawer();
 	};
 	goToOtp = () => {
-		this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo });
+		this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo ,email:this.props.user.email,routeName:"MyProfile"});
 	};
 	checkPhoneVerified = () => {
 		console.warn('phn vrr', this.props.user.phoneVerified);
@@ -57,6 +62,14 @@ export default class MyProfile extends Component {
 			});
 		}
 	};
+	checkLength = () => {
+        if (this.state.contactNo.length !==10) {
+            this.setState({ contactNoError: 'Contact No length should be equal to  10' });
+            return true;
+        } else {
+            return false;
+        }
+    };
 	componentDidMount() {
 		this.state.userName = this.props.user.fullname;
 		this.state.email = this.props.user.email;
@@ -73,6 +86,12 @@ export default class MyProfile extends Component {
 	}
 
 	onSave = () => {
+		Keyboard.dismiss()
+		let { contactNo } = this.state;
+        let contactNoError = checkEmpty(contactNo);
+        contactNoError && true ? this.setState({ contactNoError: 'Contact Number Cannot be empty' }) : '';
+        contactNoError === false ? (contactNoError = this.checkLength()) : '';
+        if (contactNoError === false) {
 		let headers = {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
@@ -97,7 +116,7 @@ export default class MyProfile extends Component {
 					setUser(result.data.updatedUser);
 					// setDriver(result.data.updatedDriver);
 					// this.setState({ loading: false });
-					this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo });
+					this.props.navigation.navigate('OTP', { contactNo: this.state.contactNo,email:this.props.user.email,routeName:"MyProfile" });
 				})
 				.catch((err) => {
 					console.log('error from myProfile Base ', err.response, err.status, err);
@@ -127,6 +146,7 @@ export default class MyProfile extends Component {
 					// this.setState({ loading: false });
 				});
 		}
+	}
 	};
 	cameraClicked = () => {
 		console.log('avatarrrrrrrrrrrrrrr clicked called>>>>>>>>>>>>>>>>>>>>>>>>>>>');

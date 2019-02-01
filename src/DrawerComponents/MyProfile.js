@@ -18,7 +18,7 @@ class MyProfile extends MyProfileBase {
 		let { vehicleNo, driverUniqueNo } = this.props.driver;
 		return (
 			<KeyboardAvoidingView style={styles.fg}>
-				<ScrollView contentContainerStyle={styles.fg}>
+				<ScrollView contentContainerStyle={styles.fg} keyboardShouldPersistTaps="always">
 					<View style={styles.fg}>
 						<View style={styles.ProfileHeaderHeight}>
 							<Header
@@ -54,6 +54,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								field={'email'}
 								fieldValue={email}
+								editable={false}
 							/>
 							<TextField
 								placeholder={'Contact No.'}
@@ -61,6 +62,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								field={'contactNo'}
 								fieldValue={this.state.contactNo}
+								error={this.state.contactNoError}
 								// error={this.state.GeneralInfo.contactNoError}
 								keyboardType={'numeric'}
 							/>

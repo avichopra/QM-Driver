@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Dimensions, Image } from 'react-native';
+import { Text, View, TextInput, Dimensions, Image,ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
@@ -34,8 +34,13 @@ export default (TextField = (props) => {
 					resizeMode={'contain'}
 				/>
 				{/* <Icon name={'key'} size={25} color={'#8D8D8D'}  /> */}
+				<ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    style={{ width: '82%' }}
+                >
 				<TextInput
-					style={{ width: '82%', fontSize: 15, color: 'black' }}
+					style={{ width: '100%', fontSize: 15, color: 'black' }}
 					placeholder={placeholder}
 					onChangeText={(text) => {
 						onHandleChange(props.value, text, props.field);
@@ -45,6 +50,7 @@ export default (TextField = (props) => {
 					keyboardType={keyboardType}
 					secureTextEntry={secureTextEntry}
 				/>
+				</ScrollView>
 			</View>
 			<View style={{ height: 5, width: '90%', marginLeft: 10 }}>
 				<Text style={{ color: 'red', fontSize: 12 }}>{error}</Text>
