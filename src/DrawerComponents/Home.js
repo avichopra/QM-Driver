@@ -102,7 +102,8 @@ function mapStateToProps(state) {
 	return {
 		user: state.user,
 		token: state.token,
-		location: state.Location
+		location: state.Location,
+		
 	};
 }
 export default connect(mapStateToProps)(Home);
