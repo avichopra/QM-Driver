@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-
+import config from '../../config/index';
 export default (AcceptDecline = (props) => {
 	const {
-		onAccept = () => {}
+		onAccept = () => {},
+		patient = { name: '', address: '', picture: 'public/1549363727367.JPEG' },
+		location = { currentPlace: '', longitude: '', latitude: '' }
 		// onAdvancedSupport = () => {},
 		// onRequestAmbulance = () => {},
 		// advancedSupport = false,
@@ -21,6 +23,7 @@ export default (AcceptDecline = (props) => {
 				borderBottomColor: 'rgba(215,219,221,0.7)'
 			}}
 		>
+			{console.log('patient>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', patient)}
 			<View style={{ flexDirection: 'row', height: 60 }}>
 				<TouchableOpacity
 					style={{ width: '50%', alignItems: 'center', justifyContent: 'center' }}
@@ -49,27 +52,46 @@ export default (AcceptDecline = (props) => {
 					marginBottom: 5
 				}}
 			/>
-			<View style={{ flexDirection: 'row', alignItems: 'center', height: 109 }}>
-				<View style={{ height: 90, width: 90, borderRadius: 50, marginLeft: 5, marginBottom: 5 }}>
+			<View style={{ flexDirection: 'row', alignItems: 'center', height: 109, width: '100%' }}>
+				<View
+					style={{
+						height: 80,
+						width: 80,
+						borderRadius: 50,
+						marginLeft: 5,
+						marginBottom: 5
+					}}
+				>
 					<Image
-						source={{ uri: 'mipmap/def' }}
-						style={{ height: 90, width: 90, borderRadius: 50 }}
-						resizeMode={'contain'}
+						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
+						style={{
+							height: 80,
+							width: 80,
+							borderRadius: 50
+						}}
 					/>
 				</View>
-				<View>
+				<View style={{ width: '100%' }}>
 					<Text
 						style={{
 							fontSize: 20,
 							fontFamily: 'NunitoSans-SemiBold',
 							color: 'black',
 							marginLeft: 25,
-							marginBottom: 8
+							marginBottom: 8,
+							width: '50%'
+						}}
+						numberOfLines={1}
+					>
+						{patient.name}
+					</Text>
+					<View
+						style={{
+							flexDirection: 'row',
+							marginLeft: 20,
+							width: '80%'
 						}}
 					>
-						Anil Kumar
-					</Text>
-					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
 							source={{ uri: 'mipmap/map' }}
 							style={{ width: 20, height: 20, marginRight: 3, marginTop: 2 }}
@@ -80,11 +102,15 @@ export default (AcceptDecline = (props) => {
 								color: '#777777',
 								fontFamily: 'NunitoSans-Regular',
 								fontSize: 18,
-								marginBottom: 3
+								marginBottom: 3,
+								width: '85%'
 							}}
-							numberOfLines={2}
+							numberOfLines={3}
 						>
-							Golf Course Road, Sector 29, Gurgaon
+							{/* {patient.address}
+						 */}
+							{/* {console.warn('acceptDecline', JSON.stringify(location, null, 3))} */}
+							{location ? location.currentPlace : ''}
 						</Text>
 					</View>
 				</View>

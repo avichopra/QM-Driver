@@ -18,7 +18,6 @@ import style from '../../styles/index';
 import Base from './LoginBase';
 import SplashScreen from 'react-native-splash-screen';
 import Loading from '../../ReusableComponents/loading';
-
 export default class Login extends Base {
 	constructor(props) {
 		super(props);
@@ -27,7 +26,7 @@ export default class Login extends Base {
 			password: '',
 			emailerror: '',
 			passworderror: '',
-			loading:false
+			loading: false
 		};
 	}
 	// componentDidMount() {
@@ -74,19 +73,30 @@ export default class Login extends Base {
 	render() {
 		// console.warn("hiiiiiiiiiiiiiiiiii")
 		return (
-			<KeyboardAvoidingView style={{ flex: 1 }} >
-			
-				<ScrollView contentContainerStyle={style.f1} keyboardShouldPersistTaps='always'>
+			<KeyboardAvoidingView style={{ flex: 1 }}>
+				<ScrollView contentContainerStyle={style.f1} keyboardShouldPersistTaps="always">
 					<ImageBackground
 						source={{ uri: 'asset:/icon/group_2.png' }}
 						style={style.d1}
 						resizeMode={'stretch'}
 					>
 						<View style={style.f1}>
-							<Image source={{ uri: 'asset:/icon/group.png' }} style={[ style.d2, style.a1 ,{marginTop:30}]} />
-							<Text style={{alignSelf:"center",color:"#ffffff",fontSize:11,fontFamily:"NunitoSans-Regular"}}>Driver App</Text>
+							<Image
+								source={{ uri: 'asset:/icon/group.png' }}
+								style={[ style.d2, style.a1, { marginTop: 30 } ]}
+							/>
+							<Text
+								style={{
+									alignSelf: 'center',
+									color: '#ffffff',
+									fontSize: 11,
+									fontFamily: 'NunitoSans-Regular'
+								}}
+							>
+								Driver App
+							</Text>
 						</View>
-						
+
 						<View style={style.f1}>
 							<View style={style.d4}>
 								<Image
@@ -138,19 +148,25 @@ export default class Login extends Base {
 							<Text style={style.c1}>{this.state.passworderror}</Text>
 						</View>
 						<View style={[ style.j1, style.f1 ]}>
-							{this.state.loading===false?<TouchableOpacity style={style.c2} onPress={this.onSubmit} accessible={false}>
-								<Text
-									style={{
-										textAlign: 'center',
-										marginTop: 13,
-										fontSize: 14,
-										color: '#2948ff',
-										fontFamily: 'Nunito Bold'
-									}}
-								>
-									SIGN IN
-								</Text>
-							</TouchableOpacity>:<View style={style.c2}><ActivityIndicator size="large" color="#000" /></View>}
+							{this.state.loading === false ? (
+								<TouchableOpacity style={style.c2} onPress={this.onSubmit} accessible={false}>
+									<Text
+										style={{
+											textAlign: 'center',
+											marginTop: 13,
+											fontSize: 14,
+											color: '#2948ff',
+											fontFamily: 'Nunito Bold'
+										}}
+									>
+										SIGN IN
+									</Text>
+								</TouchableOpacity>
+							) : (
+								<View style={style.c2}>
+									<ActivityIndicator size="large" color="#000" />
+								</View>
+							)}
 						</View>
 					</ImageBackground>
 				</ScrollView>

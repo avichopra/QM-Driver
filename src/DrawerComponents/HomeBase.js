@@ -8,6 +8,9 @@ import getDirections from 'react-native-google-maps-directions';
 import RNGooglePlaces from 'react-native-google-places';
 import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
 const { width, height } = Dimensions.get('window');
+import { onSocketData, saveSubscriptionInfo } from '../utilities/socket';
+import call from 'react-native-phone-call';
+import _ from 'lodash';
 
 export default class HomeBase extends Component {
 	constructor() {
@@ -20,15 +23,42 @@ export default class HomeBase extends Component {
 			currentPlace: '',
 			loading: true,
 			accept: false,
-			reject: false
+			reject: false,
+			patient: null,
+			showAcceptDecline: false
 		};
-		this.requestLocationPermission();
+		// onSocketData(this.props.user.id, this.onSocketData);
 	}
+	Call = (Type) => {
+		const args = {
+			number: Type === 'CN' ? this.props.patient.contactNo : this.props.patient.emergencyContactNo, // String value with the number to call
+			prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
+		};
+		call(args).catch(console.error);
+	};
 	onAccept = () => {
+		let headers = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			authorization: `Bearer ${this.props.token}`
+		};
+		let { currentPlace = '', latitude = '', longitude = '' } = this.state;
+		let { patient = {}, driver = {}, allDrivers = [], location = {}, user = {} } = this.props;
+		_.remove(this.props.allDrivers, (item) => item === this.props.user.id);
+
 		this.setState({ accept: true, reject: false });
+		let data = {
+			id: patient.id,
+			allDrivers: allDrivers,
+			driver: { ...driver, ...user },
+			location: { currentPlace: currentPlace, latitude: latitude, longitude: longitude }
+		};
+		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers).then((response) => {
+			console.log('response', response);
+		});
 	};
 	onReject = () => {
-		this.setState({ reject: true, accept: false });
+		this.setState({ reject: true, accept: false, showAcceptDecline: false });
 	};
 	componentWillUnmount() {
 		navigator.geolocation.clearWatch(this.watchID);
@@ -53,9 +83,11 @@ export default class HomeBase extends Component {
 			console.log(err);
 		}
 	};
+
 	componentWillMount() {
-		console.warn('Location in redux', this.props.location);
 		// this.requestLocationPermission();
+
+		console.warn('Location in redux', this.props.location);
 		if (this.props.location != null) {
 			this.setState({
 				loading: false,
@@ -75,7 +107,6 @@ export default class HomeBase extends Component {
 			{ perPage: 1, filter: { userId: this.props.user.id } },
 			headers
 		).then((result) => {
-			console.warn('resultttttttttttttttttttttttttttttt getOwn', result.data[0]);
 			result.data[0] ? setDriver(result.data[0]) : '';
 		});
 	}
@@ -143,15 +174,15 @@ export default class HomeBase extends Component {
 		// });
 		console.log(respJson);
 	};
-	_askForLocationServices() {
-		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-			title: 'question',
-			message: 'gimme that location'
-		}).then((granted) => {
-			console.log('granted', granted);
-			// always returns never_ask_again
-		});
-	}
+	// _askForLocationServices() {
+	// 	PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
+	// 		title: 'question',
+	// 		message: 'gimme that location'
+	// 	}).then((granted) => {
+	// 		console.log('granted', granted);
+	// 		// always returns never_ask_again
+	// 	});
+	// }
 	// onRegionChange(region) {
 	// 	this.setState({
 	// 	  latitude: region.latitude,

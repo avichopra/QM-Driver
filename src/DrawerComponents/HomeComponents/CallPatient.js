@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-
+import config from '../../config/index';
 export default (AcceptDecline = (props) => {
 	const {
-		// onBasicSupport = () => {},
-		// onAdvancedSupport = () => {},
-		// onRequestAmbulance = () => {},
-		// advancedSupport = false,
-		// basicSupport = false
+		location = { currentPlace: '', longitude: '', latitude: '' },
+
+		patient = { name: '', address: '', picture: 'public/1549363727367.JPEG', emergencycontactnumber },
+		Call = () => {}
 	} = props;
 	return (
 		<View
 			style={{
-				height: 200,
+				height: 250,
 				width: '100%',
 				backgroundColor: 'white',
 				position: 'absolute',
@@ -24,18 +23,18 @@ export default (AcceptDecline = (props) => {
 				style={{
 					flexDirection: 'row',
 					alignItems: 'center',
-					height: 100,
+					height: 150,
 					width: '100%',
 					marginTop: 5,
 					borderBottomWidth: 0.5,
 					borderBottomColor: 'rgba(215,219,221,0.7)'
 				}}
 			>
-				<View style={{ height: 80, width: 80, borderRadius: 50, marginLeft: 5, marginBottom: 5 }}>
+				<View style={{ height: 80, width: 80, borderRadius: 50, marginLeft: 5, marginBottom: 45 }}>
 					<Image
-						source={{ uri: 'mipmap/def' }}
+						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
 						style={{ height: 80, width: 80, borderRadius: 50 }}
-						resizeMode={'contain'}
+						// resizeMode={'contain'}
 					/>
 				</View>
 				<View>
@@ -52,12 +51,14 @@ export default (AcceptDecline = (props) => {
 								color: 'black',
 								marginLeft: 25,
 								marginBottom: 8,
-								marginRight: 90
+								marginRight: 40,
+								width: '50%'
 							}}
+							numberOfLines={1}
 						>
-							Anil Kumar
+							{patient.name}
 						</Text>
-						<View
+						<TouchableOpacity
 							style={{
 								height: 30,
 								width: '30%',
@@ -67,6 +68,7 @@ export default (AcceptDecline = (props) => {
 								alignItems: 'center',
 								justifyContent: 'center'
 							}}
+							onPress={() => Call('CN')}
 						>
 							<Image
 								source={{ uri: 'mipmap/telephone' }}
@@ -75,7 +77,7 @@ export default (AcceptDecline = (props) => {
 							<Text style={{ color: 'white', fontFamily: 'NunitoSans-SemiBold', fontSize: 18 }}>
 								Call
 							</Text>
-						</View>
+						</TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', marginLeft: 20, width: '75%' }}>
 						<Image
@@ -90,9 +92,9 @@ export default (AcceptDecline = (props) => {
 								fontSize: 18,
 								marginBottom: 5
 							}}
-							numberOfLines={2}
+							numberOfLines={4}
 						>
-							Golf Course Road, Sector 29, Gurgaon
+							{location ? location.currentPlace : ''}
 						</Text>
 					</View>
 				</View>
@@ -109,7 +111,7 @@ export default (AcceptDecline = (props) => {
 			>
 				Emergency Contact No.
 			</Text>
-			<View style={{ marginLeft: 25, flexDirection: 'row' }}>
+			<TouchableOpacity style={{ marginLeft: 25, flexDirection: 'row' }} onPress={() => Call('ECN')}>
 				<Image source={{ uri: 'mipmap/call_answer_blue' }} style={{ height: 20, width: 20, marginTop: 3 }} />
 				<Text
 					style={{
@@ -120,9 +122,9 @@ export default (AcceptDecline = (props) => {
 						color: '#777777'
 					}}
 				>
-					+91 1234567891
+					{patient.emergencyContactNo}
 				</Text>
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 });
