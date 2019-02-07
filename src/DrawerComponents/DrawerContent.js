@@ -7,6 +7,7 @@ import * as Storage from '../utilities/asyncStorage';
 
 import Svg, { Path, Ellipse } from 'react-native-svg';
 import config from '../config/index';
+import { callApi } from '../utilities/serverApi';
 class DrawerContent extends Component {
 	navigateToScreen = (route) => {
 		const navigateAction = StackActions.reset({
@@ -18,8 +19,18 @@ class DrawerContent extends Component {
 	};
 	onPressLogout = async () => {
 		this.props.navigation.closeDrawer();
+		let email;
+		await Storage.get('user').then(data=>{
+          email=data.email
+		})
 		await Storage.remove('token');
 		await Storage.remove('user');
+		let data={email:email,status:false}
+		callApi("post","v1/daffo/dispatch/updateOnlinestatus",data).then(response=>{
+          console.log(response)
+		}).catch(err=>{
+			console.log(err)
+		})
 		this.props.navigation.navigate('Login');
 	};
 	render() {
