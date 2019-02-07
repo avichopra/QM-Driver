@@ -27,7 +27,7 @@ export default class HomeBase extends Component {
 			patient: null,
 			showAcceptDecline: false
 		};
-		// onSocketData(this.props.user.id, this.onSocketData);
+		// this.requestLocationPermission();
 	}
 	Call = (Type) => {
 		const args = {
@@ -67,23 +67,22 @@ export default class HomeBase extends Component {
 		console.log('open drawer being called>>>>>>>>>>>>>>>>>>>>');
 		this.props.navigation.openDrawer();
 	};
-	requestLocationPermission = () => {
-		try {
-			PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-				title: 'Location Permission',
-				message: 'This app needs access to your location'
-			}).then((granted) => {
-				if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-					console.log('You can use the location');
-				} else {
-					console.log('Location permission denied');
-				}
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
+	// requestLocationPermission = () => {
+	// 	try {
+	// 		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
+	// 			title: 'Location Permission',
+	// 			message: 'This app needs access to your location'
+	// 		}).then((granted) => {
+	// 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+	// 				console.log('You can use the location');
+	// 			} else {
+	// 				console.log('Location permission denied');
+	// 			}
+	// 		});
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 	componentWillMount() {
 		// this.requestLocationPermission();
 

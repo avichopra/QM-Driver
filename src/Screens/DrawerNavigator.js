@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View ,AppState} from 'react-native';
 import {
 	createDrawerNavigator,
 	createAppContainer,
@@ -60,9 +60,12 @@ class DrawerNavigaterRapper extends Component
 	static router = MyDrawerNavigator.router;
 componentWillMount(){
 	// alert("jhbkl")
+	
 	console.warn("user id",this.props.user.id)
 	saveSubscriptionInfo("DrawerNavigaterDriver",[this.props.user.id])
 }
+
+
 	render() {
 		return <MyDrawerNavigator navigation={this.props.navigation} />;
 	}
