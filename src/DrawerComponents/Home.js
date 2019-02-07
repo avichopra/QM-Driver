@@ -23,7 +23,6 @@ import {
 	ActivityIndicator,
 	PermissionsAndroid
 } from 'react-native';
-
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 
@@ -68,11 +67,17 @@ class Home extends Base {
 						/>
 					</MapView>
 				)}
-				{this.state.accept === false ? (
-					<AcceptDecline onAccept={this.onAccept} onReject={this.onReject} />
-				) : (
-					<CallPatient />
-				)}
+				{console.warn('patient>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.props.patientLocation)}
+				{this.props.showAcceptDecline && true && this.state.accept === false ? (
+					<AcceptDecline
+						onAccept={this.onAccept}
+						onReject={this.onReject}
+						patient={this.props.patient}
+						location={this.props.patientLocation}
+					/>
+				) : this.state.accept === true ? (
+					<CallPatient Call={this.Call} patient={this.props.patient} location={this.props.patientLocation} />
+				) : null}
 			</View>
 		);
 	}
@@ -98,12 +103,15 @@ const styles = StyleSheet.create({
 	}
 });
 function mapStateToProps(state) {
-	// console.warn('I am the stateeeeeeeeeeeeeeeeeeeeeeeeeeee', state.user);
 	return {
 		user: state.user,
 		token: state.token,
 		location: state.Location,
-		
+		patient: state.patient,
+		showAcceptDecline: state.showAcceptDecline,
+		patientLocation: state.patientLocation,
+		allDrivers: state.allDrivers,
+		driver: state.driver
 	};
 }
 export default connect(mapStateToProps)(Home);
