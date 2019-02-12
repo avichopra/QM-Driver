@@ -4,8 +4,9 @@ import config from '../../config/index';
 export default (AcceptDecline = (props) => {
 	const {
 		onAccept = () => {},
-		patient = { name: '', address: '', picture: 'public/1549363727367.JPEG' },
-		location = { currentPlace: '', longitude: '', latitude: '' }
+		onReject = () => {},
+		patient = { name: 'Anil Kumar', address: 'Golf Course Road, Sector 29', picture: 'public/1549363727367.JPEG' },
+		location = { currentPlace: 'Golf Course Road, Sector 29, Gurgaon', longitude: '', latitude: '' }
 		// onAdvancedSupport = () => {},
 		// onRequestAmbulance = () => {},
 		// advancedSupport = false,
@@ -20,11 +21,11 @@ export default (AcceptDecline = (props) => {
 				position: 'absolute',
 				bottom: 0,
 				borderBottomWidth: 1,
-				borderBottomColor: 'rgba(215,219,221,0.7)'
+				borderBottomColor: 'rgba(215,219,221,0.7)',
+				alignItems: 'center'
 			}}
 		>
-			{console.log('patient>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', patient)}
-			<View style={{ flexDirection: 'row', height: 60 }}>
+			<View style={{ flexDirection: 'row', height: 60, width: '100%' }}>
 				<TouchableOpacity
 					style={{ width: '50%', alignItems: 'center', justifyContent: 'center' }}
 					onPress={onAccept}
@@ -40,7 +41,10 @@ export default (AcceptDecline = (props) => {
 						justifyContent: 'center'
 					}}
 				/>
-				<TouchableOpacity style={{ width: '50%', alignItems: 'center', justifyContent: 'center' }}>
+				<TouchableOpacity
+					style={{ width: '50%', alignItems: 'center', justifyContent: 'center' }}
+					onPress={onReject}
+				>
 					<Text style={{ color: '#f80321', fontFamily: 'Nunito-Regular', fontSize: 20 }}>REJECT</Text>
 				</TouchableOpacity>
 			</View>
@@ -52,11 +56,18 @@ export default (AcceptDecline = (props) => {
 					marginBottom: 5
 				}}
 			/>
-			<View style={{ flexDirection: 'row', alignItems: 'center', height: 109, width: '100%' }}>
+			<View
+				style={{
+					flexDirection: 'row',
+					alignItems: 'center',
+					height: 109,
+					width: '98%'
+				}}
+			>
 				<View
 					style={{
-						height: 80,
-						width: 80,
+						height: 70,
+						width: 70,
 						borderRadius: 50,
 						marginLeft: 5,
 						marginBottom: 5
@@ -65,13 +76,15 @@ export default (AcceptDecline = (props) => {
 					<Image
 						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
 						style={{
-							height: 80,
-							width: 80,
-							borderRadius: 50
+							height: 70,
+							width: 70,
+							borderRadius: 50,
+							borderColor: 'white',
+							borderWidth: 2
 						}}
 					/>
 				</View>
-				<View style={{ width: '100%' }}>
+				<View style={{ width: '75%' }}>
 					<Text
 						style={{
 							fontSize: 20,
@@ -89,7 +102,7 @@ export default (AcceptDecline = (props) => {
 						style={{
 							flexDirection: 'row',
 							marginLeft: 20,
-							width: '80%'
+							width: '100%'
 						}}
 					>
 						<Image

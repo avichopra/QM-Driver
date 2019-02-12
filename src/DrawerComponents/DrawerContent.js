@@ -4,12 +4,14 @@ import { ScrollView, Text, View, StyleSheet, Dimensions, TouchableOpacity, Image
 import DrawerItem from '../ReusableComponents/DrawerItem';
 import { connect } from 'react-redux';
 import * as Storage from '../utilities/asyncStorage';
-
+import store from '../utilities/store';
 import Svg, { Path, Ellipse } from 'react-native-svg';
 import config from '../config/index';
 import { callApi } from '../utilities/serverApi';
 class DrawerContent extends Component {
 	navigateToScreen = (route) => {
+		store.getInstance().setKeyWithRef('CurrentScreen', { route: route, navigation: this.props.navigation });
+
 		const navigateAction = StackActions.reset({
 			index: 0,
 			actions: [ NavigationActions.navigate({ routeName: route }) ]
@@ -119,7 +121,7 @@ class DrawerContent extends Component {
 					</TouchableOpacity>
 					<View style={{ width: '50%', alignItems: 'center' }}>
 						<Text style={{ color: 'black' }} numberOfLines={1}>
-							{this.props.user.fullname ? this.props.user.fullname.split(" ")[0] : ""}
+							{this.props.user.fullname ? this.props.user.fullname.split(' ')[0] : ''}
 						</Text>
 					</View>
 				</View>

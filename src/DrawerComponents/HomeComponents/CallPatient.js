@@ -3,9 +3,14 @@ import { Text, View, TouchableOpacity, Image } from 'react-native';
 import config from '../../config/index';
 export default (AcceptDecline = (props) => {
 	const {
-		location = { currentPlace: '', longitude: '', latitude: '' },
+		location = { currentPlace: 'Golf Course Road, Sector 29, Gurgaon', longitude: '', latitude: '' },
 
-		patient = { name: '', address: '', picture: 'public/1549363727367.JPEG', emergencycontactnumber },
+		patient = {
+			name: 'Anil Kumar',
+			address: '',
+			picture: 'public/1549363727367.JPEG',
+			emergencyContactNo: '123456789'
+		},
 		Call = () => {}
 	} = props;
 	return (
@@ -25,15 +30,14 @@ export default (AcceptDecline = (props) => {
 					alignItems: 'center',
 					height: 150,
 					width: '100%',
-					marginTop: 5,
 					borderBottomWidth: 0.5,
 					borderBottomColor: 'rgba(215,219,221,0.7)'
 				}}
 			>
-				<View style={{ height: 80, width: 80, borderRadius: 50, marginLeft: 5, marginBottom: 45 }}>
+				<View style={{ height: 70, width: 70, borderRadius: 50, marginLeft: 5, marginBottom: 45 }}>
 					<Image
 						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
-						style={{ height: 80, width: 80, borderRadius: 50 }}
+						style={{ height: 70, width: 70, borderRadius: 50 }}
 						// resizeMode={'contain'}
 					/>
 				</View>
@@ -41,7 +45,7 @@ export default (AcceptDecline = (props) => {
 					<View
 						style={{
 							flexDirection: 'row',
-							width: '90%'
+							width: '85%'
 						}}
 					>
 						<Text
@@ -79,7 +83,7 @@ export default (AcceptDecline = (props) => {
 							</Text>
 						</TouchableOpacity>
 					</View>
-					<View style={{ flexDirection: 'row', marginLeft: 20, width: '75%' }}>
+					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
 							source={{ uri: 'mipmap/map' }}
 							style={{ width: 20, height: 20, marginRight: 3, marginTop: 2 }}
@@ -90,7 +94,8 @@ export default (AcceptDecline = (props) => {
 								color: 'grey',
 								fontFamily: 'NunitoSans-Regular',
 								fontSize: 18,
-								marginBottom: 5
+								marginBottom: 5,
+								width: '90%'
 							}}
 							numberOfLines={4}
 						>
@@ -103,7 +108,7 @@ export default (AcceptDecline = (props) => {
 				style={{
 					color: 'black',
 					fontFamily: 'NunitoSans-SemiBold',
-					fontSize: 20,
+					fontSize: 19,
 					marginLeft: 25,
 					marginTop: 10,
 					marginBottom: 10
