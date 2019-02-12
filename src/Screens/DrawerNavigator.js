@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View ,AppState} from 'react-native';
+import { Platform, StyleSheet, Text, View, AppState } from 'react-native';
 import {
 	createDrawerNavigator,
 	createAppContainer,
 	createStackNavigator,
 	createSwitchNavigator
 } from 'react-navigation';
-import {subscribeGroups,saveSubscriptionInfo} from "../utilities/socket"
-import { connect } from "react-redux";
+import { subscribeGroups, saveSubscriptionInfo } from '../utilities/socket';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Foundation';
 
 import Home from '../DrawerComponents/Home';
@@ -55,25 +55,22 @@ const MyDrawerNavigator = createDrawerNavigator(
 		contentComponent: DrawerContent
 	}
 );
-class DrawerNavigaterRapper extends Component
-{
+class DrawerNavigaterRapper extends Component {
 	static router = MyDrawerNavigator.router;
-componentWillMount(){
-	// alert("jhbkl")
-	
-	console.warn("user id",this.props.user.id)
-	saveSubscriptionInfo("DrawerNavigaterDriver",[this.props.user.id])
-}
-
-
+	componentWillMount() {
+		// alert("jhbkl")
+		console.warn('user id', this.props.user.id);
+		console.warn('saving subscription info>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+		saveSubscriptionInfo('DrawerNavigaterDriver', [ this.props.user.id ]);
+	}
 	render() {
 		return <MyDrawerNavigator navigation={this.props.navigation} />;
 	}
 }
-function mapStateToProps(state){
-	console.warn("user in state of drawernavigater",state)
+function mapStateToProps(state) {
+	console.warn('user in state of drawernavigater', state);
 	return {
-		user:state.user
-	}
+		user: state.user
+	};
 }
 export default connect(mapStateToProps)(DrawerNavigaterRapper);

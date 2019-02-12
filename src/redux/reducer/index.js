@@ -20,19 +20,20 @@ export const initialState = {
 export default function(state = {}, action) {
 	switch (action.type) {
 		case ADD_USER:
-			console.log('adding the usersssssssssssssssssssssssssssssssssss ', action.data);
 			return { ...state, user: action.data };
 		case ADD_USER_TOKEN:
-			console.log('User token added in redux state', action.data);
 			return { ...state, token: action.data };
 		case ADD_DRIVER:
-			console.log('User token added in redux state', action.data);
 			return { ...state, driver: action.data };
 		case ADD_USER_LOCATION:
 			return { ...state, Location: action.data };
 		case SHOW_PATIENT:
 			if (action.data.patient) {
-				return { ...state, showAcceptDecline: action.data.showAcceptDecline, patient: action.data.patient };
+				return {
+					...state,
+					showAcceptDecline: action.data.showAcceptDecline,
+					patient: action.data.patient.patientId ? action.data.patient : null
+				};
 			} else {
 				return { ...state, showAcceptDecline: action.data.showAcceptDecline };
 			}

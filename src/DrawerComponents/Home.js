@@ -25,15 +25,15 @@ import {
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-
+import ReasonOfCancellation from './HomeComponents/ReasonOfCancellation';
 import Base from './HomeBase';
 class Home extends Base {
 	render() {
-		// console.log('Current position', this.state.latitude, this.state.longitude);
-		return (
+		return this.state.showReasons === true ? (
+			<ReasonOfCancellation onShowReasons={this.onShowReasons} onSubmit={this.onSubmit} />
+		) : (
 			<View style={styles.container}>
 				<Header title={'Quick Medic'} openDrawer={this.openDrawer} />
-
 				{this.state.loading ? (
 					<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 						<ActivityIndicator size="large" color="#000" />
@@ -67,15 +67,19 @@ class Home extends Base {
 						/>
 					</MapView>
 				)}
-				{console.warn('patient>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.props.patientLocation)}
-				{this.props.showAcceptDecline && true && this.state.accept === false ? (
+				{console.warn(
+					'pppppppppppppppppppppppppppppppppppppppp',
+					this.props.showAcceptDecline,
+					this.state.accept
+				)}
+				{this.props.showAcceptDecline && true ? (
 					<AcceptDecline
 						onAccept={this.onAccept}
 						onReject={this.onReject}
 						patient={this.props.patient}
 						location={this.props.patientLocation}
 					/>
-				) : this.state.accept === true ? (
+				) : this.props.patient !== null ? (
 					<CallPatient Call={this.Call} patient={this.props.patient} location={this.props.patientLocation} />
 				) : null}
 			</View>

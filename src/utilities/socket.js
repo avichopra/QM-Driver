@@ -4,6 +4,9 @@ import config from '../config/index';
  * creates a JSON of socket subscription over each view/list
  *  ViewIdSubscriptionMap = {"viewName":[groupIds]}
  * */
+import { NavigationActions, StackActions } from 'react-navigation';
+
+import store from '../utilities/store';
 import Store from '../redux/store/index';
 import { addSocketData, setPatient, setPatientLocation } from '../redux/index';
 import { addAllDrivers } from '../redux/actions';
@@ -54,17 +57,28 @@ export function connectToSocket() {
 		socket.on('updateInRow', (socketData) => {
 			filter = socketData.data.filter;
 			// let { group } = socketData;
-			console.warn('socket data', JSON.stringify(socketData, null, 3));
-			// alert('alert');
+			let navigation = store.getInstance().getKey('CurrentScreen');
+			if (navigation && navigation.route !== 'Home') {
+				const navigateAction = StackActions.reset({
+					index: 0,
+					actions: [ NavigationActions.navigate({ routeName: 'Home' }) ]
+				});
+				navigation.navigation.dispatch(navigateAction);
+			}
+			// alert('alert');p
 			if (filter === 'requestAmbulance') {
+				console.warn('socket dataaaaaaaaaaaaaaaaaaaaaaaaaa', socketData.data);
 				setPatient(true, socketData.data.patient);
 				setPatientLocation(socketData.data.location);
-				Store.dispatch(addAllDrivers(socketData.data.AllDrivers));
+				Store.dispatch(addAllDrivers(socketData.data.allDrivers));
 			} else if (filter === 'ShowAcceptDecline') {
-				setPatient(false, null);
+				setPatient(false, {});
 				setPatientLocation(null);
+			} else if (filter === 'RemovePatient' || filter === 'cancelAllDrivers') {
+				setPatient(false, {});
 			}
-			// Store.dispatch(addSocketData("socketData"))
+
+			// Store.dispatch(addSocketData('socketData'));
 		});
 	});
 }

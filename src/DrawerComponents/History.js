@@ -67,10 +67,6 @@ class History extends Base {
 									<Text style={{ fontSize: 18, color: 'grey' }} numberOfLines={1}>
 										{item.patientId.userId.fullname}
 									</Text>
-
-									{/* <View style={{ width: '40%', marginLeft: 8, height: 22 }}> */}
-									{/* <Text style={{ fontSize: 18, color: 'grey' }}>{item.driverId.vehicleNo}</Text> */}
-									{/* </View> */}
 								</View>
 								<View style={{ flexDirection: 'row', marginTop: 20 }}>
 									<Image
@@ -124,7 +120,6 @@ class History extends Base {
 	}
 }
 function mapStateToProps(state) {
-	console.log('I am the stateeeeeeeeeeeeeeeeeeeeeeeeeeee', state);
 	return {
 		user: state.user,
 		token: state.token,

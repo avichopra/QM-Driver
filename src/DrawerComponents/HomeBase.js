@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import { Text, View, PermissionsAndroid, Dimensions } from 'react-native';
-import { callApi } from '../utilities/serverApi';
-import { setDriver } from '../redux';
-import Store from '../redux/store/index';
-import { addLocation } from '../redux/actions/index';
-import getDirections from 'react-native-google-maps-directions';
-import RNGooglePlaces from 'react-native-google-places';
-import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
-const { width, height } = Dimensions.get('window');
-import { onSocketData, saveSubscriptionInfo } from '../utilities/socket';
-import call from 'react-native-phone-call';
 import _ from 'lodash';
+import { Component } from 'react';
+import { Dimensions, PermissionsAndroid } from 'react-native';
+import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
+import RNGooglePlaces from 'react-native-google-places';
+import call from 'react-native-phone-call';
+import { setDriver } from '../redux';
+import { addLocation } from '../redux/actions/index';
+import { setPatient } from '../redux/index';
+import Store from '../redux/store/index';
+import { callApi } from '../utilities/serverApi';
+const { width, height } = Dimensions.get('window');
 
 export default class HomeBase extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			latitude: 0,
 			longitude: 0,
@@ -25,7 +24,8 @@ export default class HomeBase extends Component {
 			accept: false,
 			reject: false,
 			patient: null,
-			showAcceptDecline: false
+			showAcceptDecline: false,
+			showReasons: false
 		};
 		// this.requestLocationPermission();
 	}
@@ -36,6 +36,9 @@ export default class HomeBase extends Component {
 		};
 		call(args).catch(console.error);
 	};
+	onShowReasons = (value) => {
+		this.setState({ showReasons: value });
+	};
 	onAccept = () => {
 		let headers = {
 			'Content-Type': 'application/json',
@@ -44,22 +47,60 @@ export default class HomeBase extends Component {
 		};
 		let { currentPlace = '', latitude = '', longitude = '' } = this.state;
 		let { patient = {}, driver = {}, allDrivers = [], location = {}, user = {} } = this.props;
-		_.remove(this.props.allDrivers, (item) => item === this.props.user.id);
+		console.warn('patient?>>>>>>>>>>>>>>>>>>>>', allDrivers);
 
+		_.remove(allDrivers, (item) => item === this.props.user.id);
+		setPatient(false);
 		this.setState({ accept: true, reject: false });
 		let data = {
-			id: patient.id,
+			userId: patient.userId,
+			patientId: patient.patientId,
+
 			allDrivers: allDrivers,
 			driver: { ...driver, ...user },
 			location: { currentPlace: currentPlace, latitude: latitude, longitude: longitude }
 		};
-		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers).then((response) => {
-			console.log('response', response);
-		});
+		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+			.then((response) => {
+				console.log('response', response);
+			})
+			.catch((err) => {
+				console.log('error from home base', err);
+			});
 	};
 	onReject = () => {
-		this.setState({ reject: true, accept: false, showAcceptDecline: false });
+		this.setState({ showReasons: true });
 	};
+	onSubmit = (value) => {
+		allDrivers = this.props.allDrivers;
+		_.remove(allDrivers, (item) => item === this.props.user.id);
+		console.warn('all driversssssssssssssssssssssssssssssssss', allDrivers);
+		console.warn(this.props.allDrivers);
+		let headers = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			authorization: `Bearer ${this.props.token}`
+		};
+		let data = {
+			trip: {
+				cancellationMessage: value,
+				patientId: this.props.patient.patientId,
+				driverId: this.props.driver._id,
+				cancelledBy: this.props.user.id
+			},
+			allDrivers: allDrivers
+		};
+		this.setState({ showReasons: false });
+		setPatient(false, {});
+		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+			.then((response) => {
+				console.log('response', response);
+			})
+			.catch((err) => {
+				console.log('error from >>>>>>>>>>>>>>>>>>>>>', err);
+			});
+	};
+
 	componentWillUnmount() {
 		navigator.geolocation.clearWatch(this.watchID);
 	}
@@ -100,14 +141,13 @@ export default class HomeBase extends Component {
 			authorization: `Bearer ${this.props.token}`
 		};
 		console.warn('token', this.props.token);
-		callApi(
-			'post',
-			'v1/daffo/Driver/getOwn',
-			{ perPage: 1, filter: { userId: this.props.user.id } },
-			headers
-		).then((result) => {
-			result.data[0] ? setDriver(result.data[0]) : '';
-		});
+		callApi('post', 'v1/daffo/Driver/getOwn', { perPage: 1, filter: { userId: this.props.user.id } }, headers)
+			.then((result) => {
+				result.data[0] ? setDriver(result.data[0]) : '';
+			})
+			.catch((err) => {
+				console.log('errorrrrrrr>>>>>>>>>', err);
+			});
 	}
 	componentDidMount() {
 		LocationServicesDialogBox.checkLocationServicesIsEnabled({

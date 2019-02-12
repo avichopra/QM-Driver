@@ -15,7 +15,6 @@ export function addAllDrivers(allDrivers) {
 	return { type: ADD_ALL_DRIVERS, data: allDrivers };
 }
 export function addUserToken(token) {
-	// console.warn('adding ', token);
 	return { type: ADD_USER_TOKEN, data: token };
 }
 export function showPatient(acceptDecline, patient) {
