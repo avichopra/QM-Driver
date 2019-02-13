@@ -48,7 +48,7 @@ class DrawerContent extends Component {
 					</Svg>
 				</View>
 				<DrawerItem
-					title={'Call Ambulance'}
+					title={'Home'}
 					navigateToScreen={this.navigateToScreen}
 					route={'Home'}
 					// icon={<Foundation name={'home'} size={25} color={'#383838'} />
@@ -104,7 +104,7 @@ class DrawerContent extends Component {
 						<Image
 							source={{
 								uri:
-									picture === ''
+									picture === '' || picture === null
 										? 'asset:/icon/def.png'
 										: `${config.SERVER_URL}/v1/daffo/file/${picture}`
 							}}
