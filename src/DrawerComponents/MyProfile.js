@@ -30,7 +30,7 @@ class MyProfile extends MyProfileBase {
 								onHandleChange={this.onHandleChange}
 								name="userName"
 								fieldValue={this.state.userName}
-							    clearName={this.clearName}
+								clearName={this.clearName}
 							/>
 						</View>
 
@@ -112,7 +112,6 @@ class MyProfile extends MyProfileBase {
 	}
 }
 function mapStateToProps(state) {
-	console.log('I am the stateeeeeeeeeeeeeeeeeeeeeeeeeeee from MyProfile', state);
 	return {
 		user: state.user,
 		token: state.token,

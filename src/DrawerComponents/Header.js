@@ -35,12 +35,12 @@ export default class Header extends Component {
 				</View>
 				{this.props.title === 'My Profile' ? (
 					<View>
-						{console.log('avataaaar source>>>>>>>?', avatarSource)}
+						{console.warn('avataaaar source>>>>>>>?', avatarSource)}
 						<View style={[ styles.circle, styles.HImage ]}>
 							<Image
 								source={{
 									uri:
-										avatarSource === ''
+										avatarSource === '' || avatarSource === null
 											? 'asset:/icon/def.png'
 											: `${config.SERVER_URL}/v1/daffo/file/${avatarSource}`
 								}}

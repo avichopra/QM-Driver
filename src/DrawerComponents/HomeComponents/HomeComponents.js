@@ -4,20 +4,9 @@ import config from '../../config/index';
 import styles, { Palette } from '../../styles/index';
 const Calls = () => {
 	return (
-		<TouchableOpacity
-			style={{
-				height: 30,
-				width: 80,
-				backgroundColor: '#76d015',
-				borderRadius: 30,
-				flexDirection: 'row',
-				alignItems: 'center',
-				justifyContent: 'center'
-			}}
-			onPress={() => Call('CN')}
-		>
-			<Image source={{ uri: 'mipmap/telephone' }} style={{ height: 20, width: 20, marginRight: 10 }} />
-			<Text style={{ color: 'white', fontFamily: 'NunitoSans-SemiBold', fontSize: 18 }}>Call</Text>
+		<TouchableOpacity style={[ styles.center, styles.call ]} onPress={() => Call('CN')}>
+			<Image source={{ uri: 'mipmap/telephone' }} style={[ styles.icon19, { marginRight: 10 } ]} />
+			<Text style={[ styles.f18, styles.bold, { color: 'white' } ]}>Call</Text>
 		</TouchableOpacity>
 	);
 };
@@ -34,20 +23,12 @@ export const CallPatient = (props) => {
 		Call = () => {}
 	} = props;
 	return (
-		<View
-			style={{
-				height: 250,
-				width: '100%',
-				backgroundColor: 'white',
-				position: 'absolute',
-				bottom: 0
-			}}
-		>
+		<View style={[ styles.wbg, styles.h250 ]}>
 			<View
 				style={[
 					styles.fr,
+					styles.h150,
 					{
-						height: 150,
 						width: '98%',
 						alignSelf: 'center',
 						borderBottomWidth: 0.5,
@@ -88,7 +69,7 @@ export const CallPatient = (props) => {
 					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
 							source={{ uri: 'mipmap/map' }}
-							style={{ width: 20, height: 20, marginRight: 3, marginTop: 2 }}
+							style={[ styles.icon19, { marginRight: 3, marginTop: 2 } ]}
 							resizeMode={'contain'}
 						/>
 						<Text
@@ -144,16 +125,15 @@ export const AcceptDecline = (props) => {
 	} = props;
 	return (
 		<View
-			style={{
-				height: 200,
-				width: '100%',
-				backgroundColor: 'white',
-				position: 'absolute',
-				bottom: 0,
-				borderBottomWidth: 1,
-				borderBottomColor: 'rgba(215,219,221,0.7)',
-				alignItems: 'center'
-			}}
+			style={[
+				styles.wbg,
+				{
+					height: 200,
+					borderBottomWidth: 1,
+					borderBottomColor: 'rgba(215,219,221,0.7)',
+					alignItems: 'center'
+				}
+			]}
 		>
 			<View style={{ flexDirection: 'row', height: 60, width: '100%' }}>
 				<TouchableOpacity
@@ -167,8 +147,7 @@ export const AcceptDecline = (props) => {
 						height: 45,
 						width: 0.5,
 						backgroundColor: 'rgba(215,219,221,0.7)',
-						alignSelf: 'center',
-						justifyContent: 'center'
+						alignSelf: 'center'
 					}}
 				/>
 				<TouchableOpacity
@@ -178,40 +157,21 @@ export const AcceptDecline = (props) => {
 					<Text style={{ color: '#f80321', fontFamily: 'Nunito-Regular', fontSize: 20 }}>REJECT</Text>
 				</TouchableOpacity>
 			</View>
+			<View style={[ styles.divider, styles.mb5 ]} />
 			<View
-				style={{
-					height: 0.5,
-					backgroundColor: 'rgba(215,219,221,0.7)',
-					width: '100%',
-					marginBottom: 5
-				}}
-			/>
-			<View
-				style={{
-					flexDirection: 'row',
-					alignItems: 'center',
-					height: 109,
-					width: '98%'
-				}}
+				style={[
+					styles.fr,
+					{
+						alignItems: 'center',
+						height: 109,
+						width: '98%'
+					}
+				]}
 			>
-				<View
-					style={{
-						height: 70,
-						width: 70,
-						borderRadius: 50,
-						marginLeft: 5,
-						marginBottom: 5
-					}}
-				>
+				<View style={[ styles.circle70, styles.ml5, styles.mb5 ]}>
 					<Image
 						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
-						style={{
-							height: 70,
-							width: 70,
-							borderRadius: 50,
-							borderColor: 'white',
-							borderWidth: 2
-						}}
+						style={[ styles.circle70 ]}
 					/>
 				</View>
 				<View style={{ width: '75%' }}>
@@ -263,15 +223,14 @@ export const AcceptDecline = (props) => {
 };
 export const PickedPatient = (props) => {
 	return (
-		<View style={[ styles.h200, { width: '100%', backgroundColor: 'white' } ]}>
+		<View style={[ styles.h200, styles.wbg ]}>
 			<View
 				style={[
+					styles.fr,
 					{
 						height: 80,
-						flexDirection: 'row',
 						width: '95%',
-						alignItems: 'center',
-						alignSelf: 'center'
+						alignItems: 'center'
 					}
 				]}
 			>

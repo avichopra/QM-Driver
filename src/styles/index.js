@@ -1,7 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 export const Palette = {
-	hB: '#f6263f'
+	hB: '#f6263f',
+	w: 'white'
 };
 export default StyleSheet.create({
 	f8: {
@@ -177,9 +178,26 @@ export default StyleSheet.create({
 	center: { alignItems: 'center', justifyContent: 'center' },
 	divider: {
 		height: 0.8,
-		backgroundColor: 'rgba(215,219,221,0.7)'
+		backgroundColor: 'rgba(215,219,221,0.7)',
+		width: '100%'
 	},
 	h200: { height: 200 },
+	h250: { height: 250 },
+	h150: { height: 150 },
 	fr: { flexDirection: 'row', alignItems: 'center' },
-	frSelf: { flexDirection: 'row', alignSelf: 'center' }
+	frSelf: { flexDirection: 'row', alignSelf: 'center' },
+	icon19: { height: 19, width: 19 },
+	call: {
+		height: 30,
+		width: 80,
+		backgroundColor: '#76d015',
+		borderRadius: 30,
+		flexDirection: 'row'
+	},
+	bold: { fontFamily: 'NunitoSans-SemiBold' },
+	f18: { fontSize: 18 },
+	wbg: { position: 'absolute', bottom: 0, width: '100%', backgroundColor: 'white' },
+	ml5: { marginLeft: 5 },
+	mb5: { marginBottom: 5 }
+	// wbg: { width: '100%', backgroundColor: 'white' }
 });
