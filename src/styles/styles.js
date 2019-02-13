@@ -12,7 +12,7 @@ export const Palette = {
 	white50: 'rgba(255,255,255,0.5)',
 	white70: 'rgba(255,255,255,0.7)',
 	red: '#F44336',
-
+	hButton: '#f6263f',
 	blue: '#0499DC',
 	darkblue: '#01579B',
 	lightblue: '#03A9F4',

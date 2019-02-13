@@ -14,8 +14,7 @@ export default class Header extends Component {
 			name = '',
 			onHandleChange = () => {},
 			fieldValue,
-			clearName=()=>
-			{}
+			clearName = () => {}
 		} = this.props;
 		return (
 			<View
@@ -61,8 +60,8 @@ export default class Header extends Component {
 								editable={true}
 							/>
 							<TouchableOpacity onPress={clearName}>
-							<Image style={styles.close} source={{ uri: 'mipmap/close' }} />
-						</TouchableOpacity>
+								<Image style={styles.close} source={{ uri: 'mipmap/close' }} />
+							</TouchableOpacity>
 						</View>
 					</View>
 				) : null}

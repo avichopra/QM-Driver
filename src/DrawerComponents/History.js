@@ -38,11 +38,12 @@ class History extends Base {
 							<View
 								style={{
 									height: 200,
-									width: '100%',
+									width: '90%',
 									marginTop: 20,
 									borderBottomWidth: 1,
 									borderBottomColor: 'grey',
-									marginLeft: 15
+									alignSelf: 'center'
+									// marginLeft: 15
 								}}
 							>
 								<View style={{ flexDirection: 'row' }}>
@@ -51,20 +52,20 @@ class History extends Base {
 										style={{ height: 40, width: 40 }}
 										resizeMode={'contain'}
 									/>
-									<Text style={{ fontSize: 20, color: 'black', marginLeft: 20, marginTop: 5 }}>
+									<Text style={{ fontSize: 18, color: 'black', marginLeft: 20, marginTop: 5 }}>
 										Today, 05:21 AM
 									</Text>
 								</View>
 
 								<View
 									style={{
-										width: '60%',
+										width: '80%',
 										// marginLeft: 70,
 										alignItems: 'center',
 										height: 22
 									}}
 								>
-									<Text style={{ fontSize: 18, color: 'grey' }} numberOfLines={1}>
+									<Text style={{ fontSize: 17, color: 'grey' }} numberOfLines={1}>
 										{item.patientId.userId.fullname}
 									</Text>
 								</View>
@@ -78,8 +79,7 @@ class History extends Base {
 										style={{
 											marginLeft: 25,
 											width: '68%',
-											marginRight: 3,
-											backgroundColor: 'red'
+											marginRight: 3
 										}}
 									>
 										<Text style={{ fontSize: 15, color: 'black' }}>{item.driverAddress}</Text>
@@ -89,8 +89,8 @@ class History extends Base {
 									</View>
 									<View
 										style={{
-											height: 45,
-											width: 45,
+											height: 50,
+											width: 50,
 											borderRadius: 50,
 											alignSelf: 'flex-end',
 											marginRight: 30,
@@ -103,13 +103,9 @@ class History extends Base {
 												uri: `${config.SERVER_URL}/v1/daffo/file/${item.patientId.userId
 													.picture}`
 											}}
-											style={{ height: 45, width: 45, borderRadius: 50 }}
+											style={{ height: 50, width: 50, borderRadius: 50 }}
 										/>
 									</View>
-									{console.warn(
-										'Picture>>>>>>>>>>>>>>',
-										JSON.stringify(item.patientId.userId, null, 3)
-									)}
 								</View>
 							</View>
 						);

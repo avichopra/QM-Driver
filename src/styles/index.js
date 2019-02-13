@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
+export const Palette = {
+	hB: '#f6263f'
+};
 export default StyleSheet.create({
 	f8: {
 		flex: 8
@@ -149,5 +152,34 @@ export default StyleSheet.create({
 		color: 'white',
 		fontSize: 16
 	},
-	close: { height: 10, width: 10, alignSelf: 'flex-end', marginVertical: 10 }
+	close: { height: 10, width: 10, alignSelf: 'flex-end', marginVertical: 10 },
+	circle50: {
+		height: 50,
+		width: 50,
+		borderRadius: 50 / 2,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	circle70: {
+		height: 70,
+		width: 70,
+		borderRadius: 70 / 2,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	circle90: {
+		height: 90,
+		width: 90,
+		borderRadius: 45,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	center: { alignItems: 'center', justifyContent: 'center' },
+	divider: {
+		height: 0.8,
+		backgroundColor: 'rgba(215,219,221,0.7)'
+	},
+	h200: { height: 200 },
+	fr: { flexDirection: 'row', alignItems: 'center' },
+	frSelf: { flexDirection: 'row', alignSelf: 'center' }
 });
