@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { Dimensions, PermissionsAndroid } from 'react-native';
 import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
 import RNGooglePlaces from 'react-native-google-places';
+import { AnimatedRegion } from 'react-native-maps';
 import call from 'react-native-phone-call';
 import { setDriver } from '../redux';
 import { addLocation } from '../redux/actions/index';
@@ -25,7 +26,17 @@ export default class HomeBase extends Component {
 			reject: false,
 			patient: null,
 			showAcceptDecline: false,
-			showReasons: false
+			showReasons: false,
+			coordinate: new AnimatedRegion({
+				latitude: 29.95539,
+				longitude: 78.07513
+			}),
+			destination: new AnimatedRegion({
+				latitude: 29.1397982,
+				longitude: 75.75666079999999
+			}),
+			showdes: false,
+			pointCoords: []
 		};
 		// this.requestLocationPermission();
 	}
@@ -46,9 +57,9 @@ export default class HomeBase extends Component {
 			authorization: `Bearer ${this.props.token}`
 		};
 		let { currentPlace = '', latitude = '', longitude = '' } = this.state;
-		let { patient = {}, driver = {}, allDrivers = [], location = {}, user = {} } = this.props;
-		console.warn('patient?>>>>>>>>>>>>>>>>>>>>', allDrivers);
-
+		let { patient = {}, driver = {}, allDrivers = [], location = {}, user = {},patientLocation } = this.props;
+		console.warn('patient?>>>>>>>>>>>>>>>>>>>>', allDrivers,patientLocation);
+         this.setState({showdes:true,destination:{latitude:patientLocation.latitude,longitude:patientLocation.longitude}})
 		_.remove(allDrivers, (item) => item === this.props.user.id);
 		setPatient(false);
 		this.setState({ accept: true, reject: false });
@@ -108,25 +119,8 @@ export default class HomeBase extends Component {
 		console.log('open drawer being called>>>>>>>>>>>>>>>>>>>>');
 		this.props.navigation.openDrawer();
 	};
-	// requestLocationPermission = () => {
-	// 	try {
-	// 		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-	// 			title: 'Location Permission',
-	// 			message: 'This app needs access to your location'
-	// 		}).then((granted) => {
-	// 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-	// 				console.log('You can use the location');
-	// 			} else {
-	// 				console.log('Location permission denied');
-	// 			}
-	// 		});
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
 	componentWillMount() {
 		// this.requestLocationPermission();
-
 		console.warn('Location in redux', this.props.location);
 		if (this.props.location != null) {
 			this.setState({
@@ -143,6 +137,7 @@ export default class HomeBase extends Component {
 		console.warn('token', this.props.token);
 		callApi('post', 'v1/daffo/Driver/getOwn', { perPage: 1, filter: { userId: this.props.user.id } }, headers)
 			.then((result) => {
+				console.log("results=========",result)
 				result.data[0] ? setDriver(result.data[0]) : '';
 			})
 			.catch((err) => {
@@ -175,13 +170,7 @@ export default class HomeBase extends Component {
 			(position) => {
 				console.warn('location changed');
 				// Create the object to update this.state.mapRegion through the onRegionChange function
-				let region = {
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude,
-					latitudeDelta: 0.5,
-					longitudeDelta: 0.5 * (width / height)
-				};
-				console.warn('Region', region);
+		
 				this.setState({
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude
@@ -191,46 +180,33 @@ export default class HomeBase extends Component {
 			},
 			function(error) {
 				console.warn(error);
-			},
-			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+			}
 		);
-		// this.getDirection('29.132963299999993,75.7534505', '29.1328949,75.753995');
-		// this._askForLocationServices();
-		// this.requestLocationPermission();
 	}
-	getDirection = async (startLoc, destinationLoc) => {
-		let resp = await fetch(
-			`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=AIzaSyASICVTRwAiAnnT_AzZFCqitJ56C8koh3s`
-		);
-		let respJson = await resp.json();
-		// let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
-		console.log(respJson);
-		// let coords = points.map((point, index) => {
-		//   return {
-		//     latitude: point[0],
-		//     longitude: point[1]
-		//   };
-		// });
-		console.log(respJson);
+	setUserLocation = (Coordinate) => {
+		//   console.warn("location changed",Coordinate)
+		const { latitude, longitude } = Coordinate;
+		const newCoordinate = {
+			latitude,
+			longitude
+		};
+		if (this.marker) {
+			this.marker._component.animateMarkerToCoordinate(newCoordinate, 500);
+		}
+		//    this.map.fitToCoordinates(this.state.pointCoords)
+		// this.getRouteDirection()
+
+		//   this.map.animateToRegion({latitude:Coordinate.latitude,longitude:Coordinate.longitude,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}, 2000)
+		// // this.setState({
+		// 			routeCoordinates: this.state.routeCoordinates.concat([newCoordinate])
+		// 		});
 	};
-	// _askForLocationServices() {
-	// 	PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-	// 		title: 'question',
-	// 		message: 'gimme that location'
-	// 	}).then((granted) => {
-	// 		console.log('granted', granted);
-	// 		// always returns never_ask_again
-	// 	});
-	// }
-	// onRegionChange(region) {
-	// 	this.setState({
-	// 	  latitude: region.latitude,
-	// 	  longitude: region.longitude,
-	// 	  latitudeDelta: region.latitudeDelta,
-	// 	  longitudeDelta: region.longitudeDelta
-	// 	});
-	// 	console.warn("region changed", region);
-	// }
+	onRegionChangeComplete = (region) => {
+		latitude_delta = region.latitudeDelta;
+		longitude_delta = region.longitudeDelta;
+		//  console.warn("Completed region",region)
+		//  this.setState({latitudeDelta:region.latitudeDelta,longitudeDelta:region.longitudeDelta})
+	};
 	AutoCom = () => {
 		RNGooglePlaces.openAutocompleteModal({ country: 'IN', radius: 100 })
 			.then((place) => {
