@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import config from '../../config/index';
 import styles, { Palette } from '../../styles/index';
-const Calls = () => {
+const Calls = (props) => {
+	const {Call=()=>{}}=props;
 	return (
 		<TouchableOpacity style={[ styles.center, styles.call ]} onPress={() => Call('CN')}>
 			<Image source={{ uri: 'mipmap/telephone' }} style={[ styles.icon19, { marginRight: 10 } ]} />
@@ -64,7 +65,7 @@ export const CallPatient = (props) => {
 						>
 							{patient.name}
 						</Text>
-						<Calls />
+						<Calls Call={Call}/>
 					</View>
 					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
@@ -280,7 +281,7 @@ export const PickedPatient = (props) => {
 						Sector 30, Gurgaon
 					</Text>
 				</View>
-				<Calls />
+				<Calls  />
 			</View>
 		</View>
 	);

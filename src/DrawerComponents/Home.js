@@ -7,8 +7,8 @@ const Aspect_Ratio = screen.width / screen.height;
 let latitude_Delta = 0.0922;
 let longitude_Delta = latitude_Delta * Aspect_Ratio;
 // import Geolocation from 'react-native-geolocation-service';
-import AcceptDecline from './HomeComponents/AcceptDecline';
-import CallPatient from './HomeComponents/CallPatient';
+// import AcceptDecline from './HomeComponents/AcceptDecline';
+// import CallPatient from './HomeComponents/CallPatient';
 import {
 	Platform,
 	StyleSheet,
@@ -58,75 +58,97 @@ class Home extends Base {
 						initialRegion={{
 							latitude: this.state.latitude,
 							longitude: this.state.longitude,
-							latitudeDelta: 0.015,
-							longitudeDelta: 0.0121
+							latitudeDelta:0.009,
+							longitudeDelta: 0.009
 						}}
 						onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
 							onUserLocationChange={(locationChangedResult) =>
 								this.setUserLocation(locationChangedResult.nativeEvent.coordinate)}
 						// onRegionChange={this.onRegionChange.bind(this)}
 					>
-						{this.state.pointCoords && (
+						{this.state.pointCoords && this.props.showAcceptDecline===false && this.props.patient!=null && (
 								<Polyline
 									coordinates={this.state.pointCoords}
 									strokeColor={'#1d78e2'}
 									strokeWidth={8}
 								/>
 							)}
-						<Marker.Animated
+							
+						{this.props.showAcceptDecline===false && this.props.patient!=null && <Marker.Animated
 								ref={(marker) => {
 									this.marker = marker;
 								}}
 								coordinate={this.state.coordinate}
 								title={'Your Location'}
-							/>
-								{this.state.showdes && (
+							>
+							 <Image
+										source={{ uri: 'mipmap/ambulance1' }}
+										style={{ width: 100, height: 30 }}
+										resizeMode={'contain'}
+									/>
+									</Marker.Animated>}
+								{this.props.showAcceptDecline===false && this.props.patient!=null && (
 								<Marker.Animated
 									ref={(desmarker) => {
 										this.desmarker = desmarker;
 									}}
 									coordinate={this.state.destination}
-									description={'destination'}
-									rotate={90}
+									title={this.props.patientLocation.currentPlace}
+									image={{ uri: 'mipmap/currentlocation' }}
 								>
-									<Image
-										source={{ uri: 'mipmap/ambulance1' }}
+									{/* <Image
+										source={{ uri: 'mipmap/currentlocation' }}
 										style={{ width: 100, height: 30 }}
 										resizeMode={'contain'}
-									/>
+									/> */}
 								</Marker.Animated>
 							)}
 					</MapView>
 				)}
-				<View
+				{this.props.showAcceptDecline===false && this.props.patient!=null && <View
 					style={{
-						width: '90%',
-						alignSelf: 'center',
-						height: 50,
-						backgroundColor: 'white',
-						position: 'absolute',
-						marginTop: 80,
 						flexDirection: 'row',
-						alignItems: 'center'
+								width: window.width,
+								// margin: 30,
+								height: 50,
+								padding: 5,
+								alignItems: 'center',
+								justifyContent: 'center',
+								borderRadius: 5,
+								backgroundColor: '#fff',
+								elevation: 20,
+								position: 'absolute',
+								marginTop: 60,
+								// marginLeft: 20,
+								// marginRight: 20,
+								alignSelf: 'center'
 					}}
 				>
+					<ScrollView
+								contentContainerStyle={{ alignItems: 'center' }}
+								style={{ width: '90%' }}
+								horizontal={true}
+								showsHorizontalScrollIndicator={false}
+							>
 					<Text
 						style={{
-							width: '86%',
-							fontSize: 18,
-							color: 'grey',
-							marginLeft: 10
+							
+							fontSize: 18
 						}}
 					>
-						Some location.......................
+						{this.props.patientLocation.currentPlace}
 					</Text>
+					</ScrollView>
 					<View style={{ height: 28, width: 1, backgroundColor: 'grey' }} />
-					<Image
+					<TouchableOpacity onPress={this.navigationMap}>
+						<Image
 						style={{ height: 20, width: 20, marginLeft: 5 }}
 						source={{ uri: 'mipmap/navigation' }}
 						resizeMode="contain"
+						
 					/>
-				</View>
+					</TouchableOpacity>
+				</View>}
 				{this.props.showAcceptDecline && true ? (
 					<AcceptDecline
 						onAccept={this.onAccept}
@@ -163,6 +185,7 @@ const style = StyleSheet.create({
 	}
 });
 function mapStateToProps(state) {
+// console.warn("STATE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",state)
 	return {
 		user: state.user,
 		token: state.token,
