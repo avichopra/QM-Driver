@@ -268,8 +268,8 @@ import { AnimatedRegion,Polyline } from 'react-native-maps';
 import getDirections from 'react-native-google-maps-directions';
 import call from 'react-native-phone-call';
 import { setDriver } from '../redux';
-import { addLocation } from '../redux/actions/index';
-import { setPatient } from '../redux/index';
+import { addLocation ,pickedUpPatient,markComplete} from '../redux/actions/index';
+import { setPatient} from '../redux/index';
 import Store from '../redux/store/index';
 import { callApi } from '../utilities/serverApi';
 const { width, height } = Dimensions.get('window');
@@ -299,7 +299,10 @@ export default class HomeBase extends Component {
 			}),
 			showdes: false,
 			pointCoords: [],
-			showPatientLocation:false
+			showPatientLocation:false,
+		showHospital:false,
+		markComplete:false
+
 		};
 		// this.requestLocationPermission();
 	}
@@ -313,6 +316,27 @@ export default class HomeBase extends Component {
 	onShowReasons = (value) => {
 		this.setState({ showReasons: value });
 	};
+	markComplete=()=>{
+		console.warn("Completed")
+		this.setState({showHospital:false,markComplete:false})
+		Store.dispatch(markComplete(true))
+		let headers = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			authorization: `Bearer ${this.props.token}`
+		};
+		let data = {
+			userId: this.props.patient.userId,
+			markComplete:true
+		};
+		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+			.then((response) => {
+				console.log('response', response);
+			})
+			.catch((err) => {
+				console.log('error from home base', err);
+			});
+	}
 	navigationMap=()=>{
 		console.log("data in navigation",this.props.patientLocation.latitude,this.props.patientLocation.longitude)
 		const data = {
@@ -337,9 +361,11 @@ export default class HomeBase extends Component {
 	componentWillReceiveProps(nextProps)
 	{
 		console.log("nesxtprops",nextProps)
-		if(nextProps.showAcceptDecline===false && nextProps.patient!=null)
+		if(nextProps.showAcceptDecline===false && nextProps.patient!=null && nextProps.pickedUpPatient===false)
 		//   alert("hii")
 		this.getRouteDirection()
+		if(nextProps.pickedUpPatient)
+		  this.setState({coordinate:{latitude:response.routes[0].legs[0].end_location.lat,longitude:response.routes[0].legs[0].end_location.lng}})
 	}
 	onAccept = () => {
 		let headers = {
@@ -404,7 +430,28 @@ export default class HomeBase extends Component {
 				console.log('error from >>>>>>>>>>>>>>>>>>>>>', err);
 			});
 	};
-
+onClickPickPatient=()=>
+{
+	let { patient = {}} = this.props;
+	let headers = {
+		'Content-Type': 'application/json',
+		Accept: 'application/json',
+		authorization: `Bearer ${this.props.token}`
+	};
+	let data = {
+		userId: patient.userId,
+		pickedup:true
+	};
+	this.setState({showHospital:true})
+	this.getRouteDirection()
+	callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+			.then((response) => {
+				console.log('response', response);
+			})
+			.catch((err) => {
+				console.log('error from home base', err);
+			});
+}
 	componentWillUnmount() {
 		navigator.geolocation.clearWatch(this.watchID);
 	}
@@ -436,22 +483,27 @@ export default class HomeBase extends Component {
 			console.log('points coords in state', this.state.pointCoords);
 			console.log('points coord', pointCoords);
 			this.map.fitToCoordinates(pointCoords);
+			// if(this.props.showAcceptDecline===false && this.props.patient!=null)
+			// {
+				console.warn("calling animate")
+			this.animateAmbulace()
+			// }
 			// this.map.animateToRegion({pointCoords,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}, 2000)
 			// let pointcoord = [ ...pointCoords ].reverse();
-			// // pointcoord.map((points,index)=>{
+			// pointcoord.map((points,index)=>{
 			// let i = 0;
 			// this.timer = setInterval(() => {
 			// 	this.desmarker &&
-			// 		pointcoord[i] &&
+			// 		pointCoords[i] &&
 			// 		this.desmarker._component.animateMarkerToCoordinate(
 			// 			{
-			// 				latitude: pointcoord[i].latitude,
-			// 				longitude: pointcoord[i].longitude
+			// 				latitude: pointCoords[i].latitude,
+			// 				longitude: pointCoords[i].longitude
 			// 			},
 			// 			2000
 			// 		);
 			// 	// console.warn("inside timer",pointcoord[i]);
-			// 	if (pointcoord[i] === undefined) clearInterval(this.timer);
+			// 	if (pointCoords[i] === undefined) clearInterval(this.timer);
 			// 	i++;
 			// }, 2000);
 			//   console.warn("inside map timer", +new Date());
@@ -460,6 +512,58 @@ export default class HomeBase extends Component {
 			console.log(error);
 		}
 	};
+	animateAmbulace=()=>{
+		console.warn("animate function called")
+		let i = 0;
+		this.timer = setInterval(() => {
+			if(this.props.pickedUpPatient===true)
+			{
+				let point=[...this.state.pointCoords].reverse();
+				this.desmarker &&
+				point[i] &&
+					this.desmarker._component.animateMarkerToCoordinate(
+						{
+							latitude: point[i].latitude,
+							longitude: point[i].longitude
+						},
+						2000
+					);
+			}
+			else
+			{
+				this.desmarker &&
+				this.state.pointCoords[i] &&
+					this.desmarker._component.animateMarkerToCoordinate(
+						{
+							latitude: this.state.pointCoords[i].latitude,
+							longitude: this.state.pointCoords[i].longitude
+						},
+						2000
+					);
+			}
+			// console.warn("inside timer",this.state.pointCoords[i]);
+			if (this.state.pointCoords[i] === undefined) {
+				//  --i; 
+				// let lat =this.state.pointCoords[i].latitude
+				// let log=this.state.pointCoords[i].longitude
+				console.warn("pickedup location reached")
+				// if(latitude===response.routes[0].legs[0].end_location.lat && longitude===response.routes[0].legs[0].end_location.log)
+				// {
+					clearInterval(this.timer);
+					if(this.props.pickedUpPatient===false)
+					Store.dispatch(pickedUpPatient(true))
+					else 
+					{
+						console.warn("Completed")
+						this.setState({showHospital:true,markComplete:true})
+					}
+					
+				// }
+			 
+			}
+			i++;
+		}, 3000);
+	}
 	componentWillMount() {
 		// this.requestLocationPermission();
 		console.warn('Location in redux', this.props.location);
@@ -533,9 +637,9 @@ export default class HomeBase extends Component {
 			latitude,
 			longitude
 		};
-		if (this.marker) {
-			this.marker._component.animateMarkerToCoordinate(newCoordinate, 500);
-		}
+		// if (this.desmarker) {
+		// 	this.desmarker._component.animateMarkerToCoordinate(newCoordinate, 500);
+		// }
 		//    this.map.fitToCoordinates(this.state.pointCoords)
 		// this.getRouteDirection()
 

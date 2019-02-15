@@ -66,7 +66,7 @@ class Home extends Base {
 								this.setUserLocation(locationChangedResult.nativeEvent.coordinate)}
 						// onRegionChange={this.onRegionChange.bind(this)}
 					>
-						{this.state.pointCoords && this.props.showAcceptDecline===false && this.props.patient!=null && (
+						{this.state.pointCoords && this.props.showAcceptDecline===false && this.props.patient!=null && (this.props.pickedUpPatient===false || this.state.showHospital)&& (
 								<Polyline
 									coordinates={this.state.pointCoords}
 									strokeColor={'#1d78e2'}
@@ -75,8 +75,8 @@ class Home extends Base {
 							)}
 							
 						{this.props.showAcceptDecline===false && this.props.patient!=null && <Marker.Animated
-								ref={(marker) => {
-									this.marker = marker;
+								ref={(desmarker) => {
+									this.desmarker = desmarker;
 								}}
 								coordinate={this.state.coordinate}
 								title={'Your Location'}
@@ -89,8 +89,8 @@ class Home extends Base {
 									</Marker.Animated>}
 								{this.props.showAcceptDecline===false && this.props.patient!=null && (
 								<Marker.Animated
-									ref={(desmarker) => {
-										this.desmarker = desmarker;
+									ref={(marker) => {
+										this.marker = marker;
 									}}
 									coordinate={this.state.destination}
 									title={this.props.patientLocation.currentPlace}
@@ -156,10 +156,10 @@ class Home extends Base {
 						patient={this.props.patient}
 						location={this.props.patientLocation}
 					/>
-				) : this.props.patient !== null ? (
+				) : this.props.patient !== null && this.props.pickedUpPatient===false ? (
 					<CallPatient Call={this.Call} patient={this.props.patient} location={this.props.patientLocation} />
-				) : null}
-				{/* <PickedPatient /> */}
+				) : this.props.pickedUpPatient===true?<PickedPatient onClickPickPatient={this.onClickPickPatient} onCliclPickPatientComplete={this.markComplete} showHospital={this.state.showHospital} markComplete={this.state.markComplete} patient={this.props.patient}/>:null}
+				{/* <PickedPatient onClickPickPatient={this.onClickPickPatient} showHospital={this.state.showHospital}/> */}
 			</View>
 		);
 	}
@@ -194,7 +194,8 @@ function mapStateToProps(state) {
 		showAcceptDecline: state.showAcceptDecline,
 		patientLocation: state.patientLocation,
 		allDrivers: state.allDrivers,
-		driver: state.driver
+		driver: state.driver,
+		pickedUpPatient:state.pickedUpPatient
 	};
 }
 export default connect(mapStateToProps)(Home);

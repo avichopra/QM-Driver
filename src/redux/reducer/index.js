@@ -5,7 +5,9 @@ import {
 	ADD_USER_LOCATION,
 	SHOW_PATIENT,
 	SET_PATIENT_LOCATION,
-	ADD_ALL_DRIVERS
+	ADD_ALL_DRIVERS,
+	PICKED_UP_PATIENT,
+	PICKED_UP_PATIENT_COMPLETE
 } from '../actions/index';
 export const initialState = {
 	user: null,
@@ -15,7 +17,8 @@ export const initialState = {
 	showAcceptDecline: false,
 	patient: null,
 	patientLocation: null,
-	allDrivers: null
+	allDrivers: null,
+	pickedUpPatient:false
 };
 export default function(state = {}, action) {
 	switch (action.type) {
@@ -43,6 +46,10 @@ export default function(state = {}, action) {
 		// 	return { ...state, patient: action.data.patient };
 		case ADD_ALL_DRIVERS:
 			return { ...state, allDrivers: action.data };
+			case PICKED_UP_PATIENT:
+			return {...state,pickedUpPatient:action.data}
+			case PICKED_UP_PATIENT_COMPLETE:
+			return {...state,driver:null,showAcceptDecline:false,patient:null,patientLocation:null,allDrivers:null,pickedUpPatient:false}
 		default:
 			return { ...state };
 	}
