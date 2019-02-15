@@ -10,11 +10,13 @@ import * as Storage from "./src/utilities/asyncStorage"
 import {callApi} from "./src/utilities/serverApi"
 import {connectToSocket} from "./src/utilities/socket"
 export default class App extends Component {
-  componentDidMount() {
+  componentWillMount(){
     AppState.addEventListener('change',this._handleAppstatechange);
   	connectToSocket()
 		.then(_ => {})
     .catch(e => {});
+  }
+  componentDidMount() {
     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
 			title: 'Location',
 			message: 'Allow Location Access'

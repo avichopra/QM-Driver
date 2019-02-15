@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import config from '../../config/index';
 import styles, { Palette } from '../../styles/index';
-const Calls = () => {
+import { pickedUpPatient } from '../../redux/actions';
+const Calls = (props) => {
+	const {Call=()=>{}}=props;
 	return (
 		<TouchableOpacity style={[ styles.center, styles.call ]} onPress={() => Call('CN')}>
 			<Image source={{ uri: 'mipmap/telephone' }} style={[ styles.icon19, { marginRight: 10 } ]} />
@@ -64,7 +66,7 @@ export const CallPatient = (props) => {
 						>
 							{patient.name}
 						</Text>
-						<Calls />
+						<Calls Call={Call}/>
 					</View>
 					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
@@ -222,39 +224,44 @@ export const AcceptDecline = (props) => {
 	);
 };
 export const PickedPatient = (props) => {
+	const {onClickPickPatient=()=>{},onCliclPickPatientComplete=()=>{},showHospital=false,patient = {},markComplete=false}=props
+const { name='', picture= '' }=patient
 	return (
 		<View style={[ styles.h200, styles.wbg ]}>
-			<View
+			{markComplete===false && <View
 				style={[
 					styles.fr,
 					{
 						height: 80,
 						width: '95%',
-						alignItems: 'center'
+						alignItems: 'center',
 					}
 				]}
 			>
 				<View style={[ styles.circle50, { marginRight: 15 } ]}>
 					<Image
-						source={{ uri: `http://192.168.100.141:3000/v1/daffo/file/public/1549363727367.JPEG` }}
+						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${picture}` }}
 						style={[ styles.circle50 ]}
 					/>
 				</View>
 
-				<Text style={{ fontSize: 18, color: 'black' }}>Anil Kumar</Text>
-			</View>
+				<Text style={{ fontSize: 18, color: 'black' }}>{name}</Text>
+			</View>}
 			<View style={styles.divider} />
 
-			{/* <View style={[ styles.center, { height: 100 } ]}>
-				<Button title={'Picked Up Patient'} backgroundCol
-				or={Palette.hB} />
-			</View> */}
+			{showHospital===false?<View style={[ styles.center, { height: 100 } ]}>
+				<Button title={'Picked Up Patient'} backgroundColor={Palette.hB} onSave={onClickPickPatient} />
+			</View>:markComplete===true?<View style={[ styles.center, { height: 100 } ]}>
+				<Button title={'Mark Complete'} backgroundColor={Palette.hB} onSave={onCliclPickPatientComplete} />
+			</View>:
 			<View
 				style={[
 					styles.frSelf,
+
 					{
 						marginTop: 10,
-						width: '96%'
+						width: '98%',
+
 					}
 				]}
 			>
@@ -262,7 +269,7 @@ export const PickedPatient = (props) => {
 					<Image source={{ uri: `mipmap/hospital` }} style={{ height: 50, width: 50 }} resizeMode="contain" />
 				</View>
 
-				<View style={{ width: '62%', marginTop: 10, marginLeft: 10 }}>
+				<View style={{ width: '58%', marginTop: 10, marginLeft: 10 }}>
 					<Text
 						style={{
 							fontSize: 18,
@@ -280,8 +287,8 @@ export const PickedPatient = (props) => {
 						Sector 30, Gurgaon
 					</Text>
 				</View>
-				<Calls />
-			</View>
+				<Calls  />
+			</View>}
 		</View>
 	);
 };

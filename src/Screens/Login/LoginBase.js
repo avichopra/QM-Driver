@@ -84,6 +84,8 @@ export default class LoginBase extends Component {
 						{
 							navigate('OTP', { email: error.response.data.message.email,routeName:"Drawer" });
 						}
+						else if(error.response.data.message==="User Deleted")
+						    this.setState({emailerror:"User Deleted"})
 						else
 						{
 							this.setState({emailerror:"Unauthorised User"})
