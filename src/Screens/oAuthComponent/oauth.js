@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Store from '../../redux/store/index';
 import store from "../../utilities/store"
-import { setUserToken, setUser, setPatient,setUserRefreshToken } from '../../redux/index';
+import { setUserToken, setUser, setPatient,setUserRefreshToken ,setPatientLocation} from '../../redux/index';
 import { Platform, Linking, View, Text, AppState } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import * as Storage from '../../utilities/asyncStorage';
 import { callApi } from '../../utilities/serverApi';
 import {timeCalculate} from "../../utilities/timeCalculate"
 import axios from 'axios';
-import { addUser, addUserToken } from '../../redux/actions/index';
+import { addUser, addUserToken,saveTrip } from '../../redux/actions/index';
 class oauth extends Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +29,6 @@ class oauth extends Component {
 		}, 1000);
 		console.log('inside oauth ');
 	}
-
 	navigateTo = (url) => {
 		console.log('Inside navigate url', url);
 		if (url === null) {
@@ -82,6 +81,7 @@ class oauth extends Component {
 					Accept: 'application/json',
 					authorization: `Bearer ${token}`
 				};
+				let fields={"patientId":{"userId":{"_id":1,"fullname": 1,"email": 1,"emergencycontactnumber":1,"contactNo":1,"picture":1}},"pickedPatient":1,"patientAddress":1,"driverAddress":1,"hospitalName":1,"hospitalAddress":1,"hospitalNo":1,"hospitalLocation":{"lat":1,"long":1},"patientLocation":{"lat":1,"long":1},"driverLocation":{"lat":1,"long":1},"driverId":{"userId":{"deleted":1,"role":1,"createdAt":1,"fullname":1,"email":1,"contactNo":1,"emailVerificationCode":1,"phoneVerified":1,"online":1,"deviceId":1,"picture":1}}}
 					 if(timeCalculate(expireTime))
 					 {
 						 let data={"email":email,"refreshToken":refreshToken}
@@ -97,9 +97,20 @@ class oauth extends Component {
 					callApi('get', 'v1/auth/isLogin', {}, headers)
 					.then((response) => {
 						setUser(response.data.userTransformed);
-						// Store.dispatch(addUser(response.data.userTransformed));
+						Store.dispatch(addUser(response.data.userTransformed));
+							callApi(
+								'post',
+								'v1/daffo/Trips/getOwn',
+								{ perPage: 1, fields:fields,filter: { status:"Progress",driverId: response.data.userTransformed.id } },
+								headers
+							).then((result) => {
+								console.log("results >>>>>>>>>>>>>>>>>>",result)
+								result.data.length!=0 && Store.dispatch(saveTrip(result.data[0]))
+								navigate('Drawer');
+							}).catch(error=>{
+								console.log("error",error)
+							})
 						console.log('response in auth', response);
-						navigate('Drawer');
 					})
 					.catch((error) => {
 						console.log("error token expired",error)
@@ -109,19 +120,30 @@ class oauth extends Component {
 						}).catch((error)=>{
 							console.log("error in refresh token",error)
 						})
-					
 					 }
 					else
 					{
 						callApi('get', 'v1/auth/isLogin', {}, headers)
 						.then((response) => {
+							console.log("Response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",response.data.userTransformed)
 							Store.dispatch(addUser(response.data.userTransformed));
 							Store.dispatch(addUserToken(token))
-						// Storage.get("token").then(async (token)=>
-						// {
+						Storage.get("token").then(async (token)=>
+						{
 						
-						// 	await Store.dispatch(addUserToken(token));
-						// })
+							await Store.dispatch(addUserToken(token));
+						})
+						callApi(
+							'post',
+							'v1/daffo/Trips/getOwn',
+							{ perPage: 1, fields:fields,filter: { status:"Progress",driverId: response.data.userTransformed.id } },
+							headers
+						).then((result) => {
+							console.log("results >>>>>>>>>>>>>>>>>>",result)
+							result.data.length!=0 && Store.dispatch(saveTrip(result.data[0]))
+						}).catch(error=>{
+							console.log("error",error)
+						})
 							console.log('response in auth', response);
 							navigate('Drawer');
 						})

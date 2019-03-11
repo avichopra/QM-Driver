@@ -1,20 +1,12 @@
 import io from 'socket.io-client';
 import config from '../config/index';
-/**
- * creates a JSON of socket subscription over each view/list
- *  ViewIdSubscriptionMap = {"viewName":[groupIds]}
- * */
 import { NavigationActions, StackActions } from 'react-navigation';
-
 import store from '../utilities/store';
 import Store from '../redux/store/index';
-import { addSocketData, setPatient, setPatientLocation } from '../redux/index';
-import { addAllDrivers } from '../redux/actions';
-// import { setPatientLocation } from '../redux/actions';
+import {setGPSData } from '../redux/index';
+import { patientTempData,cancelTrip} from '../redux/actions';
 let ViewIdSubscriptionMap = {};
 let socket = undefined;
-let debugger_socket = undefined;
-
 export function connectToSocket() {
 	return new Promise((resolve, reject) => {
 		const options = {
@@ -32,17 +24,14 @@ export function connectToSocket() {
 				subscribeGroups(groupIds);
 			}
 		});
-
 		socket.on('disconnect', () => {
 			console.warn('disconected');
 		});
 
 		socket.on('subscription_id', (data) => {
-			//   LOG("[websocket] Acknowledgement : ", { data });
 			console.warn('socket id', data);
 			resolve(data);
 		});
-
 		socket.on('error', (err) => {
 			reject(err);
 		});
@@ -57,6 +46,7 @@ export function connectToSocket() {
 		socket.on('updateInRow', (socketData) => {
 			filter = socketData.data.filter;
 			// let { group } = socketData;
+			console.warn("socket data in driver app",socketData)
 			let navigation = store.getInstance().getKey('CurrentScreen');
 			if (navigation && navigation.route !== 'Home') {
 				const navigateAction = StackActions.reset({
@@ -65,26 +55,32 @@ export function connectToSocket() {
 				});
 				navigation.navigation.dispatch(navigateAction);
 			}
-			// alert('alert');p
 			if (filter === 'requestAmbulance') {
 				console.warn('socket dataaaaaaaaaaaaaaaaaaaaaaaaaa', socketData.data);
-				setPatient(true, socketData.data.patient);
-				setPatientLocation(socketData.data.location);
-				Store.dispatch(addAllDrivers(socketData.data.allDrivers));
+				if(!ViewIdSubscriptionMap["TripInProgress"])
+				{
+					if(!ViewIdSubscriptionMap["Trip"])
+					{
+				saveSubscriptionInfo("Trip",[socketData.data.patient.RequestData._id])
+				Store.dispatch(patientTempData(socketData.data))
+					}
+				}
 			} else if (filter === 'ShowAcceptDecline') {
-				setPatient(false, {});
-				setPatientLocation(null);
+				unSubscribeSockets("Trip");
+				Store.dispatch(patientTempData(null))
 			} else if (filter === 'RemovePatient' || filter === 'cancelAllDrivers') {
-				setPatient(false, {});
+				unSubscribeSockets("Trip");
+				Store.dispatch(cancelTrip())
 			}
-
-			// Store.dispatch(addSocketData('socketData'));
+			else if(filter==="Gps_Device_Data")
+			{
+				console.warn("Gps Data",socketData.data.data)
+				setGPSData(socketData.data.data)
+			}
 		});
 	});
 }
-
 export function disconnectSocket() {
-	//   LOG("[websocket] Disconnected");
 	if (socket) socket.disconnect();
 }
 export function saveSubscriptionInfo(viewName, groupIds) {
@@ -95,35 +91,18 @@ export function saveSubscriptionInfo(viewName, groupIds) {
 			if (!ViewIdSubscriptionMap[viewName].indexOf(groupId) >= 0) ViewIdSubscriptionMap[viewName].push(groupId);
 		}
 	}
-
-	// console.log("SaveSub->", viewName, " --- ", ViewIdSubscriptionMap);
 	subscribeGroups(groupIds);
 }
-
 export function unSubscribeSockets(viewName) {
 	let groupIds = ViewIdSubscriptionMap[viewName];
 	delete ViewIdSubscriptionMap[viewName];
 	if (!groupIds || groupIds.length < 1) {
 		return;
 	}
-	/**
-     * check for groupId exists for some other view or not,
-     * and unsubscribe socket if it is not not used for other view.
-     * */
 	if (!isInViewIdSubscriptionMap(groupIds)) {
 		unSubscribeGroups(groupIds);
 	}
 }
-
-// export function onSocketData(groupId, onData) {
-// 	socket.on('updateInRow', (socketData) => {
-// 		let { group } = socketData;
-
-// 		if (group === groupId) {
-// 			return onData(socketData);
-// 		}
-// 	});
-// }
 export function subscribeGroups(groups) {
 	socket.emit('subscribe', groups);
 }

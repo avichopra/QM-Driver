@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import config from '../../config/index';
 import styles, { Palette } from '../../styles/index';
+import {get} from "lodash";
 import { pickedUpPatient } from '../../redux/actions';
 const Calls = (props) => {
 	const {Call=()=>{}}=props;
@@ -12,18 +13,14 @@ const Calls = (props) => {
 		</TouchableOpacity>
 	);
 };
-export const CallPatient = (props) => {
+export const ShowPatient = (props) => {
 	const {
-		location = { currentPlace: 'Golf Course Road, Sector 29, Gurgaon', longitude: '', latitude: '' },
-
-		patient = {
-			name: 'Anil Kumar',
-			address: '',
-			picture: 'public/1549363727367.JPEG',
-			emergencyContactNo: '123456789'
-		},
-		Call = () => {}
+		patient = {patientAddress:"Golf Road"},
+		Call = () => {},
+		onClickPickPatient=()=>{}
 	} = props;
+	let patientData=get(patient,"patientId.userId",{name:'Anil Kumar',picture:"public/1549363727367.JPEG",emergencyContactNo:"123456789",contactNo:"123456789"})
+	console.log("Patient data",patientData)
 	return (
 		<View style={[ styles.wbg, styles.h250 ]}>
 			<View
@@ -40,7 +37,7 @@ export const CallPatient = (props) => {
 			>
 				<View style={[ styles.circle70, { marginLeft: 5, marginBottom: 45 } ]}>
 					<Image
-						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
+						source={{ uri: patientData.picture?`${config.SERVER_URL}/v1/daffo/file/${patientData.picture}`:'asset:/icon/def.png' }}
 						style={[ styles.circle70 ]}
 					/>
 				</View>
@@ -64,9 +61,12 @@ export const CallPatient = (props) => {
 							}}
 							numberOfLines={1}
 						>
-							{patient.name}
+							{patientData.fullname}
 						</Text>
-						<Calls Call={Call}/>
+				<TouchableOpacity style={[ styles.center, styles.call ]} onPress={() => Call(patientData.contactNo)}>
+			        <Image source={{ uri: 'mipmap/telephone' }} style={[ styles.icon19, { marginRight: 10 } ]} />
+			        <Text style={[ styles.f18, styles.bold, { color: 'white' } ]}>Call</Text>
+		        </TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', marginLeft: 20, width: '80%' }}>
 						<Image
@@ -84,11 +84,13 @@ export const CallPatient = (props) => {
 							}}
 							numberOfLines={4}
 						>
-							{location ? location.currentPlace : ''}
+							{patient.patientAddress}
 						</Text>
 					</View>
 				</View>
 			</View>
+			<View style={{flexDirection:"row"}}>
+			<View style={{flexDirection:"column"}}>
 			<Text
 				style={{
 					color: 'black',
@@ -101,7 +103,7 @@ export const CallPatient = (props) => {
 			>
 				Emergency Contact No.
 			</Text>
-			<TouchableOpacity style={{ marginLeft: 25, flexDirection: 'row' }} onPress={() => Call('ECN')}>
+			<TouchableOpacity style={{ marginLeft: 25, flexDirection: 'row' }} onPress={() => Call(patientData.emergencycontactnumber)}>
 				<Image source={{ uri: 'mipmap/call_answer_blue' }} style={{ height: 20, width: 20, marginTop: 3 }} />
 				<Text
 					style={{
@@ -112,19 +114,43 @@ export const CallPatient = (props) => {
 						color: '#777777'
 					}}
 				>
-					{patient.emergencyContactNo}
+					{patientData.emergencycontactnumber}
 				</Text>
 			</TouchableOpacity>
+			</View>
+			<View style={{justifyContent:"flex-end",width:"40%",marginHorizontal:25}}>
+			{/* <Button title={'Picked'} style={{}} backgroundColor={Palette.hB} onSave={onClickPickPatient} /> */}
+			<TouchableOpacity
+					style={[
+						{
+							height: 45,
+							width: '70%',
+							borderRadius: 22.5,
+							backgroundColor: "#f6263f",
+							alignItems: 'center',
+							justifyContent: 'center'
+						}
+					]}	
+					onPress={onClickPickPatient}
+				>
+					<Text style={{ color: 'white', fontSize: 15 }}>Picked</Text>
+				</TouchableOpacity>
+			</View>
+			</View>
+		
 		</View>
+	
 	);
 };
 export const AcceptDecline = (props) => {
 	const {
 		onAccept = () => {},
 		onReject = () => {},
-		patient = { name: 'Anil Kumar', address: 'Golf Course Road, Sector 29', picture: 'public/1549363727367.JPEG' },
-		location = { currentPlace: 'Golf Course Road, Sector 29, Gurgaon', longitude: '', latitude: '' }
+		patient = {},
 	} = props;
+	let patientData=get(patient,"patient",{name:"Anil Kumar",picture:"public/1549363727367.JPEG"})
+	let patientLocation=get(patient,"location",{currentPlace:"Golf Ground",})
+	console.log("Patient Data",patientData)
 	return (
 		<View
 			style={[
@@ -172,7 +198,7 @@ export const AcceptDecline = (props) => {
 			>
 				<View style={[ styles.circle70, styles.ml5, styles.mb5 ]}>
 					<Image
-						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${patient.picture}` }}
+						source={{ uri: patientData.picture?`${config.SERVER_URL}/v1/daffo/file/${patientData.picture}`:'asset:/icon/def.png' }}
 						style={[ styles.circle70 ]}
 					/>
 				</View>
@@ -188,7 +214,7 @@ export const AcceptDecline = (props) => {
 						}}
 						numberOfLines={1}
 					>
-						{patient.name}
+						{patientData.name}
 					</Text>
 					<View
 						style={{
@@ -215,7 +241,7 @@ export const AcceptDecline = (props) => {
 							{/* {patient.address}
 						 */}
 							{/* {console.warn('acceptDecline', JSON.stringify(location, null, 3))} */}
-							{location ? location.currentPlace : ''}
+							{patientLocation.currentPlace}
 						</Text>
 					</View>
 				</View>
@@ -224,36 +250,68 @@ export const AcceptDecline = (props) => {
 	);
 };
 export const PickedPatient = (props) => {
-	const {onClickPickPatient=()=>{},onCliclPickPatientComplete=()=>{},showHospital=false,patient = {},markComplete=false}=props
-const { name='', picture= '' }=patient
-	return (
+	const {		Call = () => {},
+     onCliclPickPatientComplete=()=>{},trip=()=>{},GpsData=()=>{}}=props
+// const { name='', picture= '' }=patient
+let patientData=get(trip,"patientId.userId",{fullname:'Anil Kumar',picture:"public/1549363727367.JPEG"})
+const {hospitalName='Fortris Hospital',hospitalAddress='Sector 30, Gurgaon'}=trip	
+return (
+	// 	GpsData!=null && GpsData.pickedUpPatient?
+	// 	<View
+	// 	style={[
+	// 		styles.fr,
+	// 		styles.h150,
+	// 		{
+	// 			width: '98%',
+	// 			alignSelf: 'center',
+	// 			borderBottomWidth: 0.5,
+	// 			borderBottomColor: 'rgba(215,219,221,0.7)'
+	// 		}
+	// 	]}
+	// >
+	// 	<View style={[ styles.center, { height: 100 } ]}>
+	// 	<Button title={'Mark Complete'} backgroundColor={Palette.hB} onSave={onCliclPickPatientComplete} />
+	//    </View>
+	//    </View>
+	//    :
 		<View style={[ styles.h200, styles.wbg ]}>
-			{markComplete===false && <View
+			<View
 				style={[
 					styles.fr,
 					{
 						height: 80,
 						width: '95%',
-						alignItems: 'center',
+						alignItems: 'center'
 					}
 				]}
 			>
-				<View style={[ styles.circle50, { marginRight: 15 } ]}>
+				<View style={[ styles.circle50, { marginRight: 15,marginHorizontal:15 } ]}>
 					<Image
-						source={{ uri: `${config.SERVER_URL}/v1/daffo/file/${picture}` }}
+						source={{ uri: patientData.picture?`${config.SERVER_URL}/v1/daffo/file/${patientData.picture}`:'asset:/icon/def.png' }}
 						style={[ styles.circle50 ]}
 					/>
 				</View>
-
-				<Text style={{ fontSize: 18, color: 'black' }}>{name}</Text>
-			</View>}
+			
+				<Text style={{ fontSize: 18, color: 'black' ,flex:1}}>{patientData.fullname}</Text>
+			
+				<TouchableOpacity
+					style={[
+						{
+							height: 45,
+							width: '40%',
+							borderRadius: 22.5,
+							backgroundColor: "#f6263f",
+							alignItems: 'center',
+							justifyContent: 'center',
+						}
+					]}	
+					onPress={onCliclPickPatientComplete}
+				>
+					<Text style={{ color: 'white', fontSize: 15 }}>Mark Complete</Text>
+				</TouchableOpacity>
+				
+			</View>
 			<View style={styles.divider} />
-
-			{showHospital===false?<View style={[ styles.center, { height: 100 } ]}>
-				<Button title={'Picked Up Patient'} backgroundColor={Palette.hB} onSave={onClickPickPatient} />
-			</View>:markComplete===true?<View style={[ styles.center, { height: 100 } ]}>
-				<Button title={'Mark Complete'} backgroundColor={Palette.hB} onSave={onCliclPickPatientComplete} />
-			</View>:
 			<View
 				style={[
 					styles.frSelf,
@@ -281,14 +339,14 @@ const { name='', picture= '' }=patient
 						}}
 						numberOfLines={1}
 					>
-						Fortris Hospital
+						{hospitalName}
 					</Text>
 					<Text style={{ fontSize: 18, color: 'grey', width: '98%', fontFamily: 'NunitoSans-SemiBold' }}>
-						Sector 30, Gurgaon
+					{hospitalAddress}
 					</Text>
 				</View>
-				<Calls  />
-			</View>}
+				<Calls Call={Call}/>
+			</View>
 		</View>
 	);
 };

@@ -6,6 +6,7 @@ let screen = Dimensions.get('window');
 const Aspect_Ratio = screen.width / screen.height;
 let latitude_Delta = 0.0922;
 let longitude_Delta = latitude_Delta * Aspect_Ratio;
+import TempStorage from '../utilities/tempStorage';
 // import Geolocation from 'react-native-geolocation-service';
 // import AcceptDecline from './HomeComponents/AcceptDecline';
 // import CallPatient from './HomeComponents/CallPatient';
@@ -23,15 +24,17 @@ import {
 	ActivityIndicator,
 	PermissionsAndroid
 } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker,Polyline } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker,Polyline,OverlayComponent } from 'react-native-maps';
 import { connect } from 'react-redux';
 import ReasonOfCancellation from './HomeComponents/ReasonOfCancellation';
 import Base from './HomeBase';
 // import PickedPatient from './HomeComponents/PickedPatient';
 // import CallPatient from './HomeComponents/CallPatient';
-import { AcceptDecline, CallPatient, PickedPatient } from './HomeComponents/HomeComponents';
+import { AcceptDecline, ShowPatient, PickedPatient } from './HomeComponents/HomeComponents';
 class Home extends Base {
 	render() {
+		const {angle}=this.props.gpsData!=null && this.props.gpsData
+		console.warn("rendered")
 		return this.state.showReasons === true ? (
 			<ReasonOfCancellation onShowReasons={this.onShowReasons} onSubmit={this.onSubmit} />
 		) : (
@@ -50,8 +53,10 @@ class Home extends Base {
 						mapType="standard"
 						followsUserLocation={true}
 						showsBuildings={true}
-						showsTraffic={true}
+						showsPointsOfInterest={true}
+						showsIndoors={true}
 						loading
+						rotateEnabled={true}
 						ref={(map) => {
 							this.map = map;
 						}}
@@ -64,52 +69,83 @@ class Home extends Base {
 						onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
 							onUserLocationChange={(locationChangedResult) =>
 								this.setUserLocation(locationChangedResult.nativeEvent.coordinate)}
-						// onRegionChange={this.onRegionChange.bind(this)}
 					>
-						{this.state.pointCoords && this.props.showAcceptDecline===false && this.props.patient!=null && (this.props.pickedUpPatient===false || this.state.showHospital)&& (
+					{/* <OverlayComponent style={{position:"absolute"}}> */}
+					 {this.props.trip!=null && this.props.pickedLocationCoord!=null && (
 								<Polyline
-									coordinates={this.state.pointCoords}
+									coordinates={this.props.pickedLocationCoord}
 									strokeColor={'#1d78e2'}
 									strokeWidth={8}
 								/>
 							)}
-							
-						{this.props.showAcceptDecline===false && this.props.patient!=null && <Marker.Animated
+							 {this.props.trip!=null && this.props.hospitalLocationCoord!=null && (
+								<Polyline
+								coordinates={this.props.hospitalLocationCoord}
+								strokeColor={'#1d78e2'}
+								strokeWidth={8}
+							/>
+							)}
+							{/* </OverlayComponent> */}
+								{this.props.trip!=null && (
+										<Marker
+										coordinate={{latitude:parseFloat(this.props.trip.hospitalLocation.lat),longitude:parseFloat(this.props.trip.hospitalLocation.long)}}
+										title={`Hospital Location,${this.props.trip.hospitalName},${this.props.trip.hospitalAddress}`}					
+									    flat={true}
+									>
+									<Image source={{uri:'mipmap/hospital'}} style={{width:50,height:50}} resizeMode={'contain'}/>
+									</Marker>
+									)} 
+					{this.props.trip!=null && 
+						 <Marker.Animated
 								ref={(desmarker) => {
 									this.desmarker = desmarker;
+									// TempStorage.getInstance().setKey("desmarker", desmarker)
 								}}
-								coordinate={this.state.coordinate}
+								flat={true}
+								coordinate={{latitude:parseFloat(this.props.trip.driverLocation.lat),longitude:parseFloat(this.props.trip.driverLocation.long)}}
 								title={'Your Location'}
+								style={{transform:[{rotate:this.props.gpsData!=null?`${angle}deg`:'0deg'}]}}
+								// rotation={parseFloat(this.state.angle)} flat={false}
 							>
 							 <Image
 										source={{ uri: 'mipmap/ambulance1' }}
-										style={{ width: 100, height: 30 }}
+										style={{ width: 50, height: 50 ,transform:[{rotate:'270deg'}]}}
 										resizeMode={'contain'}
 									/>
-									</Marker.Animated>}
-								{this.props.showAcceptDecline===false && this.props.patient!=null && (
+									 </Marker.Animated>}
+								{this.props.trip!=null && (
 								<Marker.Animated
 									ref={(marker) => {
 										this.marker = marker;
 									}}
-									coordinate={this.state.destination}
-									title={this.props.patientLocation.currentPlace}
+									coordinate={{latitude:parseFloat(this.props.trip.patientLocation.lat),longitude:parseFloat(this.props.trip.patientLocation.long)}}
+									title={`PickUp Location${this.props.trip.patientAddress}`}
 									image={{ uri: 'mipmap/currentlocation' }}
 								>
-									{/* <Image
-										source={{ uri: 'mipmap/currentlocation' }}
-										style={{ width: 100, height: 30 }}
-										resizeMode={'contain'}
-									/> */}
 								</Marker.Animated>
 							)}
+							{this.props.pickedLocationCoord!=null && (
+							<Marker flat={true} title={"Picked Location Distance,Time"} coordinate={this.props.pickedLocationCoord[this.props.pickedLocationCoord.length/2]} >
+                             <View style={{width:"100%",height:"100%",backgroundColor:"#FFFFFF",borderRadius:5,borderColor:"black",display:"flex",flexDirection:"row"}}>
+                             <Image source={{uri:'mipmap/ambulance1'}}style={{width:20,height:20,margin:10}} resizeMode={'contain'}/>
+							<Text style={{margin:10}}>{this.props.pickedDuration.distance},{this.props.pickedDuration.duration}</Text>
+							 </View>
+							</Marker>
+						)}
+						{this.props.hospitalLocationCoord!=null && (
+							<Marker flat={true} title={"Hospital Location Distance,Time"} coordinate={this.props.hospitalLocationCoord[this.props.hospitalLocationCoord.length/2]} >
+                             <View style={{width:"100%",height:"100%",backgroundColor:"#FFFFFF",borderRadius:5,borderColor:"black",display:"flex",flexDirection:"row"}}>
+                            <Image source={{uri:'mipmap/hospital'}}style={{width:20,height:20,margin:10}} resizeMode={'contain'}/>
+							<Text style={{margin:10}}>{this.props.hospitalDuration.distance},{this.props.hospitalDuration.duration}</Text>
+							 </View>
+							</Marker>
+						)}
 					</MapView>
 				)}
-				{this.props.showAcceptDecline===false && this.props.patient!=null && <View
+				{this.props.trip!=null && <View
 					style={{
 						flexDirection: 'row',
 								width: window.width,
-								// margin: 30,
 								height: 50,
 								padding: 5,
 								alignItems: 'center',
@@ -119,8 +155,6 @@ class Home extends Base {
 								elevation: 20,
 								position: 'absolute',
 								marginTop: 60,
-								// marginLeft: 20,
-								// marginRight: 20,
 								alignSelf: 'center'
 					}}
 				>
@@ -131,12 +165,9 @@ class Home extends Base {
 								showsHorizontalScrollIndicator={false}
 							>
 					<Text
-						style={{
-							
-							fontSize: 18
-						}}
+						style={{fontSize: 18}}
 					>
-						{this.props.patientLocation.currentPlace}
+						{this.props.trip.patientAddress}
 					</Text>
 					</ScrollView>
 					<View style={{ height: 28, width: 1, backgroundColor: 'grey' }} />
@@ -145,28 +176,29 @@ class Home extends Base {
 						style={{ height: 20, width: 20, marginLeft: 5 }}
 						source={{ uri: 'mipmap/navigation' }}
 						resizeMode="contain"
-						
 					/>
 					</TouchableOpacity>
 				</View>}
-				{this.props.showAcceptDecline && true ? (
-					<AcceptDecline
-						onAccept={this.onAccept}
-						onReject={this.onReject}
-						patient={this.props.patient}
-						location={this.props.patientLocation}
-					/>
-				) : this.props.patient !== null && this.props.pickedUpPatient===false ? (
-					<CallPatient Call={this.Call} patient={this.props.patient} location={this.props.patientLocation} />
-				) : this.props.pickedUpPatient===true?<PickedPatient onClickPickPatient={this.onClickPickPatient} onCliclPickPatientComplete={this.markComplete} showHospital={this.state.showHospital} markComplete={this.state.markComplete} patient={this.props.patient}/>:null}
-				{/* <PickedPatient onClickPickPatient={this.onClickPickPatient} showHospital={this.state.showHospital}/> */}
+				{this.props.trip!=null?
+				this.props.trip.pickedPatient?
+				<PickedPatient Call={this.Call}  onCliclPickPatientComplete={this.markComplete}  trip={this.props.trip} />
+				:
+				<ShowPatient Call={this.Call} patient={this.props.trip} onClickPickPatient={this.onClickPickPatient}/>
+				:
+				this.props.patientTempData!=null?
+				<AcceptDecline
+				onAccept={this.onAccept}
+				onReject={this.onReject}
+				patient={this.props.patientTempData}
+			/>
+			:
+			null}
 			</View>
 		);
 	}
 }
 const style = StyleSheet.create({
 	container: {
-		// ...styleheet.absoluteFillObject
 		flex: 1
 	},
 	welcome: {
@@ -180,22 +212,22 @@ const style = StyleSheet.create({
 		marginBottom: 5
 	},
 	map: {
-		// ...styleheet.absoluteFillObject
 		flexGrow: 1
 	}
 });
 function mapStateToProps(state) {
-// console.warn("STATE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",state)
+console.log("state>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",state)
 	return {
 		user: state.user,
 		token: state.token,
 		location: state.Location,
-		patient: state.patient,
-		showAcceptDecline: state.showAcceptDecline,
-		patientLocation: state.patientLocation,
-		allDrivers: state.allDrivers,
-		driver: state.driver,
-		pickedUpPatient:state.pickedUpPatient
+		trip:state.trip,
+		patientTempData:state.patientTempData,
+		pickedLocationCoord:state.pickedLocationCoord,
+		hospitalLocationCoord:state.hospitalLocationCoord,
+		gpsData:state.gpsData,
+		pickedDuration:state.pickedDuration,
+		hospitalDuration:state.hospitalDuration
 	};
 }
 export default connect(mapStateToProps)(Home);

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
+import { Text, View, TouchableOpacity, FlatList, Image,ActivityIndicator } from 'react-native';
 import Header from './Header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Base from './HistoryBase';
 import { connect } from 'react-redux';
 import config from '../config/index';
+import styles from '../styles/index';
 class History extends Base {
 	static navigationOptions = {
 		drawerLabel: 'History',
@@ -22,6 +23,7 @@ class History extends Base {
 			<View style={{ flex: 1 }}>
 				<Header title={'History'} openDrawer={this.openDrawer} />
 				{console.log('before FlatList')}
+				{this.state.loading===false?
 				<FlatList
 					scrollsToTop={true}
 					onEndReached={() => {
@@ -42,7 +44,8 @@ class History extends Base {
 									marginTop: 20,
 									borderBottomWidth: 1,
 									borderBottomColor: 'grey',
-									alignSelf: 'center'
+									alignSelf: 'center',
+									paddingBottom:10
 									// marginLeft: 15
 								}}
 							>
@@ -53,7 +56,7 @@ class History extends Base {
 										resizeMode={'contain'}
 									/>
 									<Text style={{ fontSize: 18, color: 'black', marginLeft: 20, marginTop: 5 }}>
-										Today, 05:21 AM
+										{`${new Date(item.updatedAt).getDate()}/${new Date(item.updatedAt).getMonth()}/${new Date(item.updatedAt).getFullYear()},${new Date(item.updatedAt).getHours()>12?new Date(item.updatedAt).getHours()%12:new Date(item.updatedAt).getHours()}:${new Date(item.updatedAt).getMinutes()} ${new Date(item.updatedAt).getHours()>12?"PM":"AM"}`}
 									</Text>
 								</View>
 
@@ -79,11 +82,12 @@ class History extends Base {
 										style={{
 											marginLeft: 25,
 											width: '68%',
-											marginRight: 3
+											marginRight: 3,
+											paddingBottom:15
 										}}
 									>
-										<Text style={{ fontSize: 15, color: 'black' }}>{item.driverAddress}</Text>
-										<Text style={{ fontSize: 15, color: 'black', marginTop: 10 }}>
+										<Text style={{ fontSize: 15, color: 'black' }}  numberOfLines={2}>{item.driverAddress}</Text>
+										<Text style={{ fontSize: 15, color: 'black', marginTop: 10 }}  numberOfLines={2}>
 											{item.patientAddress}
 										</Text>
 									</View>
@@ -100,8 +104,9 @@ class History extends Base {
 									>
 										<Image
 											source={{
-												uri: `${config.SERVER_URL}/v1/daffo/file/${item.patientId.userId
-													.picture}`
+												uri: item.patientId.userId
+												.picture?`${config.SERVER_URL}/v1/daffo/file/${item.patientId.userId
+													.picture}`:'asset:/icon/def.png'
 											}}
 											style={{ height: 50, width: 50, borderRadius: 50 }}
 										/>
@@ -111,6 +116,11 @@ class History extends Base {
 						);
 					}}
 				/>
+				:
+				<View style={[ styles.f2, styles.center ]}>
+				<ActivityIndicator size="large" color="#000" />
+		     	</View>
+		    }
 			</View>
 		);
 	}

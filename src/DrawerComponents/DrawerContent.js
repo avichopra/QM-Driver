@@ -7,6 +7,8 @@ import * as Storage from '../utilities/asyncStorage';
 import store from '../utilities/store';
 import Svg, { Path, Ellipse } from 'react-native-svg';
 import config from '../config/index';
+import Store from '../redux/store/index';
+import {cancelTrip} from "../redux/actions/index"
 import { callApi } from '../utilities/serverApi';
 class DrawerContent extends Component {
 	navigateToScreen = (route) => {
@@ -27,6 +29,7 @@ class DrawerContent extends Component {
 		});
 		await Storage.remove('token');
 		await Storage.remove('user');
+		await Store.dispatch(cancelTrip())
 		let data = { email: email, status: false };
 		callApi('post', 'v1/daffo/dispatch/updateOnlinestatus', data)
 			.then((response) => {

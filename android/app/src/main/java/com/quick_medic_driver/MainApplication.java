@@ -2,10 +2,10 @@ package com.quick_medic_driver;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
-
-
+import br.com.dopaminamob.gpsstate.GPSStatePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -32,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAndroidLocationEnablerPackage(),
             new LocationServicesDialogBoxPackage(),
             new ImageResizerPackage(),
             new MapsPackage(),
@@ -40,8 +41,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SvgPackage(),
             new SplashScreenReactPackage(),
             new ImagePickerPackage(),
-            new RNGestureHandlerPackage()
-                        
+            new RNGestureHandlerPackage(),
+            new GPSStatePackage()            
       );
     }
 
