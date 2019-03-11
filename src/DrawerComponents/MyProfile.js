@@ -15,7 +15,7 @@ class MyProfile extends MyProfileBase {
 		const height = Dimensions.get('window').height;
 		const { GeneralInfoPressed, AdditionalInfoPressed } = this.state;
 		let { username = '', email = '', contactNo, picture = '' } = this.props.user;
-		let { vehicleNo, driverUniqueNo } = this.props.driver;
+		let { vehicleNo, driverUniqueNo } = this.props.driver.ambulanceDetails;
 		return (
 			<KeyboardAvoidingView style={styles.fg}>
 				<ScrollView contentContainerStyle={styles.fg} keyboardShouldPersistTaps="always">

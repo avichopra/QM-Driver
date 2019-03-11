@@ -6,7 +6,7 @@ import {
 	createStackNavigator,
 	createSwitchNavigator
 } from 'react-navigation';
-import { subscribeGroups, saveSubscriptionInfo } from '../utilities/socket';
+import { subscribeGroups, saveSubscriptionInfo,unSubscribeSockets } from '../utilities/socket';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Foundation';
 
@@ -62,7 +62,10 @@ class DrawerNavigaterWrapper extends Component
 		// alert("jhbkl")
 		console.warn('user id', this.props.user.id);
 		console.warn('saving subscription info>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-		saveSubscriptionInfo('DrawerNavigaterDriver', [ this.props.user.id ]);
+		saveSubscriptionInfo('DrawerNavigaterDriver', [ this.props.user.id,this.props.user.deviceId]);
+	}
+	componentWillUnmount(){
+		unSubscribeSockets('DrawerNavigaterDriver');
 	}
 	render() {
 		return <MyDrawerNavigator navigation={this.props.navigation} />;

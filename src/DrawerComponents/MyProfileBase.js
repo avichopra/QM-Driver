@@ -22,7 +22,7 @@ export default class MyProfile extends Component {
 			picture: '',
 			userName: '',
 			loading: false,
-			contactNoError: ''
+			contactNoError: '',
 		};
 	}
 
@@ -44,7 +44,7 @@ export default class MyProfile extends Component {
 	};
 	goToOtp = () => {
 		this.props.navigation.navigate('OTP', {
-			contactNo: this.state.contactNo,
+			contactNo: this.state.newContactNo,
 			email: this.props.user.email,
 			routeName: 'MyProfile'
 		});
@@ -85,9 +85,9 @@ export default class MyProfile extends Component {
 		// this.state.DUN = this.props.driver.driverUniqueNo;
 		// this.state.vehicleNo = this.props.driver.vehicleNo;
 		this.checkPhoneVerified();
-		setTimeout(() => {
-			SplashScreen.hide();
-		}, 2000);
+		// setTimeout(() => {
+		// 	SplashScreen.hide();
+		// }, 2000);
 	}
 
 	onSave = () => {

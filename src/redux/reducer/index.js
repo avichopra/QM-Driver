@@ -3,22 +3,26 @@ import {
 	ADD_USER_TOKEN,
 	ADD_DRIVER,
 	ADD_USER_LOCATION,
-	SHOW_PATIENT,
-	SET_PATIENT_LOCATION,
-	ADD_ALL_DRIVERS,
-	PICKED_UP_PATIENT,
-	PICKED_UP_PATIENT_COMPLETE
+	ADD_GPS_DATA,
+	ADD_TRIP,
+	ADD_PATIENT_TEMP_DATA,
+	CANCEL_TRIP,
+	ADD_HOSPITAL_LOCATION_COORD,
+	ADD_PATIENT_LOCATION_COORD,
+	CANCEL_PATIENT_LOCATION_COORD
 } from '../actions/index';
 export const initialState = {
 	user: null,
 	token: null,
 	driver: null,
 	Location: null,
-	showAcceptDecline: false,
-	patient: null,
-	patientLocation: null,
-	allDrivers: null,
-	pickedUpPatient:false
+	gpsData:null,
+	trip:null,
+	patientTempData:null,
+	pickedLocationCoord:null,
+	hospitalLocationCoord:null,
+	pickedDuration:null,
+	hospitalDuration:null
 };
 export default function(state = {}, action) {
 	switch (action.type) {
@@ -30,27 +34,21 @@ export default function(state = {}, action) {
 			return { ...state, driver: action.data };
 		case ADD_USER_LOCATION:
 			return { ...state, Location: action.data };
-		case SHOW_PATIENT:
-			if (action.data.patient) {
-				return {
-					...state,
-					showAcceptDecline: action.data.showAcceptDecline,
-					patient: action.data.patient.patientId ? action.data.patient : null
-				};
-			} else {
-				return { ...state, showAcceptDecline: action.data.showAcceptDecline };
-			}
-		case SET_PATIENT_LOCATION:
-			return { ...state, patientLocation: action.data.patientLocation };
-		// case ADD_PATIENT:
-		// 	return { ...state, patient: action.data.patient };
-		case ADD_ALL_DRIVERS:
-			return { ...state, allDrivers: action.data };
-			case PICKED_UP_PATIENT:
-			return {...state,pickedUpPatient:action.data}
-			case PICKED_UP_PATIENT_COMPLETE:
-			return {...state,driver:null,showAcceptDecline:false,patient:null,patientLocation:null,allDrivers:null,pickedUpPatient:false}
-		default:
+		   case ADD_GPS_DATA:
+		   return {...state,gpsData:action.data}	
+		   case ADD_TRIP:
+		   return {...state,trip:action.data}
+		   case ADD_PATIENT_TEMP_DATA:
+		   return {...state,patientTempData:action.data}
+		   case CANCEL_TRIP:
+		   return {...state,trip:null,patientTempData:null,pickedLocationCoord:null,hospitalLocationCoord:null}
+		   case ADD_PATIENT_LOCATION_COORD:
+		   return {...state,pickedLocationCoord:action.data.pickedLocation,pickedDuration:action.data.duration}
+		   case ADD_HOSPITAL_LOCATION_COORD:
+		   return {...state,hospitalLocationCoord:action.data.hospitalLocation,hospitalDuration:action.data.duration}
+		   case CANCEL_PATIENT_LOCATION_COORD:
+		   return {...state,pickedLocationCoord:null}
+		   default:
 			return { ...state };
 	}
 }

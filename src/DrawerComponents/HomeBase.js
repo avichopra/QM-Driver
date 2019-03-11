@@ -1,3 +1,212 @@
+let response1={
+	geocoded_waypoints: [
+	  {
+	geocoder_status: "OK",
+	place_id: "ChIJAbgWHwszEjkRgmrYI7wODhk",
+	types: [
+	  "route"
+	],
+	},
+	  {
+	geocoder_status: "OK",
+	place_id: "ChIJV1dZdmwzEjkR3IwNlVoXPcA",
+	types: [
+	  "route"
+	],
+	}
+	],
+	routes: [
+	  {
+	bounds: {
+	northeast: {
+	lat: 29.14144349999999,
+	lng: 75.7566769
+	},
+	southwest: {
+	lat: 29.1323704,
+	lng: 75.7430748
+	}
+	},
+	copyrights: "Map data ©2019 Google",
+	legs: [
+	  {
+	distance: {
+	text: "2.2 km",
+	value: 2239
+	},
+	duration: {
+	text: "8 mins",
+	value: 486
+	},
+	"end_address": "Gurudwara Rd, Model Town, Hisar, Haryana 125011, India",
+	"end_location": {
+	"lat": 29.1323704,
+	"lng": 75.7430748
+	},
+	"start_address": "Gali Number 11, Surya Nagar, Hisar, Haryana 125005, India",
+	"start_location": {
+	"lat": 29.1397982,
+	"lng": 75.75666079999999
+	},
+	"steps": [
+	  {
+	"distance": {
+	"text": "54 m",
+	"value": 54
+	},
+	"duration": {
+	"text": "1 min",
+	"value": 12
+	},
+	"end_location": {
+	"lat": 29.1402793,
+	"lng": 75.7566769
+	},
+	"html_instructions": "Head <b>north</b>",
+	"polyline": {
+	"points": "wjzpDcfkmM_BC"
+	},
+	"start_location": {
+	"lat": 29.1397982,
+	"lng": 75.75666079999999
+	},
+	"travel_mode": "DRIVING"
+	},
+	  {
+	"distance": {
+	"text": "0.1 km",
+	"value": 124
+	},
+	"duration": {
+	"text": "1 min",
+	"value": 39
+	},
+	"end_location": {
+	"lat": 29.1403797,
+	"lng": 75.7554701
+	},
+	"html_instructions": "Turn <b>left</b> at Happy Kriyana And Confectionery Store",
+	"maneuver": "turn-left",
+	"polyline": {
+	"points": "wmzpDgfkmM?x@?jA@J?\?PA\ADABCBKB"
+	},
+	"start_location": {
+	"lat": 29.1402793,
+	"lng": 75.7566769
+	},
+	"travel_mode": "DRIVING"
+	},
+	  {
+	"distance": {
+	"text": "0.6 km",
+	"value": 573
+	},
+	"duration": {
+	"text": "2 mins",
+	"value": 130
+	},
+	"end_location": {
+	"lat": 29.1412476,
+	"lng": 75.7507758
+	},
+	html_instructions: "Slight <b>right</b><div style='font-size:0.9em'>Pass by Bharat Wooden works (on the left)</div>",
+	maneuver: "turn-slight-right",
+	polyline: {
+	points: "knzpDu~jmMi@AwAC_ADG?C@C@A@?B?DDz@Dn@Dj@Br@FxABt@BvA@fA@bA?`@AfB@b@CjD"
+	},
+	start_location: {
+	lat: 29.1403797,
+	lng: 75.7554701
+	},
+	travel_mode: "DRIVING"
+	},
+	  {
+	distance: {
+	text: "0.8 km",
+	value: 809
+	},
+	duration: {
+	text: "3 mins",
+	value: 158
+	},
+	end_location: {
+	lat: 29.1345812,
+	lng: 75.7475285
+	},
+	html_instructions: "Turn <b>left</b> at Dhaka Bldg Material onto <b>Jindal Chowk - Raipur Rd</b><div style='font-size:0.9em'>Pass by Goswami Ice Cream Point (on the left)</div>",
+	maneuver: "turn-left",
+	polyline: {
+	points: "yszpDkajmMzBz@jA\HNHDTFv@XRA@?D@FBNDx@\BBxD|AhCfAv@ZxAl@XJ~D|AxChAnAf@"
+	},
+	start_location: {
+	lat: 29.1412476,
+	lng: 75.7507758
+	},
+	travel_mode: "DRIVING"
+	},
+	  {
+	distance: {
+	text: "0.3 km",
+	value: 303
+	},
+	duration: {
+	text: "1 min",
+	value: 59
+	},
+	end_location: {
+	lat: 29.135438,
+	lng: 75.7446873
+	},
+	html_instructions: "Turn <b>right</b> at SBM Toilet onto <b>Mall Rd</b>/<b>Sirsa Rd</b><div style='font-size:0.9em'>Pass by SBM Toilet (on the left)</div>",
+    maneuver: "turn-right",
+	polyline: {
+	points: "cjypDamimMNBEV]zCCNI\}@zCkAtD"
+	},
+	start_location: {
+	lat: 29.1345812,
+	lng: 75.7475285
+	},
+	travel_mode: "DRIVING"
+	},
+	  {
+	distance: {
+	text: "0.4 km",
+	value: 376
+	},
+	duration: {
+	text: "1 min",
+	value: 88
+	},
+	end_location: {
+	lat: 29.1323704,
+	lng: 75.7430748
+	},
+	html_instructions: "Turn <b>left</b> onto <b>Gurudwara Rd</b><div style='font-size:0.9em'>Pass by सीए दीपक धनखड़ (on the left)</div><div style='font-size:0.9em'>Destination will be on the left</div>",
+	maneuver: "turn-left",
+	polyline: {
+	points :"ooypDi{hmMt@Zt@TjAj@nBt@~BdARJnBz@`@PVN"
+	},
+	start_location: {
+	lat: 29.135438,
+	lng: 75.7446873
+	},
+	travel_mode: "DRIVING"
+	}
+	],
+	traffic_speed_entry: [],
+	via_waypoint: [],
+	}
+	],
+	overview_polyline: {
+		"points": "wjzpDcfkmM_BC?x@@vACrAEFKBi@AwAC_ADK@EB?HTjEJnCD~C@pFCjDzBz@jA\\HN^Lv@XRAF@VH`KfEjJrDhFpBNBEVa@jDgAxDkAtDt@Zt@TjAj@nFzBbCfAx@`@"
+	},
+	summary: "Jindal Chowk - Raipur Rd",
+	warnings: [],
+	waypoint_order: [],
+	}
+	],
+	status: "OK"
+	}
 let response = {
 	geocoded_waypoints: [
 		{
@@ -261,19 +470,23 @@ let response = {
 import _ from 'lodash';
 import { Component } from 'react';
 import PolyLine from '@mapbox/polyline';
-import { Dimensions, PermissionsAndroid } from 'react-native';
-import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
+import { Dimensions } from 'react-native';
+// import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
 import RNGooglePlaces from 'react-native-google-places';
 import { AnimatedRegion,Polyline } from 'react-native-maps';
 import getDirections from 'react-native-google-maps-directions';
 import call from 'react-native-phone-call';
 import { setDriver } from '../redux';
-import { addLocation ,pickedUpPatient,markComplete} from '../redux/actions/index';
+import {unSubscribeSockets,saveSubscriptionInfo} from "../utilities/socket"
+import GPSState from 'react-native-gps-state'
+import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
+import { addLocation ,cancelPatientLocationCoord,saveTrip,patientTempData,addPatientLocationCoord,addHospitalLocationCoord,cancelTrip,addAmbulanceCoord} from '../redux/actions/index';
 import { setPatient} from '../redux/index';
 import Store from '../redux/store/index';
 import { callApi } from '../utilities/serverApi';
+import TempStorage from '../utilities/tempStorage';
 const { width, height } = Dimensions.get('window');
-
+let latitude_delta=0.009,longitude_delta=0.009;
 export default class HomeBase extends Component {
 	constructor(props) {
 		super(props);
@@ -290,8 +503,8 @@ export default class HomeBase extends Component {
 			showAcceptDecline: false,
 			showReasons: false,
 			coordinate: new AnimatedRegion({
-				latitude: 29.95539,
-				longitude: 78.07513
+				latitude: 29.1397982,
+				longitude: 75.75666079999999
 			}),
 			destination: new AnimatedRegion({
 				latitude: 29.1397982,
@@ -301,15 +514,16 @@ export default class HomeBase extends Component {
 			pointCoords: [],
 			showPatientLocation:false,
 		showHospital:false,
-		markComplete:false
-
+		markComplete:false,
+angle:200
 		};
-		// this.requestLocationPermission();
+	
 	}
 	Call = (Type) => {
+		console.log("type",Type)
 		const args = {
-			number: Type === 'CN' ? this.props.patient.contactNo : this.props.patient.emergencyContactNo, // String value with the number to call
-			prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
+			number: Type === 'CN' ? this.props.trip.hospitalNo : Type,
+			prompt: false 
 		};
 		call(args).catch(console.error);
 	};
@@ -318,18 +532,17 @@ export default class HomeBase extends Component {
 	};
 	markComplete=()=>{
 		console.warn("Completed")
-		this.setState({showHospital:false,markComplete:false})
-		Store.dispatch(markComplete(true))
+		Store.dispatch(cancelTrip());
 		let headers = {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 			authorization: `Bearer ${this.props.token}`
 		};
 		let data = {
-			userId: this.props.patient.userId,
-			markComplete:true
+			driverData: this.props.trip.driverId.userId._id,
+			patientData:this.props.trip.patientId.userId._id
 		};
-		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+		callApi('post', 'v1/daffo/dispatch/tripCompleted', data, headers)
 			.then((response) => {
 				console.log('response', response);
 			})
@@ -337,61 +550,115 @@ export default class HomeBase extends Component {
 				console.log('error from home base', err);
 			});
 	}
-	navigationMap=()=>{
-		console.log("data in navigation",this.props.patientLocation.latitude,this.props.patientLocation.longitude)
-		const data = {
+	navigationMap=async()=>{
+	  console.log("Navigation map data",this.props.trip)
+		let data;
+		 this.props.trip.pickedPatient?
+		 data = {
 			source: {
-			 latitude: this.state.latitude ,
-			 longitude: this.state.longitude
+			 latitude: parseFloat(this.props.trip.patientLocation.lat) ,
+			 longitude: parseFloat(this.props.trip.patientLocation.long)
 		   },
 		   destination: {
-			 latitude: this.props.patientLocation.latitude,
-			 longitude: this.props.patientLocation.longitude
+			 latitude:  parseFloat(this.props.trip.hospitalLocation.lat),
+			 longitude: parseFloat(this.props.trip.hospitalLocation.long)
 		   },
 		   params: [
 			 {
 			   key: "travelmode",
-			   value: "driving"        // may be "walking", "bicycling" or "transit" as well
+			   value: "driving"     
 			 }
 		   ]
 		 }
-
+:  data = { source: {
+	latitude: this.state.latitude ,
+	longitude: this.state.longitude
+  },
+  destination: {
+	latitude: parseFloat(this.props.trip.patientLocation.lat),
+	longitude: parseFloat(this.props.trip.patientLocation.long)
+  },
+  params: [
+	{
+	  key: "travelmode",
+	  value: "driving"     
+	}
+  ]}
+  console.log("data before navigation",data)
 		 getDirections(data)
 	}
-	componentWillReceiveProps(nextProps)
+
+	 componentWillReceiveProps(nextProps)
 	{
-		console.log("nesxtprops",nextProps)
-		if(nextProps.showAcceptDecline===false && nextProps.patient!=null && nextProps.pickedUpPatient===false)
-		//   alert("hii")
-		this.getRouteDirection()
-		if(nextProps.pickedUpPatient)
-		  this.setState({coordinate:{latitude:response.routes[0].legs[0].end_location.lat,longitude:response.routes[0].legs[0].end_location.lng}})
-	}
-	onAccept = () => {
+		if(nextProps.trip!=null)
+		{console.log("Inside component receive props",nextProps)
+		   if(nextProps.pickedLocationCoord===null)
+		   { 
+			if(nextProps.trip.pickedPatient===false)
+			 this.getPickupRouteDirection(nextProps.trip.patientLocation)
+		   }
+		   if(nextProps.hospitalLocationCoord===null)
+		   {
+		     this.getHospitalRouteDirection(nextProps.trip.hospitalLocation)
+		   }
+		//    this.props.gpsData===null && this.props.pickedLocationCoord !=null && this.props.hospitalLocationCoord!=null && this.map.fitToCoordinates([...nextProps.pickedLocationCoord,...nextProps.hospitalLocationCoord]);
+		}
+		if(this.props.gpsData!=nextProps.gpsData)
+		{
+			this.desmarker._component.animateMarkerToCoordinate(
+				{
+				latitude: parseFloat(nextProps.gpsData.latitude),
+				longitude: parseFloat(nextProps.gpsData.longitude)
+				},
+				2000
+				);
+				let newCoordinate={latitude:parseFloat(nextProps.gpsData.latitude),longitude:parseFloat(nextProps.gpsData.longitude),latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}
+				this.map.animateToRegion(newCoordinate, 1000);
+		}
+		}
+	     getPickupRouteDirection=async (data)=>{
+			//   const response=await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${this.state.latitude},${this.state.longitude}&destination=Universal+Studios+Hollywood&key=AIzaSyD9fameWCeX54X9WwqIKmp6x_S13v9a49g`
+					//   const json=response.json();
+					const points = PolyLine.decode(response.routes[0].overview_polyline.points);
+					let pointCoords = points.map((point) => {
+						return { latitude: point[0], longitude: point[1] };
+					});
+					await Store.dispatch(addPatientLocationCoord(pointCoords,{distance:response.routes[0].legs[0].distance.text,duration:response.routes[0].legs[0].duration.text}))
+					if(this.props.trip===null)
+					this.map.fitToCoordinates(pointCoords);
+					console.log("Point Coords",pointCoords)
+				}
+	      getHospitalRouteDirection=async (data)=>{
+					//   const response=await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${this.state.latitude},${this.state.longitude}&destination=Universal+Studios+Hollywood&key=AIzaSyD9fameWCeX54X9WwqIKmp6x_S13v9a49g`
+					//   const json=response.json();
+					const points = PolyLine.decode(response1.routes[0].overview_polyline.points);
+					let pointCoords = points.map((point) => {
+						return { latitude: point[0], longitude: point[1] };
+					});
+					await Store.dispatch(addHospitalLocationCoord(pointCoords,{distance:response1.routes[0].legs[0].distance.text,duration:response1.routes[0].legs[0].duration.text}))
+				}
+	onAccept = async() => {
 		let headers = {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 			authorization: `Bearer ${this.props.token}`
 		};
 		let { currentPlace = '', latitude = '', longitude = '' } = this.state;
-	
-		let { patient = {}, driver = {}, allDrivers = [], location = {}, user = {},patientLocation } = this.props;
-		console.warn('patient?>>>>>>>>>>>>>>>>>>>>', allDrivers,patientLocation);
-         this.setState({showdes:true,showPatientLocation:true,destination:{latitude:patientLocation.latitude,longitude:patientLocation.longitude}})
-		_.remove(allDrivers, (item) => item === this.props.user.id);
-		setPatient(false);
+		let {  user = {},patientTempData={}} = this.props;
+		await unSubscribeSockets("Trip");
+		await saveSubscriptionInfo("TripInProgress",[])
+		// _.remove(patientTempData.allDrivers, (item) => item === this.props.user.id);
 		this.setState({ accept: true, reject: false });
+		console.warn("user data on Accept",user.id)
 		let data = {
-			userId: patient.userId,
-			patientId: patient.patientId,
-
-			allDrivers: allDrivers,
-			driver: { ...driver, ...user },
-			location: { currentPlace: currentPlace, latitude: latitude, longitude: longitude }
-		};
-		console.warn("current data send",data.location)
-		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+			patient: {RequestData:patientTempData.patient.RequestData,patientId:patientTempData.patient.userId,patientLocation:{currentPlace:patientTempData.location.currentPlace,latitude:patientTempData.location.latitude,longitude:patientTempData.location.longitude}},
+			// allDrivers: patientTempData.allDrivers,
+			driver:{deviceId:user.deviceId,driverId:user.id,driverLocation:{currentPlace:currentPlace,latitude:latitude,longitude:longitude}},
+				};
+		callApi('post', 'v1/daffo/dispatch/ambulanceRequestAccepted', data, headers)
 			.then((response) => {
+				Store.dispatch(saveTrip(response.data.trip))
+				unSubscribeSockets("TripInProgress")
 				console.log('response', response);
 			})
 			.catch((err) => {
@@ -401,52 +668,28 @@ export default class HomeBase extends Component {
 	onReject = () => {
 		this.setState({ showReasons: true });
 	};
-	onSubmit = (value) => {
-		allDrivers = this.props.allDrivers;
-		_.remove(allDrivers, (item) => item === this.props.user.id);
-		console.warn('all driversssssssssssssssssssssssssssssssss', allDrivers);
-		console.warn(this.props.allDrivers);
-		let headers = {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-			authorization: `Bearer ${this.props.token}`
-		};
-		let data = {
-			trip: {
-				cancellationMessage: value,
-				patientId: this.props.patient.patientId,
-				driverId: this.props.driver._id,
-				cancelledBy: this.props.user.id
-			},
-			allDrivers: allDrivers
-		};
+	onSubmit = async(value) => {
 		this.setState({ showReasons: false });
-		setPatient(false, {});
-		callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
-			.then((response) => {
-				console.log('response', response);
-			})
-			.catch((err) => {
-				console.log('error from >>>>>>>>>>>>>>>>>>>>>', err);
-			});
+		Store.dispatch(cancelTrip())
+		await unSubscribeSockets("Trip");
 	};
-onClickPickPatient=()=>
+onClickPickPatient=async()=>
 {
-	let { patient = {}} = this.props;
 	let headers = {
 		'Content-Type': 'application/json',
 		Accept: 'application/json',
 		authorization: `Bearer ${this.props.token}`
 	};
 	let data = {
-		userId: patient.userId,
-		pickedup:true
+		driverData: this.props.trip.driverId,
+		patientData:this.props.trip.patientId
 	};
-	this.setState({showHospital:true})
-	this.getRouteDirection()
-	callApi('post', 'v1/daffo/dispatch/requestAmbulance', data, headers)
+	// Store.dispatch(addPatientLocationCoord(null));
+	await Store.dispatch(cancelPatientLocationCoord())
+	callApi('post', 'v1/daffo/dispatch/pickedUpPatient', data, headers)
 			.then((response) => {
 				console.log('response', response);
+				Store.dispatch(saveTrip(response.data.trip))
 			})
 			.catch((err) => {
 				console.log('error from home base', err);
@@ -454,118 +697,66 @@ onClickPickPatient=()=>
 }
 	componentWillUnmount() {
 		navigator.geolocation.clearWatch(this.watchID);
+		GPSState.removeListener()
 	}
 	openDrawer = () => {
 		console.log('open drawer being called>>>>>>>>>>>>>>>>>>>>');
 		this.props.navigation.openDrawer();
 	};
-	getRouteDirection = async () => {
-		try {
-			// this.setState({showdes:true})
-			//   const response=await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${this.state.latitude},${this.state.longitude}&destination=Universal+Studios+Hollywood&key=AIzaSyD9fameWCeX54X9WwqIKmp6x_S13v9a49g`)
+	// getRouteDirection = async () => {
+	// 	try {
+	// 		// this.setState({showdes:true})
+	// 		//   const response=await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${this.state.latitude},${this.state.longitude}&destination=Universal+Studios+Hollywood&key=AIzaSyD9fameWCeX54X9WwqIKmp6x_S13v9a49g`)
 
-			//   const json=response.json();
-			//   console.log("response for map")
-			//   console.log("in json",json)
-			// console.log('inside route direction', response1.results.trips[0].pts);
-			console.log('data in response', response.routes[0]);
-			const points = PolyLine.decode(response.routes[0].overview_polyline.points);
-			console.log('Polyline points', points);
-			let pointCoords = points.map((point) => {
-				return { latitude: point[0], longitude: point[1] };
-			});
-			//   console.log("state for route",this.state.pointCoords)
-			let destination = {
-				latitude: response.routes[0].legs[0].end_location.lat,
-				longitude: response.routes[0].legs[0].end_location.lng
-			};
-			this.setState({ pointCoords: pointCoords, destination });
-			console.log('points coords in state', this.state.pointCoords);
-			console.log('points coord', pointCoords);
-			this.map.fitToCoordinates(pointCoords);
-			// if(this.props.showAcceptDecline===false && this.props.patient!=null)
-			// {
-				console.warn("calling animate")
-			this.animateAmbulace()
-			// }
-			// this.map.animateToRegion({pointCoords,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}, 2000)
-			// let pointcoord = [ ...pointCoords ].reverse();
-			// pointcoord.map((points,index)=>{
-			// let i = 0;
-			// this.timer = setInterval(() => {
-			// 	this.desmarker &&
-			// 		pointCoords[i] &&
-			// 		this.desmarker._component.animateMarkerToCoordinate(
-			// 			{
-			// 				latitude: pointCoords[i].latitude,
-			// 				longitude: pointCoords[i].longitude
-			// 			},
-			// 			2000
-			// 		);
-			// 	// console.warn("inside timer",pointcoord[i]);
-			// 	if (pointCoords[i] === undefined) clearInterval(this.timer);
-			// 	i++;
-			// }, 2000);
-			//   console.warn("inside map timer", +new Date());
-			// })
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	animateAmbulace=()=>{
-		console.warn("animate function called")
-		let i = 0;
-		this.timer = setInterval(() => {
-			if(this.props.pickedUpPatient===true)
-			{
-				let point=[...this.state.pointCoords].reverse();
-				this.desmarker &&
-				point[i] &&
-					this.desmarker._component.animateMarkerToCoordinate(
-						{
-							latitude: point[i].latitude,
-							longitude: point[i].longitude
-						},
-						2000
-					);
-			}
-			else
-			{
-				this.desmarker &&
-				this.state.pointCoords[i] &&
-					this.desmarker._component.animateMarkerToCoordinate(
-						{
-							latitude: this.state.pointCoords[i].latitude,
-							longitude: this.state.pointCoords[i].longitude
-						},
-						2000
-					);
-			}
-			// console.warn("inside timer",this.state.pointCoords[i]);
-			if (this.state.pointCoords[i] === undefined) {
-				//  --i; 
-				// let lat =this.state.pointCoords[i].latitude
-				// let log=this.state.pointCoords[i].longitude
-				console.warn("pickedup location reached")
-				// if(latitude===response.routes[0].legs[0].end_location.lat && longitude===response.routes[0].legs[0].end_location.log)
-				// {
-					clearInterval(this.timer);
-					if(this.props.pickedUpPatient===false)
-					Store.dispatch(pickedUpPatient(true))
-					else 
-					{
-						console.warn("Completed")
-						this.setState({showHospital:true,markComplete:true})
-					}
-					
-				// }
-			 
-			}
-			i++;
-		}, 3000);
-	}
+	// 		//   const json=response.json();
+	// 		//   console.log("response for map")
+	// 		//   console.log("in json",json)
+	// 		// console.log('inside route direction', response1.results.trips[0].pts);
+	// 		console.log('data in response', response.routes[0]);
+	// 		const points = PolyLine.decode(response.routes[0].overview_polyline.points);
+	// 		console.log('Polyline points', points);
+	// 		let pointCoords = points.map((point) => {
+	// 			return { latitude: point[0], longitude: point[1] };
+	// 		});
+	// 		//   console.log("state for route",this.state.pointCoords)
+	// 		let destination = {
+	// 			latitude: response.routes[0].legs[0].end_location.lat,
+	// 			longitude: response.routes[0].legs[0].end_location.lng
+	// 		};
+	// 		this.setState({ pointCoords: pointCoords, destination });
+	// 		console.log('points coords in state', this.state.pointCoords);
+	// 		console.log('points coord', pointCoords);
+	// 		this.map.fitToCoordinates(pointCoords);
+	// 		// if(this.props.showAcceptDecline===false && this.props.patient!=null)
+	// 		// {
+	// 			console.warn("calling animate")
+	// 		this.animateAmbulace()
+	// 		// }
+	// 		// this.map.animateToRegion({pointCoords,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}, 2000)
+	// 		// let pointcoord = [ ...pointCoords ].reverse();
+	// 		// pointcoord.map((points,index)=>{
+	// 		// let i = 0;
+	// 		// this.timer = setInterval(() => {
+	// 		// 	this.desmarker &&
+	// 		// 		pointCoords[i] &&
+	// 		// 		this.desmarker._component.animateMarkerToCoordinate(
+	// 		// 			{
+	// 		// 				latitude: pointCoords[i].latitude,
+	// 		// 				longitude: pointCoords[i].longitude
+	// 		// 			},
+	// 		// 			2000
+	// 		// 		);
+	// 		// 	// console.warn("inside timer",pointcoord[i]);
+	// 		// 	if (pointCoords[i] === undefined) clearInterval(this.timer);
+	// 		// 	i++;
+	// 		// }, 2000);
+	// 		//   console.warn("inside map timer", +new Date());
+	// 		// })
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 	componentWillMount() {
-		// this.requestLocationPermission();
 		console.warn('Location in redux', this.props.location);
 		if(this.props.showAcceptDecline===false && this.props.patient!=null)
 		    this.setState({destination:{latitude:this.props.patientLocation.latitude,longitude:this.props.patientLocation.longitude}})
@@ -581,26 +772,21 @@ onClickPickPatient=()=>
 			Accept: 'application/json',
 			authorization: `Bearer ${this.props.token}`
 		};
+		let data={perPage:1,fields:{ambulanceId:{vehicleNo:1}},filter:{driverId:this.props.user.id}}
 		console.warn('token', this.props.token);
-		callApi('post', 'v1/daffo/Driver/getOwn', { perPage: 1, filter: { userId: this.props.user.id } }, headers)
+		Promise.all([callApi('post', 'v1/daffo/AssignAmbulance/getOwn', data, headers),callApi('post', 'v1/daffo/Driver/getOwn', { perPage: 1, filter: { userId: this.props.user.id } }, headers)])
 			.then((result) => {
-				console.log("results=========",result)
-				result.data[0] ? setDriver(result.data[0]) : '';
+				console.log("results=========>>>>>>>>>>>>>",result)
+				 setDriver({...result[1].data[0],ambulanceDetails:result[0].data[0].ambulanceId});
 			})
 			.catch((err) => {
 				console.log('errorrrrrrr>>>>>>>>>', err);
 			});
 	}
-	componentDidMount() {
-		LocationServicesDialogBox.checkLocationServicesIsEnabled({
-			message:
-				'<h3>Use Location?</h3> \
-						This app wants to change your device settings:<br/><br/>\
-						Use GPS for location<br/><br/>',
-			ok: 'YES',
-			cancel: 'NO'
-		}).then(() => {
-			RNGooglePlaces.getCurrentPlace()
+	checkLocationIsEnabled=()=>{
+		RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({interval: 10000, fastInterval: 5000})
+		.then(data => {
+					RNGooglePlaces.getCurrentPlace()
 				.then((results) => {
 					Store.dispatch(addLocation({ latitude: results[0].latitude, longitude: results[0].longitude }));
 					this.setState({
@@ -612,48 +798,67 @@ onClickPickPatient=()=>
 					console.warn('current place', results);
 				})
 				.catch((error) => console.warn(error.message));
-		});
+		})
+	}
+	componentDidMount() {
+		this.checkLocationIsEnabled()
+		GPSState.addListener((status)=>{
+	console.warn("location state",status)
+		 if(status===1)
+		 {
+		this.checkLocationIsEnabled()
+		 }
+		})
 		this.watchID = navigator.geolocation.watchPosition(
 			(position) => {
 				console.warn('location changed');
-				// Create the object to update this.state.mapRegion through the onRegionChange function
-		
 				this.setState({
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude
 				});
-				// this.onRegionChange(region, region.latitude, region.longitude);
 				// this._map.animateToRegion(region, 100);
+				let newCoordinate={latitude:position.coords.latitude,longitude:position.coords.longitude,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}
+				// this.map.animateToRegion(newCoordinate, 1000);
 			},
 			function(error) {
 				console.warn(error);
-			}
+			},
+			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
 		);
 	}
 	setUserLocation = (Coordinate) => {
-		//   console.warn("location changed",Coordinate)
 		const { latitude, longitude } = Coordinate;
 		const newCoordinate = {
 			latitude,
-			longitude
+			longitude,
+			latitudeDelta:latitude_delta,
+			longitudeDelta:longitude_delta
 		};
-		// if (this.desmarker) {
-		// 	this.desmarker._component.animateMarkerToCoordinate(newCoordinate, 500);
-		// }
-		//    this.map.fitToCoordinates(this.state.pointCoords)
-		// this.getRouteDirection()
-
-		//   this.map.animateToRegion({latitude:Coordinate.latitude,longitude:Coordinate.longitude,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}, 2000)
-		// // this.setState({
-		// 			routeCoordinates: this.state.routeCoordinates.concat([newCoordinate])
-		// 		});
-	};
+	// console.warn("set user >>>>>",newCoordinate)
+	// this.animateMap(newCoordinate);
+	// if(this.map)
+	// {
+	// let region={latitude:Coordinate.latitude,longitude:Coordinate.longitude,latitudeDelta:latitude_delta,longitudeDelta:longitude_delta}
+	
+	if(this.props.trip===null && this.props.pickedLocationCoord===null)
+	{
+		const newCoordinate = {
+			latitude,
+			longitude,
+			latitudeDelta:latitude_delta,
+			longitudeDelta:longitude_delta
+		};
+		this.map.animateToRegion(newCoordinate, 1000);
+	}
+// }	
+};
+// animateMap=()=>{
+// 	this._map.animateToRegion(region, 100)
+// }
 	onRegionChangeComplete = (region) => {
-		console.warn("region complete",region)
 		latitude_delta = region.latitudeDelta;
 		longitude_delta = region.longitudeDelta;
-		//  console.warn("Completed region",region)
-		//  this.setState({latitudeDelta:region.latitudeDelta,longitudeDelta:region.longitudeDelta})
+		// this._map.animateToRegion(region, 100);
 	};
 	AutoCom = () => {
 		RNGooglePlaces.openAutocompleteModal({ country: 'IN', radius: 100 })
