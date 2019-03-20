@@ -125,7 +125,7 @@ class Home extends Base {
 								</Marker.Animated>
 							)}
 							{this.props.pickedLocationCoord!=null && (
-							<Marker flat={true} title={"Picked Location Distance,Time"} coordinate={this.props.pickedLocationCoord[this.props.pickedLocationCoord.length/2]} >
+							<Marker flat={true} title={"Picked Location Distance,Time"} coordinate={this.props.pickedLocationCoord[parseInt(this.props.pickedLocationCoord.length/2)]} >
                              <View style={{width:"100%",height:"100%",backgroundColor:"#FFFFFF",borderRadius:5,borderColor:"black",display:"flex",flexDirection:"row"}}>
                              <Image source={{uri:'mipmap/ambulance1'}}style={{width:20,height:20,margin:10}} resizeMode={'contain'}/>
 							<Text style={{margin:10}}>{this.props.pickedDuration.distance},{this.props.pickedDuration.duration}</Text>
@@ -133,7 +133,7 @@ class Home extends Base {
 							</Marker>
 						)}
 						{this.props.hospitalLocationCoord!=null && (
-							<Marker flat={true} title={"Hospital Location Distance,Time"} coordinate={this.props.hospitalLocationCoord[this.props.hospitalLocationCoord.length/2]} >
+							<Marker flat={true} title={"Hospital Location Distance,Time"} coordinate={this.props.hospitalLocationCoord[0]} >
                              <View style={{width:"100%",height:"100%",backgroundColor:"#FFFFFF",borderRadius:5,borderColor:"black",display:"flex",flexDirection:"row"}}>
                             <Image source={{uri:'mipmap/hospital'}}style={{width:20,height:20,margin:10}} resizeMode={'contain'}/>
 							<Text style={{margin:10}}>{this.props.hospitalDuration.distance},{this.props.hospitalDuration.duration}</Text>
