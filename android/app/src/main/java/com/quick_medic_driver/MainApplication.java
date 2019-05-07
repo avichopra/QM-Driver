@@ -1,6 +1,5 @@
 package com.quick_medic_driver;
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
@@ -42,7 +41,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SplashScreenReactPackage(),
             new ImagePickerPackage(),
             new RNGestureHandlerPackage(),
-            new GPSStatePackage()            
+            new GPSStatePackage(),
+            new GeoLocationPackage()            
       );
     }
 
