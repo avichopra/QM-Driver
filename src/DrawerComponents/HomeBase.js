@@ -60,7 +60,6 @@ export default class HomeBase extends Component {
     this.setState({ showReasons: value });
   };
   markComplete = () => {
-    // console.warn("Completed>>>>>>>>>>>>>", currentCoordinate);
     Store.dispatch(cancelTrip());
     let headers = {
       "Content-Type": "application/json",
@@ -86,8 +85,14 @@ export default class HomeBase extends Component {
     this.props.trip.pickedPatient
       ? (data = {
           source: {
-            latitude: parseFloat(this.props.trip.patientLocation.lat),
-            longitude: parseFloat(this.props.trip.patientLocation.long)
+            latitude:
+              currentCoordinate != null
+                ? currentCoordinate.latitude
+                : parseFloat(this.props.trip.patientLocation.lat),
+            longitude:
+              currentCoordinate != null
+                ? currentCoordinate.longitude
+                : parseFloat(this.props.trip.patientLocation.long)
           },
           destination: {
             latitude: parseFloat(this.props.trip.hospitalLocation.lat),
@@ -102,8 +107,14 @@ export default class HomeBase extends Component {
         })
       : (data = {
           source: {
-            latitude: this.state.latitude,
-            longitude: this.state.longitude
+            latitude:
+              currentCoordinate != null
+                ? currentCoordinate.latitude
+                : this.state.latitude,
+            longitude:
+              currentCoordinate != null
+                ? currentCoordinate.longitude
+                : this.state.longitude
           },
           destination: {
             latitude: parseFloat(this.props.trip.patientLocation.lat),
