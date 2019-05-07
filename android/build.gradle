@@ -25,6 +25,8 @@ allprojects {
         mavenLocal()
         google()
         jcenter()
+                               maven { url "https://jitpack.io" }
+
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -33,7 +35,47 @@ allprojects {
            url "https://maven.google.com"
        }
     }
+    subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
+            }
+        }
+    }
 }
+}
+// subprojects {
+//   project.configurations.all {
+//       afterEvaluate {project ->
+//         if (project.hasProperty("android")) {
+//             android {
+//                 compileSdkVersion 27
+//                 buildToolsVersion '27.0.3'
+//             }
+//         }
+//     }
+//   }
+// }
+// subprojects {
+//   project.configurations.all {
+//       afterEvaluate {project ->
+//         if (project.hasProperty("android")) {
+//             android {
+//                 compileSdkVersion 26
+//                 buildToolsVersion '26.0.2'
+//             }
+//         }
+//     }
+//      resolutionStrategy.eachDependency { details ->
+//         if (details.requested.group == 'com.android.support'
+//               && !details.requested.name.contains('multidex') ) {
+//            details.useVersion "26.0.2"
+//         }
+//      }
+//   }
+// }
 
 
 task wrapper(type: Wrapper) {
