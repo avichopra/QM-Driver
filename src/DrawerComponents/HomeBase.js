@@ -19,11 +19,13 @@ import {
   addHospitalLocationCoord,
   cancelTrip
 } from "../redux/actions/index";
+import { deviceGpsData } from "../utilities/socket";
 import Store from "../redux/store/index";
 import { callApi } from "../utilities/serverApi";
 let latitude_delta = 0.009,
   longitude_delta = 0.009;
 let currentCoordinate = null;
+let locationUpdate;
 export default class HomeBase extends Component {
   constructor(props) {
     super(props);
@@ -445,6 +447,7 @@ export default class HomeBase extends Component {
     });
   };
   componentDidMount() {
+    locationUpdate = new Date();
     this.checkLocationIsEnabled();
     GPSState.addListener(status => {
       console.warn("location state", status);
@@ -454,7 +457,7 @@ export default class HomeBase extends Component {
     });
     this.watchID = navigator.geolocation.watchPosition(
       position => {
-        console.warn("location changed");
+        console.log("location changed", position);
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
@@ -462,10 +465,18 @@ export default class HomeBase extends Component {
       },
       function(error) {
         console.warn(error);
-      },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      }
+      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   }
+  checkSignalTime = (prevTime, presentTime) => {
+    let diff = (presentTime.getTime() - prevTime.getTime()) / 1000;
+    if (Math.floor(diff) >= 7) {
+      locationUpdate = new Date();
+      return true;
+    }
+    return false;
+  };
   setUserLocation = Coordinate => {
     const { latitude, longitude } = Coordinate;
     currentCoordinate = {
@@ -483,8 +494,20 @@ export default class HomeBase extends Component {
       };
       this.map.animateToRegion(newCoordinate, 1000);
     }
+    // console.warn("Location>>>>>>>", Coordinate);
+    // if (this.checkSignalTime(locationUpdate, new Date())) {
+    //   console.log("time>>>>>>>greater than 7 sec");
+    //   deviceGpsData({
+    //     deviceId: parseInt(this.props.user.deviceId),
+    //     latitude: latitude,
+    //     longitude: longitude
+    //   });
+    // } else {
+    //   console.log("less than 7 sec");
+    // }
   };
   onRegionChangeComplete = region => {
+    // console.log("region change scomplete>>>>", region);
     latitude_delta = region.latitudeDelta;
     longitude_delta = region.longitudeDelta;
   };

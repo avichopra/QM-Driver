@@ -101,6 +101,13 @@ export function unSubscribeSockets(viewName) {
 export function subscribeGroups(groups) {
   socket.emit("subscribe", groups);
 }
+export function deviceGpsData(data) {
+  socket.emit("gps_Signal", {
+    deviceId: data.deviceId,
+    latitude: data.latitude,
+    longitude: data.longitude
+  });
+}
 function unSubscribeGroups(groups) {
   socket.emit("unsubscribe", groups);
 }
