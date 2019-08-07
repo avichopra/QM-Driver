@@ -7,7 +7,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.Callback;
-
 import com.google.maps.android.PolyUtil;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.List;

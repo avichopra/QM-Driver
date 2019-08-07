@@ -29,24 +29,14 @@ class OTP extends Base {
     this.setState({ email: email });
   }
   componentDidMount() {
-    // const user = navigation.getParam('user');
-    console.warn("email", this.state.email);
     this.resendOTP();
-    // console.log('Parameter',email);
   }
 
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          keyboardShouldPersistTaps="always"
-        >
-          <ImageBackground
-            source={{ uri: "asset:/icon/group_2.png" }}
-            style={[style.d1]}
-            resizeMode={"stretch"}
-          >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="always">
+          <ImageBackground source={{ uri: "asset:/icon/group_2.png" }} style={[style.d1]} resizeMode={"stretch"}>
             <View>
               <View style={style.d3}>
                 <Image
@@ -76,10 +66,7 @@ class OTP extends Base {
                     OTP
                   </Textinput>
                 </View>
-                <Text
-                  style={{ fontSize: 12, color: "white", marginVertical: 20 }}
-                  onPress={this.resendOTP}
-                >
+                <Text style={{ fontSize: 12, color: "white", marginVertical: 20 }} onPress={this.resendOTP}>
                   Resend OTP
                 </Text>
               </View>
@@ -112,7 +99,6 @@ class OTP extends Base {
   }
 }
 function mapStateToProps(state) {
-  console.log("I am the stateeeeeeeeeeeeeeeeeeeeeeeeeeee", state);
   return {
     user: state.user,
     token: state.token

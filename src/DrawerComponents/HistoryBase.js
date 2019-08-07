@@ -20,9 +20,7 @@ export default class History extends Component {
     console.warn("OnEndReached", this.state.page);
     let data = {
       perPage:
-        this.state.count - this.state.historyList.length <= 5
-          ? this.state.count - this.state.historyList.length
-          : 5,
+        this.state.count - this.state.historyList.length <= 5 ? this.state.count - this.state.historyList.length : 5,
       page: this.state.page,
       fields: {
         patientId: { userId: { picture: 1, fullname: 1 } },
@@ -41,9 +39,7 @@ export default class History extends Component {
       authorization: `Bearer ${this.props.token}`
     };
     let a =
-      this.state.count - this.state.historyList.length <= 5
-        ? this.state.count - this.state.historyList.length
-        : 5;
+      this.state.count - this.state.historyList.length <= 5 ? this.state.count - this.state.historyList.length : 5;
     console.warn("Length", a, "Perpage value", data.perPage);
     if (this.state.count - this.state.historyList.length != 0) {
       let b = this.state.count - this.state.historyList.length != 0;
@@ -59,15 +55,10 @@ export default class History extends Component {
         })
         .catch(err => {
           this.setState({ loading: false });
-          console.log("error from history get route>>>>>>>>>>>>>>>>>>>>>", err);
         });
     }
   };
   componentDidMount() {
-    // console.log(
-    //   "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>       >>>>>>>>>>>>>>",
-    //   this.props.driver._id
-    // );
     let data = {
       page: this.state.page,
       perPage: 5,
@@ -89,29 +80,21 @@ export default class History extends Component {
     };
     callApi("post", "v1/daffo/Trips/count", data, headers)
       .then(result => {
-        console.log("count>>>>>>>>>>>>>>>>>>>>>>>>>>", result.data.count);
         this.setState({ count: result.data.count });
         callApi("post", "v1/daffo/Trips/getOwn", data, headers)
           .then(response => {
-            console.log("response>>>>>>>>>>>>>>", response);
             this.setState({
               loading: false,
               historyList: response.data,
               page: this.state.page + 1
             });
-            console.log("response from historyyyyy", response.data);
           })
           .catch(err => {
             this.setState({ loading: false });
-            console.log(
-              "error from history get route>>>>>>>>>>>>>>>>>>>>>",
-              err
-            );
           });
       })
       .catch(err => {
         this.setState({ loading: false });
-        console.log("error from myProfile Base", err.response, err.status, err);
       });
   }
 }
