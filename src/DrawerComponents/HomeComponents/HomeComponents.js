@@ -7,24 +7,14 @@ import { pickedUpPatient } from "../../redux/actions";
 const Calls = props => {
   const { Call = () => {} } = props;
   return (
-    <TouchableOpacity
-      style={[styles.center, styles.call]}
-      onPress={() => Call("CN")}
-    >
-      <Image
-        source={{ uri: "mipmap/telephone" }}
-        style={[styles.icon19, { marginRight: 10 }]}
-      />
+    <TouchableOpacity style={[styles.center, styles.call]} onPress={() => Call("CN")}>
+      <Image source={{ uri: "mipmap/telephone" }} style={[styles.icon19, { marginRight: 10 }]} />
       <Text style={[styles.f18, styles.bold, { color: "white" }]}>Call</Text>
     </TouchableOpacity>
   );
 };
 export const ShowPatient = props => {
-  const {
-    patient = { patientAddress: "Golf Road" },
-    Call = () => {},
-    onClickPickPatient = () => {}
-  } = props;
+  const { patient = { patientAddress: "Golf Road" }, Call = () => {}, onClickPickPatient = () => {} } = props;
   let patientData = get(patient, "patientId.userId", {
     name: "Anil Kumar",
     picture: "public/1549363727367.JPEG",
@@ -78,17 +68,9 @@ export const ShowPatient = props => {
             >
               {patientData.fullname}
             </Text>
-            <TouchableOpacity
-              style={[styles.center, styles.call]}
-              onPress={() => Call(patientData.contactNo)}
-            >
-              <Image
-                source={{ uri: "mipmap/telephone" }}
-                style={[styles.icon19, { marginRight: 10 }]}
-              />
-              <Text style={[styles.f18, styles.bold, { color: "white" }]}>
-                Call
-              </Text>
+            <TouchableOpacity style={[styles.center, styles.call]} onPress={() => Call(patientData.contactNo)}>
+              <Image source={{ uri: "mipmap/telephone" }} style={[styles.icon19, { marginRight: 10 }]} />
+              <Text style={[styles.f18, styles.bold, { color: "white" }]}>Call</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: "row", marginLeft: 20, width: "80%" }}>
@@ -130,10 +112,7 @@ export const ShowPatient = props => {
             style={{ marginLeft: 25, flexDirection: "row" }}
             onPress={() => Call(patientData.emergencycontactnumber)}
           >
-            <Image
-              source={{ uri: "mipmap/call_answer_blue" }}
-              style={{ height: 20, width: 20, marginTop: 3 }}
-            />
+            <Image source={{ uri: "mipmap/call_answer_blue" }} style={{ height: 20, width: 20, marginTop: 3 }} />
             <Text
               style={{
                 fontSize: 20,
@@ -312,40 +291,14 @@ export const AcceptDecline = props => {
   );
 };
 export const PickedPatient = props => {
-  const {
-    Call = () => {},
-    onCliclPickPatientComplete = () => {},
-    trip = () => {},
-    GpsData = () => {}
-  } = props;
+  const { Call = () => {}, onCliclPickPatientComplete = () => {}, trip = () => {}, GpsData = () => {} } = props;
   // const { name='', picture= '' }=patient
   let patientData = get(trip, "patientId.userId", {
     fullname: "Anil Kumar",
     picture: "public/1549363727367.JPEG"
   });
-  const {
-    hospitalName = "Fortris Hospital",
-    hospitalAddress = "Sector 30, Gurgaon"
-  } = trip;
+  const { hospitalName = "Fortris Hospital", hospitalAddress = "Sector 30, Gurgaon" } = trip;
   return (
-    // 	GpsData!=null && GpsData.pickedUpPatient?
-    // 	<View
-    // 	style={[
-    // 		styles.fr,
-    // 		styles.h150,
-    // 		{
-    // 			width: '98%',
-    // 			alignSelf: 'center',
-    // 			borderBottomWidth: 0.5,
-    // 			borderBottomColor: 'rgba(215,219,221,0.7)'
-    // 		}
-    // 	]}
-    // >
-    // 	<View style={[ styles.center, { height: 100 } ]}>
-    // 	<Button title={'Mark Complete'} backgroundColor={Palette.hB} onSave={onCliclPickPatientComplete} />
-    //    </View>
-    //    </View>
-    //    :
     <View style={[styles.h200, styles.wbg]}>
       <View
         style={[
@@ -357,9 +310,7 @@ export const PickedPatient = props => {
           }
         ]}
       >
-        <View
-          style={[styles.circle50, { marginRight: 15, marginHorizontal: 15 }]}
-        >
+        <View style={[styles.circle50, { marginRight: 15, marginHorizontal: 15 }]}>
           <Image
             source={{
               uri: patientData.picture
@@ -370,9 +321,7 @@ export const PickedPatient = props => {
           />
         </View>
 
-        <Text style={{ fontSize: 18, color: "black", flex: 1 }}>
-          {patientData.fullname}
-        </Text>
+        <Text style={{ fontSize: 18, color: "black", flex: 1 }}>{patientData.fullname}</Text>
 
         <TouchableOpacity
           style={[
@@ -402,11 +351,7 @@ export const PickedPatient = props => {
         ]}
       >
         <View style={{ marginLeft: 5, height: 50, width: 50, marginTop: 10 }}>
-          <Image
-            source={{ uri: `mipmap/hospital` }}
-            style={{ height: 50, width: 50 }}
-            resizeMode="contain"
-          />
+          <Image source={{ uri: `mipmap/hospital` }} style={{ height: 50, width: 50 }} resizeMode="contain" />
         </View>
 
         <View style={{ width: "58%", marginLeft: 10 }}>
@@ -416,7 +361,6 @@ export const PickedPatient = props => {
               fontFamily: "NunitoSans-SemiBold",
               color: "black",
               marginBottom: 5,
-              // marginRight: 45,
               width: "96%"
             }}
             numberOfLines={1}

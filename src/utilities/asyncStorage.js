@@ -1,10 +1,10 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from "react-native";
 export let set = (key, object) => {
   return new Promise(function(resolve, reject) {
     if (object === undefined) {
-      reject(new Error('storage item value required'));
+      reject(new Error("storage item value required"));
     } else {
-      console.log('Value', object);
+      console.log("Value", object);
       let value = getString(object);
       AsyncStorage.setItem(key, value)
         .then(resolve)
@@ -40,7 +40,7 @@ export let getJSONObject = str => {
 
 export let getString = data => {
   try {
-    if (typeof data === 'string') {
+    if (typeof data === "string") {
       return data;
     }
     return JSON.stringify(data);

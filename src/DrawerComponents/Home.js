@@ -6,10 +6,6 @@ let screen = Dimensions.get("window");
 const Aspect_Ratio = screen.width / screen.height;
 let latitude_Delta = 0.0922;
 let longitude_Delta = latitude_Delta * Aspect_Ratio;
-import TempStorage from "../utilities/tempStorage";
-// import Geolocation from 'react-native-geolocation-service';
-// import AcceptDecline from './HomeComponents/AcceptDecline';
-// import CallPatient from './HomeComponents/CallPatient';
 import {
   StyleSheet,
   Text,
@@ -24,28 +20,19 @@ import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
 import { connect } from "react-redux";
 import ReasonOfCancellation from "./HomeComponents/ReasonOfCancellation";
 import Base from "./HomeBase";
-import {
-  AcceptDecline,
-  ShowPatient,
-  PickedPatient
-} from "./HomeComponents/HomeComponents";
+import { AcceptDecline, ShowPatient, PickedPatient } from "./HomeComponents/HomeComponents";
 class Home extends Base {
   render() {
     const { angle } = this.props.gpsData != null && this.props.gpsData;
     console.warn("rendered");
     return this.state.showReasons === true ? (
-      <ReasonOfCancellation
-        onShowReasons={this.onShowReasons}
-        onSubmit={this.onSubmit}
-      />
+      <ReasonOfCancellation onShowReasons={this.onShowReasons} onSubmit={this.onSubmit} />
     ) : (
       <View style={style.container}>
-        <Header title={"Quick Medic"} openDrawer={this.openDrawer} />
+        <Header title={"UP 108 Driver"} openDrawer={this.openDrawer} />
 
         {this.state.loading ? (
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <ActivityIndicator size="large" color="#000" />
           </View>
         ) : (
@@ -74,38 +61,22 @@ class Home extends Base {
               this.setUserLocation(locationChangedResult.nativeEvent.coordinate)
             }
           >
-            {this.props.trip != null &&
-              this.props.pickedLocationCoord != null && (
-                <Polyline
-                  coordinates={this.props.pickedLocationCoord}
-                  strokeColor={"#1d78e2"}
-                  strokeWidth={8}
-                />
-              )}
-            {this.props.trip != null &&
-              this.props.hospitalLocationCoord != null && (
-                <Polyline
-                  coordinates={this.props.hospitalLocationCoord}
-                  strokeColor={"#1d78e2"}
-                  strokeWidth={8}
-                />
-              )}
+            {this.props.trip != null && this.props.pickedLocationCoord != null && (
+              <Polyline coordinates={this.props.pickedLocationCoord} strokeColor={"#1d78e2"} strokeWidth={8} />
+            )}
+            {this.props.trip != null && this.props.hospitalLocationCoord != null && (
+              <Polyline coordinates={this.props.hospitalLocationCoord} strokeColor={"#1d78e2"} strokeWidth={8} />
+            )}
             {this.props.trip != null && (
               <Marker
                 coordinate={{
                   latitude: parseFloat(this.props.trip.hospitalLocation.lat),
                   longitude: parseFloat(this.props.trip.hospitalLocation.long)
                 }}
-                title={`Hospital Location,${this.props.trip.hospitalName},${
-                  this.props.trip.hospitalAddress
-                }`}
+                title={`Hospital Location,${this.props.trip.hospitalName},${this.props.trip.hospitalAddress}`}
                 flat={true}
               >
-                <Image
-                  source={{ uri: "mipmap/hospital" }}
-                  style={{ width: 50, height: 50 }}
-                  resizeMode={"contain"}
-                />
+                <Image source={{ uri: "mipmap/hospital" }} style={{ width: 50, height: 50 }} resizeMode={"contain"} />
               </Marker>
             )}
             {this.props.trip != null && (
@@ -122,8 +93,7 @@ class Home extends Base {
                 style={{
                   transform: [
                     {
-                      rotate:
-                        this.props.gpsData != null ? `${angle}deg` : "0deg"
+                      rotate: this.props.gpsData != null ? `${angle}deg` : "0deg"
                     }
                   ]
                 }}
@@ -156,11 +126,7 @@ class Home extends Base {
               <Marker
                 flat={true}
                 title={"Picked Location Distance,Time"}
-                coordinate={
-                  this.props.pickedLocationCoord[
-                    parseInt(this.props.pickedLocationCoord.length / 2)
-                  ]
-                }
+                coordinate={this.props.pickedLocationCoord[parseInt(this.props.pickedLocationCoord.length / 2)]}
               >
                 <View
                   style={{
@@ -179,8 +145,7 @@ class Home extends Base {
                     resizeMode={"contain"}
                   />
                   <Text style={{ margin: 10 }}>
-                    {this.props.pickedDuration.distance},
-                    {this.props.pickedDuration.duration}
+                    {this.props.pickedDuration.distance},{this.props.pickedDuration.duration}
                   </Text>
                 </View>
               </Marker>
@@ -189,11 +154,7 @@ class Home extends Base {
               <Marker
                 flat={true}
                 title={"Hospital Location Distance,Time"}
-                coordinate={
-                  this.props.hospitalLocationCoord[
-                    parseInt(this.props.hospitalLocationCoord.length / 2)
-                  ]
-                }
+                coordinate={this.props.hospitalLocationCoord[parseInt(this.props.hospitalLocationCoord.length / 2)]}
               >
                 <View
                   style={{
@@ -212,8 +173,7 @@ class Home extends Base {
                     resizeMode={"contain"}
                   />
                   <Text style={{ margin: 10 }}>
-                    {this.props.hospitalDuration.distance},
-                    {this.props.hospitalDuration.duration}
+                    {this.props.hospitalDuration.distance},{this.props.hospitalDuration.duration}
                   </Text>
                 </View>
               </Marker>
@@ -243,9 +203,7 @@ class Home extends Base {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <Text style={{ fontSize: 18 }}>
-                {this.props.trip.patientAddress}
-              </Text>
+              <Text style={{ fontSize: 18 }}>{this.props.trip.patientAddress}</Text>
             </ScrollView>
             <View style={{ height: 28, width: 1, backgroundColor: "grey" }} />
             <TouchableOpacity onPress={this.navigationMap}>
@@ -259,24 +217,12 @@ class Home extends Base {
         )}
         {this.props.trip != null ? (
           this.props.trip.pickedPatient ? (
-            <PickedPatient
-              Call={this.Call}
-              onCliclPickPatientComplete={this.markComplete}
-              trip={this.props.trip}
-            />
+            <PickedPatient Call={this.Call} onCliclPickPatientComplete={this.markComplete} trip={this.props.trip} />
           ) : (
-            <ShowPatient
-              Call={this.Call}
-              patient={this.props.trip}
-              onClickPickPatient={this.onClickPickPatient}
-            />
+            <ShowPatient Call={this.Call} patient={this.props.trip} onClickPickPatient={this.onClickPickPatient} />
           )
         ) : this.props.patientTempData != null ? (
-          <AcceptDecline
-            onAccept={this.onAccept}
-            onReject={this.onReject}
-            patient={this.props.patientTempData}
-          />
+          <AcceptDecline onAccept={this.onAccept} onReject={this.onReject} patient={this.props.patientTempData} />
         ) : null}
       </View>
     );

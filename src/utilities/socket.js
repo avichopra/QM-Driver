@@ -53,12 +53,9 @@ export function connectToSocket() {
         navigation.navigation.dispatch(navigateAction);
       }
       if (filter === "requestAmbulance") {
-        console.warn("socket dataaaaaaaaaaaaaaaaaaaaaaaaaa", socketData.data);
         if (!ViewIdSubscriptionMap["TripInProgress"]) {
           if (!ViewIdSubscriptionMap["Trip"]) {
-            saveSubscriptionInfo("Trip", [
-              socketData.data.patient.RequestData._id
-            ]);
+            saveSubscriptionInfo("Trip", [socketData.data.patient.RequestData._id]);
             Store.dispatch(patientTempData(socketData.data));
           }
         }
@@ -82,8 +79,7 @@ export function saveSubscriptionInfo(viewName, groupIds) {
 
   if (groupIds && groupIds.length > 0) {
     for (let groupId of groupIds) {
-      if (!ViewIdSubscriptionMap[viewName].indexOf(groupId) >= 0)
-        ViewIdSubscriptionMap[viewName].push(groupId);
+      if (!ViewIdSubscriptionMap[viewName].indexOf(groupId) >= 0) ViewIdSubscriptionMap[viewName].push(groupId);
     }
   }
   subscribeGroups(groupIds);

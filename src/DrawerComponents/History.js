@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  ActivityIndicator
-} from "react-native";
+import { Text, View, TouchableOpacity, FlatList, Image, ActivityIndicator } from "react-native";
 import Header from "./Header";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Base from "./HistoryBase";
@@ -16,10 +9,7 @@ import styles from "../styles/index";
 class History extends Base {
   static navigationOptions = {
     drawerLabel: "History",
-    drawerIcon: ({ tintColor }) => (
-      // <Image source={require('./chats-icon.png')} style={[ styles.icon, { tintColor: tintColor } ]} />
-      <Icon name={"history"} size={25} color={"black"} />
-    )
+    drawerIcon: ({ tintColor }) => <Icon name={"history"} size={25} color={"black"} />
   };
   openDrawer = () => {
     this.props.navigation.openDrawer();
@@ -70,9 +60,7 @@ class History extends Base {
                         marginTop: 5
                       }}
                     >
-                      {`${new Date(item.updatedAt).getDate()}/${new Date(
-                        item.updatedAt
-                      ).getMonth() + 1}/${new Date(
+                      {`${new Date(item.updatedAt).getDate()}/${new Date(item.updatedAt).getMonth() + 1}/${new Date(
                         item.updatedAt
                       ).getFullYear()},${
                         new Date(item.updatedAt).getHours() > 12
@@ -92,10 +80,7 @@ class History extends Base {
                       height: 22
                     }}
                   >
-                    <Text
-                      style={{ fontSize: 17, color: "grey" }}
-                      numberOfLines={1}
-                    >
+                    <Text style={{ fontSize: 17, color: "grey" }} numberOfLines={1}>
                       {item.patientId.userId.fullname}
                     </Text>
                   </View>
@@ -147,9 +132,7 @@ class History extends Base {
                       <Image
                         source={{
                           uri: item.patientId.userId.picture
-                            ? `${config.SERVER_URL}/v1/daffo/file/${
-                                item.patientId.userId.picture
-                              }`
+                            ? `${config.SERVER_URL}/v1/daffo/file/${item.patientId.userId.picture}`
                             : "asset:/icon/def.png"
                         }}
                         style={{ height: 50, width: 50, borderRadius: 50 }}

@@ -19,7 +19,6 @@ import {
   addHospitalLocationCoord,
   cancelTrip
 } from "../redux/actions/index";
-import { deviceGpsData } from "../utilities/socket";
 import Store from "../redux/store/index";
 import { callApi } from "../utilities/serverApi";
 let latitude_delta = 0.009,
@@ -51,7 +50,6 @@ export default class HomeBase extends Component {
     };
   }
   Call = Type => {
-    console.log("type", Type);
     const args = {
       number: Type === "CN" ? this.props.trip.hospitalNo : Type,
       prompt: false
@@ -82,19 +80,14 @@ export default class HomeBase extends Component {
       });
   };
   navigationMap = async () => {
-    console.log("Navigation map data", this.props.trip);
     let data;
     this.props.trip.pickedPatient
       ? (data = {
           source: {
             latitude:
-              currentCoordinate != null
-                ? currentCoordinate.latitude
-                : parseFloat(this.props.trip.patientLocation.lat),
+              currentCoordinate != null ? currentCoordinate.latitude : parseFloat(this.props.trip.patientLocation.lat),
             longitude:
-              currentCoordinate != null
-                ? currentCoordinate.longitude
-                : parseFloat(this.props.trip.patientLocation.long)
+              currentCoordinate != null ? currentCoordinate.longitude : parseFloat(this.props.trip.patientLocation.long)
           },
           destination: {
             latitude: parseFloat(this.props.trip.hospitalLocation.lat),
@@ -109,14 +102,8 @@ export default class HomeBase extends Component {
         })
       : (data = {
           source: {
-            latitude:
-              currentCoordinate != null
-                ? currentCoordinate.latitude
-                : this.state.latitude,
-            longitude:
-              currentCoordinate != null
-                ? currentCoordinate.longitude
-                : this.state.longitude
+            latitude: currentCoordinate != null ? currentCoordinate.latitude : this.state.latitude,
+            longitude: currentCoordinate != null ? currentCoordinate.longitude : this.state.longitude
           },
           destination: {
             latitude: parseFloat(this.props.trip.patientLocation.lat),
@@ -153,15 +140,13 @@ export default class HomeBase extends Component {
           if (status) this.getHospitalRouteDirection(customisedData1, true);
           else this.getPickupRouteDirection(customisedData, true);
         }
-        console.log(">>>>>>points on polyline >>>>>>", response);
       }
     );
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.trip != null) {
       if (nextProps.pickedLocationCoord === null) {
-        if (nextProps.trip.pickedPatient === false)
-          this.getPickupRouteDirection(nextProps.trip.patientLocation, false);
+        if (nextProps.trip.pickedPatient === false) this.getPickupRouteDirection(nextProps.trip.patientLocation, false);
       }
       if (nextProps.hospitalLocationCoord === null) {
         this.getHospitalRouteDirection(nextProps.trip, false);
@@ -207,9 +192,7 @@ export default class HomeBase extends Component {
           : currentCoordinate != null
           ? currentCoordinate.longitude
           : this.state.longitude
-      }&destination=${patientLocation.lat},${
-        patientLocation.long
-      }&key=AIzaSyAYl-EN9gKgW4DflxwhYmHIt4RqP5vT-WY`,
+      }&destination=${patientLocation.lat},${patientLocation.long}&key=AIzaSyAYl-EN9gKgW4DflxwhYmHIt4RqP5vT-WY`,
       headers = { "content-type": "application/json" };
     let option = {
       method,
@@ -217,9 +200,7 @@ export default class HomeBase extends Component {
       headers
     };
     axios(option).then(response => {
-      const points = PolyLine.decode(
-        response.data.routes[0].overview_polyline.points
-      );
+      const points = PolyLine.decode(response.data.routes[0].overview_polyline.points);
       let pointCoords = points.map(point => {
         return { latitude: point[0], longitude: point[1] };
       });
@@ -244,9 +225,7 @@ export default class HomeBase extends Component {
     let method = "get",
       url = `https://maps.googleapis.com/maps/api/directions/json?origin=${
         reRoute ? data.Gps_Data.latitude : data.patientLocation.lat
-      },${
-        reRoute ? data.Gps_Data.longitude : data.patientLocation.long
-      }&destination=${data.hospitalLocation.lat},${
+      },${reRoute ? data.Gps_Data.longitude : data.patientLocation.long}&destination=${data.hospitalLocation.lat},${
         data.hospitalLocation.long
       }&key=AIzaSyAYl-EN9gKgW4DflxwhYmHIt4RqP5vT-WY`,
       headers = { "content-type": "application/json" };
@@ -256,9 +235,7 @@ export default class HomeBase extends Component {
       headers
     };
     axios(option).then(response => {
-      const points = PolyLine.decode(
-        response.data.routes[0].overview_polyline.points
-      );
+      const points = PolyLine.decode(response.data.routes[0].overview_polyline.points);
       let pointCoords = points.map(point => {
         return { latitude: point[0], longitude: point[1] };
       });
@@ -353,7 +330,6 @@ export default class HomeBase extends Component {
     GPSState.removeListener();
   }
   openDrawer = () => {
-    console.log("open drawer being called>>>>>>>>>>>>>>>>>>>>");
     this.props.navigation.openDrawer();
   };
   componentWillMount() {
@@ -385,15 +361,9 @@ export default class HomeBase extends Component {
     console.warn("token", this.props.token);
     Promise.all([
       callApi("post", "v1/daffo/AssignAmbulance/getOwn", data, headers),
-      callApi(
-        "post",
-        "v1/daffo/Driver/getOwn",
-        { perPage: 1, filter: { userId: this.props.user.id } },
-        headers
-      )
+      callApi("post", "v1/daffo/Driver/getOwn", { perPage: 1, filter: { userId: this.props.user.id } }, headers)
     ])
       .then(result => {
-        console.log("results=========>>>>>>>>>>>>>", result);
         setDriver({
           ...result[1].data[0],
           ambulanceDetails: result[0].data[0].ambulanceId
@@ -507,7 +477,6 @@ export default class HomeBase extends Component {
     // }
   };
   onRegionChangeComplete = region => {
-    // console.log("region change scomplete>>>>", region);
     latitude_delta = region.latitudeDelta;
     longitude_delta = region.longitudeDelta;
   };
